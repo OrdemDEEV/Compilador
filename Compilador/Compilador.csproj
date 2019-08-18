@@ -56,7 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackEnd\AnalizadorLexico\Auxiliar\ClnArquivo.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\Token.cs" />
+    <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\TokenAtivo.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\TokenController.cs" />
     <Compile Include="FrontEnd\Ferramentas\GerenciadorDicionarioToken.cs">
       <SubType>Form</SubType>
