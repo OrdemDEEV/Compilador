@@ -275,3 +275,14 @@ C:\Users\User\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.csproj
 C:\Users\User\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.csproj.CopyComplete
 C:\Users\User\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.exe
 C:\Users\User\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.pdb
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.csprojAssemblyReference.cache
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.FrontEnd.FrmInicio.resources
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.Properties.Resources.resources
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.csproj.GenerateResource.cache
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.csproj.CoreCompileInputs.cache
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.exe
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.pdb
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\bin\Debug\Compilador.exe.config
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\bin\Debug\Compilador.exe
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\bin\Debug\Compilador.pdb
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.FrontEnd.Ferramentas.FrmGerenciadorDicionarioTokens1.resources

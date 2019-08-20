@@ -8,9 +8,21 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 {
 	class TokenAtivo
 	{
-		public int Codigo { get; private set; }
+		public TokenAtivo(Token token, int linha, string car, int valor, string buffer_ident, string buffer_literal)
+		{
+			this.token = token;
+			Linha = linha;
+			Car = car;
+			Valor = valor;
+			Buffer_ident = buffer_ident;
+			Buffer_literal = buffer_literal;
+		}
+
+		public Token token { get; private set; }
+		public int Linha { get; private set; }
 		public string Car { get; private set; }
-		public int valor { get; private set; }
-		public bool buffer	{ get; private set; }
+		public int Valor { get; private set; }
+		public string Buffer_ident	{ get; private set; }
+		public string Buffer_literal { get; private set; }
 	}
 }

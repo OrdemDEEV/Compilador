@@ -39,11 +39,13 @@
 			this.ferramentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gerenciarDicionarioDeDadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.rodarAnalizadorLéxicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.BtnRodarAnalizadorLexico = new System.Windows.Forms.ToolStripMenuItem();
 			this.rodarAnalizarSintáticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.rodarAnalizadorSemanticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.TxtEditorTexto = new System.Windows.Forms.RichTextBox();
+			this.TxtCaminhoArquivo = new System.Windows.Forms.TextBox();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -103,7 +105,7 @@
 			this.ferramentasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gerenciarDicionarioDeDadosToolStripMenuItem,
             this.toolStripSeparator1,
-            this.rodarAnalizadorLéxicoToolStripMenuItem,
+            this.BtnRodarAnalizadorLexico,
             this.rodarAnalizarSintáticoToolStripMenuItem,
             this.rodarAnalizadorSemanticoToolStripMenuItem,
             this.toolStripSeparator2,
@@ -124,11 +126,12 @@
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(232, 6);
 			// 
-			// rodarAnalizadorLéxicoToolStripMenuItem
+			// BtnRodarAnalizadorLexico
 			// 
-			this.rodarAnalizadorLéxicoToolStripMenuItem.Name = "rodarAnalizadorLéxicoToolStripMenuItem";
-			this.rodarAnalizadorLéxicoToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-			this.rodarAnalizadorLéxicoToolStripMenuItem.Text = "Rodar Analizador Léxico";
+			this.BtnRodarAnalizadorLexico.Name = "BtnRodarAnalizadorLexico";
+			this.BtnRodarAnalizadorLexico.Size = new System.Drawing.Size(235, 22);
+			this.BtnRodarAnalizadorLexico.Text = "Rodar Analizador Léxico";
+			this.BtnRodarAnalizadorLexico.Click += new System.EventHandler(this.BtnRodarAnalizadorLexico_Click);
 			// 
 			// rodarAnalizarSintáticoToolStripMenuItem
 			// 
@@ -153,12 +156,31 @@
 			this.compilarToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
 			this.compilarToolStripMenuItem.Text = "Compilar";
 			// 
+			// TxtEditorTexto
+			// 
+			this.TxtEditorTexto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.TxtEditorTexto.Location = new System.Drawing.Point(12, 78);
+			this.TxtEditorTexto.Name = "TxtEditorTexto";
+			this.TxtEditorTexto.Size = new System.Drawing.Size(915, 308);
+			this.TxtEditorTexto.TabIndex = 3;
+			this.TxtEditorTexto.Text = "";
+			// 
+			// TxtCaminhoArquivo
+			// 
+			this.TxtCaminhoArquivo.Location = new System.Drawing.Point(12, 27);
+			this.TxtCaminhoArquivo.Name = "TxtCaminhoArquivo";
+			this.TxtCaminhoArquivo.Size = new System.Drawing.Size(345, 20);
+			this.TxtCaminhoArquivo.TabIndex = 4;
+			// 
 			// FrmInicio
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
 			this.ClientSize = new System.Drawing.Size(939, 507);
+			this.Controls.Add(this.TxtCaminhoArquivo);
+			this.Controls.Add(this.TxtEditorTexto);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "FrmInicio";
@@ -184,10 +206,12 @@
         private System.Windows.Forms.ToolStripMenuItem ferramentasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gerenciarDicionarioDeDadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem rodarAnalizadorLéxicoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BtnRodarAnalizadorLexico;
         private System.Windows.Forms.ToolStripMenuItem rodarAnalizarSintáticoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rodarAnalizadorSemanticoToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem compilarToolStripMenuItem;
-    }
+		private System.Windows.Forms.RichTextBox TxtEditorTexto;
+		private System.Windows.Forms.TextBox TxtCaminhoArquivo;
+	}
 }

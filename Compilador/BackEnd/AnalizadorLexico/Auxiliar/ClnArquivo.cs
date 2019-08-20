@@ -23,24 +23,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.Auxiliar
             }
         }
 
-        public List<Leitura> LerTexto(string arquivo)
-        {
-            string TextoLido = "";
-            List<string> linhaMensagem = new List<string>();
-            List<Leitura> listaLeitura = new List<Leitura>();
-            using (StreamReader reader = new StreamReader(arquivo))
-            {
-                while ((TextoLido = reader.ReadLine()) != null)
-                {
-                    linhaMensagem.Add(TextoLido);
-                    listaLeitura.Add(new Leitura(verificaSeeDigito(TextoLido), TextoLido));
-                }
-            }
-
-            return listaLeitura;
-        }
-
-        public List<string> LerSeparadamente(string arquivo)
+        public List<string> LerArquivo(string arquivo)
         {
             string TextoLido = "";
             List<string> linhaMensagem = new List<string>();

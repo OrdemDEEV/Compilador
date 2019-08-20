@@ -11,9 +11,14 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 {
     class TokenController
     {
-        private OleDbConnection _olecon;
+
+		#region --- MONTAGEM DICIONARIO DE DADOS ---
+
+		/* CODIGO PROIBIDO NAO MECHA */
+
+		private OleDbConnection _olecon;
         private OleDbCommand _oleCmd;
-        private static String _Arquivo = @"C:\Users\User\Desktop\EduardoCompilador\Compilador\Compilador\BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx";
+        private static String _Arquivo = @"C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx";
         private String _StringConexao = String.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR=YES;ReadOnly=False';", _Arquivo);
         private String _Consulta;
 
@@ -34,7 +39,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                 {
                     // Monta os objetos do dicionario tokens.
                     ListaTokens.Add(new Token(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString()));
-                }
+				}
 
                 reader.Close();
             }
@@ -66,7 +71,29 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
             }
         }
 
-        #endregion
+		#endregion
 
-    }
+		#endregion
+
+		#region --- METODOS ANALIZADOR LEXICO ---
+
+		public void MontagemPilha(List<string> Codigos)
+		{
+			// Recebe as linhas brutas.
+			char[] Leitura;
+
+			// Percorre as linhas brutas recebidas.
+			for (int i=0;i<Codigos.Count;i++)
+			{
+				// Quebra linha recebida em char para realizar tratamento.
+				Leitura = Codigos[i].ToCharArray();
+
+
+
+			}
+		}
+
+		#endregion
+
+	}
 }

@@ -1,4 +1,5 @@
-﻿using Compilador.BackEnd.AnalizadorLexico.DicionarioTokens;
+﻿using Compilador.BackEnd.AnalizadorLexico.Auxiliar;
+using Compilador.BackEnd.AnalizadorLexico.DicionarioTokens;
 using Compilador.FrontEnd.Ferramentas;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Compilador.FrontEnd
 
         private void gerenciarDicionarioDeDadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GerenciadorDicionarioToken gerToken = new GerenciadorDicionarioToken();
+            FrmGerenciadorDicionarioTokens1 gerToken = new FrmGerenciadorDicionarioTokens1();
             gerToken.Show();
         }
 
@@ -46,20 +47,33 @@ namespace Compilador.FrontEnd
 					arquivo = openFileDialog.FileName;
 			}
 
-			/*if (!string.IsNullOrEmpty(arquivo))
+			if (!string.IsNullOrEmpty(arquivo))
 			{
+				// Armazena no campo para leitura psterior.
+				TxtCaminhoArquivo.Text = arquivo;
+
 				ClnArquivo clArquivo = new ClnArquivo();
-				List<Leitura> retorno = clArquivo.LerTexto(arquivo);
+				List<string> retorno = clArquivo.LerArquivo(arquivo);
 
 				for (int i = 0; i < retorno.Count; i++)
 				{
-					TxtTextoLido.Text += retorno[i].Tipo + " " + retorno[i].Texto + " | ";
+					TxtEditorTexto.Text += retorno[i];
 				}
 			}
 			else
 			{
 				MessageBox.Show("Arquivop Invalido", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}*/
+			}
+		}
+
+		private void BtnRodarAnalizadorLexico_Click(object sender, EventArgs e)
+		{
+			ClnArquivo clArquivo = new ClnArquivo();
+			List<string> LinhaLidas = clArquivo.LerArquivo(TxtCaminhoArquivo.Text);
+
+			TokenController tokenController = new TokenController();
+			tokenController.MontagemPilha(LinhaLidas);
+
 		}
 	}
 }
