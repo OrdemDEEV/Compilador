@@ -77,6 +77,23 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
 		#region --- METODOS ANALIZADOR LEXICO ---
 
+		private Token BuscarTokenNoDicionario(string variavel, string proximo)
+		{
+			Token tokenEncontradoAtual = ListaTokens.Find(c => c.Simbolo.Equals(variavel));
+			
+			if (tokenEncontradoAtual == null)
+			{
+				Token tokenEncontradoProx = ListaTokens.Find(c => c.Simbolo.Equals(proximo));
+				if (tokenEncontradoProx != null)
+				{
+					// Retorna o codigo do token do identificador.
+					return ListaTokens.Find(c => c.Simbolo.Equals("Identificador"));
+				}
+			}
+
+			return tokenEncontradoAtual;
+		}
+		
 		public void MontagemPilha(List<string> Codigos)
 		{
 			// Recebe as linhas brutas.
@@ -88,9 +105,38 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 				// Quebra linha recebida em char para realizar tratamento.
 				Leitura = Codigos[i].ToCharArray();
 
+				Token Retorno = null;
+				int j = 0;
+				string concatenado = "";
+				while (Retorno == null)
+				{
+					concatenado = concatenado + Leitura[j].ToString();
+					Retorno = BuscarTokenNoDicionario(concatenado,  j==Leitura.Length-1 ?null: Leitura[j + 1].ToString());
+					j++;
+				}
 
+				// Percore characteres.
+				//for (int j=0;j <= Leitura.Length;j++)
+				//{
+				//	Token retorno = BuscarTokenNoDicionario(Leitura[j].ToString());
+
+				//	if (retorno == null)
+				//	{
+				//		BuscarTokenNoDicionario(Leitura[j].ToString() + Leitura[j + 1].ToString());
+				//	}
+				//	else
+				//	{
+				//		SalvarPilhaPrincipal(retorno);
+				//	}
+					
+				//}
 
 			}
+		}
+
+		private void SalvarPilhaPrincipal(Token Token)
+		{
+
 		}
 
 		#endregion
