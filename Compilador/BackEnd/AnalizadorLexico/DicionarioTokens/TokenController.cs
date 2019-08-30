@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
@@ -18,6 +18,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
         public List<Token> IniciarDicionarioTokens()
         {
+
             ListaTokens.Add(new Token(1, "Program"));
             ListaTokens.Add(new Token(2, "Label"));
             ListaTokens.Add(new Token(3, "Const"));
@@ -84,9 +85,11 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 			
 			if (tokenEncontradoAtual == null)
 			{
-				Token tokenEncontradoProx = ListaTokens.Find(c => c.Simbolo.Equals(proximo));
-				if (tokenEncontradoProx != null)
-				{
+                //	Token tokenEncontradoProx = ListaTokens.Find(c => c.Simbolo.Equals(proximo));
+
+
+                if (proximo == ";" || proximo == ",")
+                {
 					// Retorna o codigo do token do identificador.
 					return ListaTokens.Find(c => c.Simbolo.Equals("Identificador"));
 				}
@@ -109,10 +112,22 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 				Token Retorno = null;
 				int j = 0;
 				string concatenado = "";
-				while (Retorno == null)
+				while (j < Leitura.Length)
 				{
-					concatenado = concatenado + Leitura[j].ToString();
-					Retorno = BuscarTokenNoDicionario(concatenado,  j==Leitura.Length-1 ?null: Leitura[j + 1].ToString());
+                    if (Leitura[j].ToString() != " ")
+                    {
+                        concatenado = concatenado + Leitura[j].ToString();
+                        Retorno = BuscarTokenNoDicionario(concatenado, j == Leitura.Length - 1 ? null : Leitura[j + 1].ToString());
+                    }
+                    
+                    if (Retorno != null)
+                    {
+                        //mandar para onde tem que mandar
+
+                        //e limpar a variavel
+                        concatenado = null;
+                        Retorno = null;
+                    }
 					j++;
 				}
 
