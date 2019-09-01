@@ -23,10 +23,21 @@ namespace Compilador.FrontEnd
         private void FrmInicio_Load(object sender, EventArgs e)
         {
             TokenController tokenController = new TokenController();
-            tokenController.IniciarDicionarioTokens();
-        }
+			//tokenController.IniciarDicionarioTokens();
+			tokenController.IniciarDicionarioTokensComExcel();
+		}
 
-        private void gerenciarDicionarioDeDadosToolStripMenuItem_Click(object sender, EventArgs e)
+		#region --- CONTROLE GRID VIEW TOKENS ---
+
+		private void CarregarGridViewTokensAtivos()
+		{
+			GcTokensAtivos.DataSource = TokenController.ListaTokenPrincipal;
+			GcTokensAtivos.RefreshDataSource();
+		}
+
+		#endregion
+
+		private void gerenciarDicionarioDeDadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmGerenciadorDicionarioTokens1 gerToken = new FrmGerenciadorDicionarioTokens1();
             gerToken.Show();
@@ -74,6 +85,7 @@ namespace Compilador.FrontEnd
 			TokenController tokenController = new TokenController();
 			tokenController.MontagemPilha(LinhaLidas);
 
+			CarregarGridViewTokensAtivos();
 		}
 	}
 }

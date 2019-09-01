@@ -46,7 +46,18 @@
 			this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.TxtEditorTexto = new System.Windows.Forms.RichTextBox();
 			this.TxtCaminhoArquivo = new System.Windows.Forms.TextBox();
+			this.tokenAtivoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.GcTokensAtivos = new DevExpress.XtraGrid.GridControl();
+			this.DgvTokensAtivos = new DevExpress.XtraGrid.Views.Grid.GridView();
+			this.tokenAtivoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+			this.colLinha = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.ColCod = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.ColDescricao = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.menuStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.GcTokensAtivos)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.DgvTokensAtivos)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// contextMenuStrip1
@@ -67,7 +78,7 @@
             this.ferramentasToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(939, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(1256, 24);
 			this.menuStrip1.TabIndex = 2;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -84,20 +95,20 @@
 			// BtnAbrir
 			// 
 			this.BtnAbrir.Name = "BtnAbrir";
-			this.BtnAbrir.Size = new System.Drawing.Size(180, 22);
+			this.BtnAbrir.Size = new System.Drawing.Size(109, 22);
 			this.BtnAbrir.Text = "Abrir";
 			this.BtnAbrir.Click += new System.EventHandler(this.BtnAbrir_Click);
 			// 
 			// salvarToolStripMenuItem
 			// 
 			this.salvarToolStripMenuItem.Name = "salvarToolStripMenuItem";
-			this.salvarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.salvarToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
 			this.salvarToolStripMenuItem.Text = "Salvar";
 			// 
 			// fecharToolStripMenuItem
 			// 
 			this.fecharToolStripMenuItem.Name = "fecharToolStripMenuItem";
-			this.fecharToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.fecharToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
 			this.fecharToolStripMenuItem.Text = "Fechar";
 			// 
 			// ferramentasToolStripMenuItem
@@ -162,7 +173,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.TxtEditorTexto.Location = new System.Drawing.Point(12, 78);
 			this.TxtEditorTexto.Name = "TxtEditorTexto";
-			this.TxtEditorTexto.Size = new System.Drawing.Size(915, 308);
+			this.TxtEditorTexto.Size = new System.Drawing.Size(707, 308);
 			this.TxtEditorTexto.TabIndex = 3;
 			this.TxtEditorTexto.Text = "";
 			// 
@@ -173,12 +184,73 @@
 			this.TxtCaminhoArquivo.Size = new System.Drawing.Size(345, 20);
 			this.TxtCaminhoArquivo.TabIndex = 4;
 			// 
+			// tokenAtivoBindingSource
+			// 
+			this.tokenAtivoBindingSource.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
+			// 
+			// GcTokensAtivos
+			// 
+			this.GcTokensAtivos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.GcTokensAtivos.DataSource = this.tokenAtivoBindingSource1;
+			this.GcTokensAtivos.Location = new System.Drawing.Point(725, 78);
+			this.GcTokensAtivos.LookAndFeel.SkinName = "Office 2013";
+			this.GcTokensAtivos.LookAndFeel.UseDefaultLookAndFeel = false;
+			this.GcTokensAtivos.MainView = this.DgvTokensAtivos;
+			this.GcTokensAtivos.Name = "GcTokensAtivos";
+			this.GcTokensAtivos.Size = new System.Drawing.Size(519, 308);
+			this.GcTokensAtivos.TabIndex = 5;
+			this.GcTokensAtivos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.DgvTokensAtivos});
+			// 
+			// DgvTokensAtivos
+			// 
+			this.DgvTokensAtivos.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colLinha,
+            this.ColCod,
+            this.ColDescricao});
+			this.DgvTokensAtivos.GridControl = this.GcTokensAtivos;
+			this.DgvTokensAtivos.Name = "DgvTokensAtivos";
+			this.DgvTokensAtivos.OptionsView.ShowGroupPanel = false;
+			// 
+			// tokenAtivoBindingSource1
+			// 
+			this.tokenAtivoBindingSource1.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
+			// 
+			// colLinha
+			// 
+			this.colLinha.Caption = "Linha";
+			this.colLinha.FieldName = "Linha";
+			this.colLinha.Name = "colLinha";
+			this.colLinha.OptionsColumn.ReadOnly = true;
+			this.colLinha.Visible = true;
+			this.colLinha.VisibleIndex = 0;
+			this.colLinha.Width = 59;
+			// 
+			// ColCod
+			// 
+			this.ColCod.Caption = "Cod";
+			this.ColCod.FieldName = "token.Codigo";
+			this.ColCod.Name = "ColCod";
+			this.ColCod.Visible = true;
+			this.ColCod.VisibleIndex = 1;
+			this.ColCod.Width = 64;
+			// 
+			// ColDescricao
+			// 
+			this.ColDescricao.Caption = "Simbolo";
+			this.ColDescricao.FieldName = "token.Simbolo";
+			this.ColDescricao.Name = "ColDescricao";
+			this.ColDescricao.Visible = true;
+			this.ColDescricao.VisibleIndex = 2;
+			this.ColDescricao.Width = 669;
+			// 
 			// FrmInicio
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.ClientSize = new System.Drawing.Size(939, 507);
+			this.ClientSize = new System.Drawing.Size(1256, 408);
+			this.Controls.Add(this.GcTokensAtivos);
 			this.Controls.Add(this.TxtCaminhoArquivo);
 			this.Controls.Add(this.TxtEditorTexto);
 			this.Controls.Add(this.menuStrip1);
@@ -189,6 +261,10 @@
 			this.Load += new System.EventHandler(this.FrmInicio_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.GcTokensAtivos)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.DgvTokensAtivos)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -213,5 +289,12 @@
         private System.Windows.Forms.ToolStripMenuItem compilarToolStripMenuItem;
 		private System.Windows.Forms.RichTextBox TxtEditorTexto;
 		private System.Windows.Forms.TextBox TxtCaminhoArquivo;
+		private System.Windows.Forms.BindingSource tokenAtivoBindingSource;
+		private DevExpress.XtraGrid.GridControl GcTokensAtivos;
+		private DevExpress.XtraGrid.Views.Grid.GridView DgvTokensAtivos;
+		private System.Windows.Forms.BindingSource tokenAtivoBindingSource1;
+		private DevExpress.XtraGrid.Columns.GridColumn colLinha;
+		private DevExpress.XtraGrid.Columns.GridColumn ColCod;
+		private DevExpress.XtraGrid.Columns.GridColumn ColDescricao;
 	}
 }
