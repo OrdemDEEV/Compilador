@@ -19,7 +19,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
 		private OleDbConnection _olecon;
 		private OleDbCommand _oleCmd;
-		private static String _Arquivo = @"C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx";
+		private static String _Arquivo = @"C:\Users\User\Desktop\Projetos\Compilador\Compilador\BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx";
 		private String _StringConexao = String.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR=YES;ReadOnly=False';", _Arquivo);
 		private String _Consulta;
 
@@ -143,90 +143,66 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
 		#region --- METODOS ANALIZADOR LEXICO ---
 
-		private Token BuscarTokenNoDicionario(string variavel, string proximo, string anterior)
+		private Token BuscarTokenNoDicionario(string variavel)
 		{
-			Token tokenEncontradoAtual = ListaTokens.Find(c => c.Simbolo.Equals(variavel));
-			
-			if (tokenEncontradoAtual == null)
+			Token token = ListaTokens.Find(c => c.Simbolo.Equals(variavel));
+
+			if (token == null)
 			{
-				//	Token tokenEncontradoProx = ListaTokens.Find(c => c.Simbolo.Equals(proximo));
-
-
-				/*if (proximo == ";" || proximo == "," || proximo == " " || proximo == ":")
-                {
-					// Retorna o codigo do token do identificador.
-					return ListaTokens.Find(c => c.Simbolo.Equals("Identificador"));
-				}*/
-
-				// se o anterior for um identificador e o proximo aspas tem que pegar o do meio das aspas pra ser literal.
-
-				// Se o anterior for um identificador o proximo e um literal inteiro ou bool
-
-				// Se o proximo for encontrado o atual e um dentificador.
-				if (proximo == " " || proximo == null || ListaTokens.Exists(c=>c.Simbolo.Equals(proximo)))
-				{
-					return ListaTokens.Find(c => c.Simbolo.Equals("IDENTIFICADOR"));
-				}
-
+				return new Token(25, "IDENTIFICADOR");
 			}
-
-			return tokenEncontradoAtual;
+			return token;
 		}
 		
-		public void MontagemPilha(List<string> Codigos)
+		public void MontagemPilha(List<string> Linhas)
 		{
-			// Recebe as linhas brutas.
-			char[] Leitura;
 
-			// Percorre as linhas brutas recebidas.
-			for (int i=0;i<Codigos.Count;i++)
+			try
 			{
-				// Quebra linha recebida em char para realizar tratamento.
-				Leitura = Codigos[i].ToCharArray();
-
-				Token Retorno = null;
+				// Recebe as linhas brutas.
+				char[] Caracteres;
 				int j = 0;
-				string concatenado = "";
-				while (j < Leitura.Length-1)
+				string concatenado = null;
+				Token TokenEncontrado=  null;
+
+				// Percorre as linhas brutas recebidas.
+				for (int i = 0; i < Linhas.Count; i++)
 				{
+					// Quebra linha recebida em char para realizar tratamento.
+					Caracteres = Linhas[i].ToCharArray();
 
-					concatenado = concatenado + Leitura[j].ToString();
-					if (Leitura[j+1].Equals(';') || Leitura[j+1].Equals(',') || Leitura[j+1].Equals(' ') || Leitura[j+1].Equals('(') || Leitura[j+1].Equals(')') || Leitura[j+1].Equals('[') || Leitura[j+1].Equals(']'))
+					while (j < Caracteres.Length)
 					{
-						Retorno = BuscarTokenNoDicionario(concatenado.ToUpper(), j == Leitura.Length - 1 ? null : Leitura[j + 1].ToString().ToUpper(), j == 0 ? null : Leitura[j - 1].ToString());
+						// Concatena
+						concatenado += Caracteres[j]; 
+						// Ultimo caractere da linha
+						if (j.Equals(Caracteres.Length-1) || Caracteres[j+1].ToString().Equals(","))
+						{
+							TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+							concatenado = null;
+						}
+
+						// Adicionar a pilha principal.
+						if (TokenEncontrado != null)
+						{
+							SalvarPilhaPrincipal(new TokenAtivo(TokenEncontrado, i + 1, "", 0, "", ""));
+						}
+						j++;
 					}
-
-
-					if (Retorno != null)
-                    {
-						//mandar para onde tem que mandar
-						PilhaTokenPrincipal.Add(new TokenAtivo(Retorno, i, "", 0, "", ""));
-                        //e limpar a variavel
-                        concatenado = null;
-                        Retorno = null;
-                    }
-					j++;
+					j = 0;
 				}
 
-				// Percore characteres.
-				//for (int j=0;j <= Leitura.Length;j++)
-				//{
-				//	Token retorno = BuscarTokenNoDicionario(Leitura[j].ToString());
-
-				//	if (retorno == null)
-				//	{
-				//		BuscarTokenNoDicionario(Leitura[j].ToString() + Leitura[j + 1].ToString());
-				//	}
-				//	else
-				//	{
-				//		SalvarPilhaPrincipal(retorno);
-				//	}
-					
-				//}
-
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
+		private void SalvarPilhaPrincipal(TokenAtivo tokenAtivo)
+		{
+			PilhaTokenPrincipal.Add(tokenAtivo);
+		}
 
 		#endregion
 
