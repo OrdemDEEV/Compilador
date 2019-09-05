@@ -285,3 +285,14 @@ C:\Users\User\Desktop\Projetos\Compilador\Compilador\bin\Debug\ja\DevExpress.Off
 C:\Users\User\Desktop\Projetos\Compilador\Compilador\bin\Debug\ru\DevExpress.Office.v18.1.Core.resources.dll
 C:\Users\User\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.exe.licenses
 C:\Users\User\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.csproj.CopyComplete
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\bin\Debug\Compilador.exe.config
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\bin\Debug\Compilador.exe
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\bin\Debug\Compilador.pdb
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\obj\Debug\Compilador.FrontEnd.Ferramentas.FrmGerenciadorDicionarioTokens1.resources
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\obj\Debug\Compilador.FrontEnd.FrmInicio.resources
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\obj\Debug\Compilador.Properties.Resources.resources
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\obj\Debug\Compilador.csproj.GenerateResource.cache
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\obj\Debug\Compilador.csproj.CoreCompileInputs.cache
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\obj\Debug\Compilador.exe
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\obj\Debug\Compilador.pdb
+C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\obj\Debug\Compilador.csprojAssemblyReference.cache

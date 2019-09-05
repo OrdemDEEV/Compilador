@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,10 +30,49 @@ namespace Compilador.FrontEnd
 
 		#region --- CONTROLE GRID VIEW TOKENS ---
 
+		private void dgvDados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		{
+			if ((DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem != null) && (DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
+			{
+				e.Value = BindProperty(DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem, DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName);
+			}
+		}
+
+		private string BindProperty(object property, string propertyName)
+		{
+			string retValue = "";
+			if (propertyName.Contains("."))
+			{
+				PropertyInfo[] arrayProperties;
+				string leftPropertyName;
+				leftPropertyName = propertyName.Substring(0, propertyName.IndexOf("."));
+				arrayProperties = property.GetType().GetProperties();
+				foreach (PropertyInfo propertyInfo in arrayProperties)
+				{
+					if (propertyInfo.Name == leftPropertyName)
+					{
+						retValue = BindProperty(
+						  propertyInfo.GetValue(property, null),
+						  propertyName.Substring(propertyName.IndexOf(".") + 1));
+						break;
+					}
+				}
+			}
+			else
+			{
+				Type propertyType;
+				PropertyInfo propertyInfo;
+				propertyType = property.GetType();
+				propertyInfo = propertyType.GetProperty(propertyName);
+				retValue = propertyInfo.GetValue(property, null).ToString();
+			}
+			return retValue;
+		}
+
 		private void CarregarGridViewTokensAtivos()
 		{
-			GcTokensAtivos.DataSource = TokenController.ListaTokenPrincipal;
-			GcTokensAtivos.RefreshDataSource();
+			DgvPilhaPrincipal.DataSource = TokenController.PilhaTokenPrincipal;
+			DgvPilhaPrincipal.Refresh();
 		}
 
 		#endregion

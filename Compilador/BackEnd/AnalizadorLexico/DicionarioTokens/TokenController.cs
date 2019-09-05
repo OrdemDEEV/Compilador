@@ -12,14 +12,14 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
     class TokenController
     {
 
-		public static List<TokenAtivo> ListaTokenPrincipal = new List<TokenAtivo>();
+		public static List<TokenAtivo> PilhaTokenPrincipal = new List<TokenAtivo>();
 		public static List<Token> ListaTokens = new List<Token>();
 
 		#region --- Excel ---
 
 		private OleDbConnection _olecon;
 		private OleDbCommand _oleCmd;
-		private static String _Arquivo = @"C:\Users\User\Desktop\Projetos\Compilador\Compilador\BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx";
+		private static String _Arquivo = @"C:\Users\Eduardo\Desktop\Projetos\Compilador-master\Compilador\BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx";
 		private String _StringConexao = String.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR=YES;ReadOnly=False';", _Arquivo);
 		private String _Consulta;
 
@@ -187,18 +187,20 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 				Token Retorno = null;
 				int j = 0;
 				string concatenado = "";
-				while (j < Leitura.Length)
+				while (j < Leitura.Length-1)
 				{
-                    if (Leitura[j].ToString() != " ")
-                    {
-                        concatenado = concatenado + Leitura[j].ToString();
-                        Retorno = BuscarTokenNoDicionario(concatenado.ToUpper(), j == Leitura.Length - 1 ? null : Leitura[j + 1].ToString().ToUpper(), j==0?null:Leitura[j-1].ToString());
-                    }
-                    
-                    if (Retorno != null)
+
+					concatenado = concatenado + Leitura[j].ToString();
+					if (Leitura[j+1].Equals(';') || Leitura[j+1].Equals(',') || Leitura[j+1].Equals(' ') || Leitura[j+1].Equals('(') || Leitura[j+1].Equals(')') || Leitura[j+1].Equals('[') || Leitura[j+1].Equals(']'))
+					{
+						Retorno = BuscarTokenNoDicionario(concatenado.ToUpper(), j == Leitura.Length - 1 ? null : Leitura[j + 1].ToString().ToUpper(), j == 0 ? null : Leitura[j - 1].ToString());
+					}
+
+
+					if (Retorno != null)
                     {
 						//mandar para onde tem que mandar
-						ListaTokenPrincipal.Add(new TokenAtivo(Retorno, i, "", 0, "", ""));
+						PilhaTokenPrincipal.Add(new TokenAtivo(Retorno, i, "", 0, "", ""));
                         //e limpar a variavel
                         concatenado = null;
                         Retorno = null;
