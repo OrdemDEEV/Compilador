@@ -11,11 +11,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Compilador.FrontEnd
 {
+
     public partial class FrmInicio : Form
     {
+        public string LocalArquivo = "";    
         public FrmInicio()
         {
             InitializeComponent();
@@ -81,7 +84,7 @@ namespace Compilador.FrontEnd
 
 		private void CarregarGridViewTokensAtivos()
 		{
-			DgvPilhaPrincipal.DataSource = TokenController.PilhaTokenPrincipal;
+            DgvPilhaPrincipal.DataSource = TokenController.PilhaTokenPrincipal;
 			DgvPilhaPrincipal.Refresh();
 		}
 
@@ -99,9 +102,8 @@ namespace Compilador.FrontEnd
 			using (OpenFileDialog openFileDialog = new OpenFileDialog())
 			{
 				openFileDialog.Title = "Procurar";
-				openFileDialog.InitialDirectory = @"c:\Program Files"; //Se ja quiser em abrir 
 
-				openFileDialog.Filter = "All files (*.*)|*.*|All files (*.*)|*.*";
+				openFileDialog.Filter = "All files (*.*)|*.*|LMS File (*.lms*)|*.lms*";
 				openFileDialog.FilterIndex = 2;
 				openFileDialog.RestoreDirectory = true;
 				if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -111,7 +113,7 @@ namespace Compilador.FrontEnd
 			if (!string.IsNullOrEmpty(arquivo))
 			{
 				// Armazena no campo para leitura psterior.
-				TxtCaminhoArquivo.Text = arquivo;
+				LocalArquivo = arquivo;
 
 				ClnArquivo clArquivo = new ClnArquivo();
 				List<string> retorno = clArquivo.LerArquivo(arquivo);
@@ -125,16 +127,20 @@ namespace Compilador.FrontEnd
 			}
 			else
 			{
-				MessageBox.Show("Arquivop Invalido", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				//MessageBox.Show("Arquivop Invalido", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
 		private void BtnRodarAnalizadorLexico_Click(object sender, EventArgs e)
 		{
+            if (LocalArquivo == "")
+            {
+             salvarToolStripMenuItem_Click(sender, e);
+            }
 			ClnArquivo clArquivo = new ClnArquivo();
-			List<string> LinhaLidas = clArquivo.LerArquivo(TxtCaminhoArquivo.Text);
+			List<string> LinhaLidas = clArquivo.LerArquivo(LocalArquivo);
 
-			TokenController tokenController = new TokenController();
+			TokenController tokenController = new TokenController(); 
 			tokenController.MontagemPilha(LinhaLidas);
 
 			CarregarGridViewTokensAtivos();
@@ -142,11 +148,29 @@ namespace Compilador.FrontEnd
 
 		private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			FolderBrowserDialog teste = new FolderBrowserDialog();
-			teste.ShowDialog();
-			string Caminho = teste.SelectedPath;
+   
 
-			Escrevertexto(TxtEditorTexto.Text, Caminho);
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "LMS File (*.lms*)|*.lms*|All files (*.*)|*.*";
+            saveFileDialog1.DefaultExt = "lms";
+            saveFileDialog1.AddExtension = true;
+
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                
+                if (File.Exists(saveFileDialog1.FileName))
+                {
+                    File.Delete(saveFileDialog1.FileName);
+                }
+                using (Stream s = File.Open(saveFileDialog1.FileName, FileMode.CreateNew))
+                using (StreamWriter sw = new StreamWriter(s))
+                {
+                    LocalArquivo = saveFileDialog1.FileName;
+                    sw.Write(TxtEditorTexto.Text);
+                }
+            }
+           
 		}
 
 		public void Escrevertexto(string texto, string caminho)

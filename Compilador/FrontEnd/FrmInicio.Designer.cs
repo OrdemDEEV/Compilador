@@ -44,21 +44,20 @@
             this.rodarAnalizadorSemanticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.TxtCaminhoArquivo = new System.Windows.Forms.TextBox();
             this.DgvPilhaPrincipal = new System.Windows.Forms.DataGridView();
+            this.linhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.LineNumberTextBox = new System.Windows.Forms.RichTextBox();
-            this.TxtEditorTexto = new System.Windows.Forms.RichTextBox();
-            this.linhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tokenAtivoBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.TxtEditorTexto = new System.Windows.Forms.RichTextBox();
+            this.LineNumberTextBox = new System.Windows.Forms.RichTextBox();
             this.tokenAtivoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tokenAtivoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPilhaPrincipal)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -98,21 +97,21 @@
             // BtnAbrir
             // 
             this.BtnAbrir.Name = "BtnAbrir";
-            this.BtnAbrir.Size = new System.Drawing.Size(109, 22);
+            this.BtnAbrir.Size = new System.Drawing.Size(180, 22);
             this.BtnAbrir.Text = "Abrir";
             this.BtnAbrir.Click += new System.EventHandler(this.BtnAbrir_Click);
             // 
             // salvarToolStripMenuItem
             // 
             this.salvarToolStripMenuItem.Name = "salvarToolStripMenuItem";
-            this.salvarToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.salvarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salvarToolStripMenuItem.Text = "Salvar";
             this.salvarToolStripMenuItem.Click += new System.EventHandler(this.salvarToolStripMenuItem_Click);
             // 
             // fecharToolStripMenuItem
             // 
             this.fecharToolStripMenuItem.Name = "fecharToolStripMenuItem";
-            this.fecharToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.fecharToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.fecharToolStripMenuItem.Text = "Fechar";
             // 
             // ferramentasToolStripMenuItem
@@ -171,13 +170,6 @@
             this.compilarToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.compilarToolStripMenuItem.Text = "Compilar";
             // 
-            // TxtCaminhoArquivo
-            // 
-            this.TxtCaminhoArquivo.Location = new System.Drawing.Point(12, 27);
-            this.TxtCaminhoArquivo.Name = "TxtCaminhoArquivo";
-            this.TxtCaminhoArquivo.Size = new System.Drawing.Size(345, 20);
-            this.TxtCaminhoArquivo.TabIndex = 4;
-            // 
             // DgvPilhaPrincipal
             // 
             this.DgvPilhaPrincipal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -189,11 +181,18 @@
             this.Column2,
             this.Column1});
             this.DgvPilhaPrincipal.DataSource = this.tokenAtivoBindingSource2;
-            this.DgvPilhaPrincipal.Location = new System.Drawing.Point(725, 62);
+            this.DgvPilhaPrincipal.Location = new System.Drawing.Point(725, 31);
             this.DgvPilhaPrincipal.Name = "DgvPilhaPrincipal";
-            this.DgvPilhaPrincipal.Size = new System.Drawing.Size(519, 675);
+            this.DgvPilhaPrincipal.Size = new System.Drawing.Size(519, 700);
             this.DgvPilhaPrincipal.TabIndex = 5;
             this.DgvPilhaPrincipal.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDados_CellFormatting);
+            // 
+            // linhaDataGridViewTextBoxColumn
+            // 
+            this.linhaDataGridViewTextBoxColumn.DataPropertyName = "Linha";
+            this.linhaDataGridViewTextBoxColumn.HeaderText = "Linha";
+            this.linhaDataGridViewTextBoxColumn.Name = "linhaDataGridViewTextBoxColumn";
+            this.linhaDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // Column2
             // 
@@ -207,6 +206,10 @@
             this.Column1.HeaderText = "Simb";
             this.Column1.Name = "Column1";
             // 
+            // tokenAtivoBindingSource2
+            // 
+            this.tokenAtivoBindingSource2.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
+            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -214,11 +217,25 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.TxtEditorTexto);
             this.groupBox1.Controls.Add(this.LineNumberTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(12, 53);
+            this.groupBox1.Location = new System.Drawing.Point(12, 22);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(697, 684);
+            this.groupBox1.Size = new System.Drawing.Size(697, 715);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
+            // 
+            // TxtEditorTexto
+            // 
+            this.TxtEditorTexto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtEditorTexto.Location = new System.Drawing.Point(46, 9);
+            this.TxtEditorTexto.Name = "TxtEditorTexto";
+            this.TxtEditorTexto.Size = new System.Drawing.Size(651, 700);
+            this.TxtEditorTexto.TabIndex = 1;
+            this.TxtEditorTexto.Text = "";
+            this.TxtEditorTexto.VScroll += new System.EventHandler(this.TxtEditorTexto_VScroll);
+            this.TxtEditorTexto.FontChanged += new System.EventHandler(this.TxtEditorTexto_FontChanged);
+            this.TxtEditorTexto.TextChanged += new System.EventHandler(this.TxtEditorTexto_TextChanged);
             // 
             // LineNumberTextBox
             // 
@@ -230,35 +247,10 @@
             this.LineNumberTextBox.Name = "LineNumberTextBox";
             this.LineNumberTextBox.ReadOnly = true;
             this.LineNumberTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.LineNumberTextBox.Size = new System.Drawing.Size(40, 666);
+            this.LineNumberTextBox.Size = new System.Drawing.Size(40, 697);
             this.LineNumberTextBox.TabIndex = 0;
             this.LineNumberTextBox.Text = "";
             this.LineNumberTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LineNumberTextBox_MouseDown);
-            // 
-            // TxtEditorTexto
-            // 
-            this.TxtEditorTexto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtEditorTexto.Location = new System.Drawing.Point(46, 9);
-            this.TxtEditorTexto.Name = "TxtEditorTexto";
-            this.TxtEditorTexto.Size = new System.Drawing.Size(651, 669);
-            this.TxtEditorTexto.TabIndex = 1;
-            this.TxtEditorTexto.Text = "";
-            this.TxtEditorTexto.VScroll += new System.EventHandler(this.TxtEditorTexto_VScroll);
-            this.TxtEditorTexto.FontChanged += new System.EventHandler(this.TxtEditorTexto_FontChanged);
-            this.TxtEditorTexto.TextChanged += new System.EventHandler(this.TxtEditorTexto_TextChanged);
-            // 
-            // linhaDataGridViewTextBoxColumn
-            // 
-            this.linhaDataGridViewTextBoxColumn.DataPropertyName = "Linha";
-            this.linhaDataGridViewTextBoxColumn.HeaderText = "Linha";
-            this.linhaDataGridViewTextBoxColumn.Name = "linhaDataGridViewTextBoxColumn";
-            this.linhaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tokenAtivoBindingSource2
-            // 
-            this.tokenAtivoBindingSource2.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
             // 
             // tokenAtivoBindingSource
             // 
@@ -276,7 +268,6 @@
             this.ClientSize = new System.Drawing.Size(1256, 749);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DgvPilhaPrincipal);
-            this.Controls.Add(this.TxtCaminhoArquivo);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmInicio";
@@ -287,8 +278,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPilhaPrincipal)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -313,7 +304,6 @@
         private System.Windows.Forms.ToolStripMenuItem rodarAnalizadorSemanticoToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem compilarToolStripMenuItem;
-		private System.Windows.Forms.TextBox TxtCaminhoArquivo;
 		private System.Windows.Forms.BindingSource tokenAtivoBindingSource;
 		private System.Windows.Forms.BindingSource tokenAtivoBindingSource1;
 		private System.Windows.Forms.DataGridView DgvPilhaPrincipal;

@@ -80,35 +80,35 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
         public List<Token> IniciarDicionarioTokens()
         {
 
-            ListaTokens.Add(new Token(1, "Program"));
-            ListaTokens.Add(new Token(2, "Label"));
-            ListaTokens.Add(new Token(3, "Const"));
-            ListaTokens.Add(new Token(4, "Var"));
-            ListaTokens.Add(new Token(5, "Procedure"));
-            ListaTokens.Add(new Token(6, "Begin"));
-            ListaTokens.Add(new Token(7, "End"));
-            ListaTokens.Add(new Token(8, "Integer"));
-            ListaTokens.Add(new Token(9, "Array"));
-            ListaTokens.Add(new Token(10, "Of"));
-            ListaTokens.Add(new Token(11, "Call"));
-            ListaTokens.Add(new Token(12, "Goto"));
-            ListaTokens.Add(new Token(13, "If"));
-            ListaTokens.Add(new Token(14, "Then"));
-            ListaTokens.Add(new Token(15, "Else"));
-            ListaTokens.Add(new Token(16, "While"));
-            ListaTokens.Add(new Token(17, "Do"));
-            ListaTokens.Add(new Token(18, "Repeat"));
-            ListaTokens.Add(new Token(19, "Until"));
-            ListaTokens.Add(new Token(20, "Readln"));
-            ListaTokens.Add(new Token(21, "Writeln"));
-            ListaTokens.Add(new Token(22, "Or"));
-            ListaTokens.Add(new Token(23, "And"));
-            ListaTokens.Add(new Token(24, "Not"));
-            ListaTokens.Add(new Token(25, "Identificador"));
-            ListaTokens.Add(new Token(26, "Inteiro"));
-            ListaTokens.Add(new Token(27, "For"));
-            ListaTokens.Add(new Token(28, "To"));
-            ListaTokens.Add(new Token(29, "Case"));
+            ListaTokens.Add(new Token(1, "PROGRAM"));
+            ListaTokens.Add(new Token(2, "LABEL"));
+            ListaTokens.Add(new Token(3, "CONST"));
+            ListaTokens.Add(new Token(4, "VAR"));
+            ListaTokens.Add(new Token(5, "PROCEDURE"));
+            ListaTokens.Add(new Token(6, "BEGIN"));
+            ListaTokens.Add(new Token(7, "END"));
+            ListaTokens.Add(new Token(8, "INTEGER"));
+            ListaTokens.Add(new Token(9, "ARRAY"));
+            ListaTokens.Add(new Token(10, "OF"));
+            ListaTokens.Add(new Token(11, "CALL"));
+            ListaTokens.Add(new Token(12, "GOTO"));
+            ListaTokens.Add(new Token(13, "IF"));
+            ListaTokens.Add(new Token(14, "THEN"));
+            ListaTokens.Add(new Token(15, "ELSE"));
+            ListaTokens.Add(new Token(16, "WHILE"));
+            ListaTokens.Add(new Token(17, "DO"));
+            ListaTokens.Add(new Token(18, "REPEAT"));
+            ListaTokens.Add(new Token(19, "UNTIL"));
+            ListaTokens.Add(new Token(20, "READLN"));
+            ListaTokens.Add(new Token(21, "WRITELN"));
+            ListaTokens.Add(new Token(22, "OR"));
+            ListaTokens.Add(new Token(23, "AND"));
+            ListaTokens.Add(new Token(24, "NOT"));
+            ListaTokens.Add(new Token(25, "IDENTIFICADOR"));
+            ListaTokens.Add(new Token(26, "INTEIRO"));
+            ListaTokens.Add(new Token(27, "FOR"));
+            ListaTokens.Add(new Token(28, "TO"));
+            ListaTokens.Add(new Token(29, "CASE"));
             ListaTokens.Add(new Token(30, "+"));
             ListaTokens.Add(new Token(31, "-"));
             ListaTokens.Add(new Token(32, "*"));
@@ -127,7 +127,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
             ListaTokens.Add(new Token(45, "<>"));
             ListaTokens.Add(new Token(46, ","));
             ListaTokens.Add(new Token(47, ";"));
-            ListaTokens.Add(new Token(48, "literal"));
+            ListaTokens.Add(new Token(48, "LITERAL"));
             ListaTokens.Add(new Token(49, "."));
             ListaTokens.Add(new Token(50, ".."));
             ListaTokens.Add(new Token(51, "$"));
@@ -154,7 +154,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 		public void MontagemPilha(List<string> Linhas)
 		{
 
-			try
+            try
 			{
 				// Recebe as linhas brutas.
 				char[] Caracteres;
