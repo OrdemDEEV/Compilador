@@ -15,16 +15,15 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 		public static List<TokenAtivo> PilhaTokenPrincipal = new List<TokenAtivo>();
 		public static List<Token> ListaTokens = new List<Token>();
 
-		#region --- Excel ---
+        #region --- Excel ---
 
-		private OleDbConnection _olecon;
+        /*
+        private OleDbConnection _olecon;
 		private OleDbCommand _oleCmd;
 		private static String _Arquivo = @"C:\Users\User\Desktop\Projetos\Compilador\Compilador\BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx";
 		private String _StringConexao = String.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR=YES;ReadOnly=False';", _Arquivo);
 		private String _Consulta;
-
-		
-
+     
 		public List<Token> IniciarDicionarioTokensComExcel()
 		{
 			// Conectar com excel.
@@ -52,7 +51,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 			// Retorna Lista.
 			return ListaTokens;
 		}
-
+       
 		#region --- CONTROLE CONEXAO ---
 
 		private void ConectarExcel()
@@ -71,16 +70,14 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 				MessageBox.Show(ex.Message, "Erro Fatal!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
+         
+        #endregion
+    */
+        #endregion
 
-		#endregion
+        #region --- MONTAGEM DICIONARIO DE DADOS ---
 
-		#endregion
-
-		#region --- MONTAGEM DICIONARIO DE DADOS ---
-
-		//public static List<Token> ListaTokens = new List<Token>();
-
-		public List<Token> IniciarDicionarioTokens()
+        public List<Token> IniciarDicionarioTokens()
         {
 
             ListaTokens.Add(new Token(1, "Program"));
@@ -112,24 +109,24 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
             ListaTokens.Add(new Token(27, "For"));
             ListaTokens.Add(new Token(28, "To"));
             ListaTokens.Add(new Token(29, "Case"));
-            ListaTokens.Add(new Token(30, "+ "));
-            ListaTokens.Add(new Token(31, "- "));
-            ListaTokens.Add(new Token(32, "* "));
-            ListaTokens.Add(new Token(33, "/ "));
+            ListaTokens.Add(new Token(30, "+"));
+            ListaTokens.Add(new Token(31, "-"));
+            ListaTokens.Add(new Token(32, "*"));
+            ListaTokens.Add(new Token(33, "/"));
             ListaTokens.Add(new Token(34, "["));
             ListaTokens.Add(new Token(35, "]"));
             ListaTokens.Add(new Token(36, "("));
             ListaTokens.Add(new Token(37, ")"));
-            ListaTokens.Add(new Token(38, ":= "));
+            ListaTokens.Add(new Token(38, ":="));
             ListaTokens.Add(new Token(39, ":"));
-            ListaTokens.Add(new Token(40, "= "));
-            ListaTokens.Add(new Token(41, "> "));
-            ListaTokens.Add(new Token(42, ">= "));
-            ListaTokens.Add(new Token(43, "< "));
-            ListaTokens.Add(new Token(44, "<= "));
-            ListaTokens.Add(new Token(45, "<> "));
+            ListaTokens.Add(new Token(40, "="));
+            ListaTokens.Add(new Token(41, ">"));
+            ListaTokens.Add(new Token(42, ">="));
+            ListaTokens.Add(new Token(43, "<"));
+            ListaTokens.Add(new Token(44, "<="));
+            ListaTokens.Add(new Token(45, "<>"));
             ListaTokens.Add(new Token(46, ","));
-            ListaTokens.Add(new Token(47, "; "));
+            ListaTokens.Add(new Token(47, ";"));
             ListaTokens.Add(new Token(48, "literal"));
             ListaTokens.Add(new Token(49, "."));
             ListaTokens.Add(new Token(50, ".."));
