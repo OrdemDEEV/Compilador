@@ -84,6 +84,7 @@ namespace Compilador.FrontEnd
 
 		private void CarregarGridViewTokensAtivos()
 		{
+            DgvPilhaPrincipal.DataSource = null;
             DgvPilhaPrincipal.DataSource = TokenController.PilhaTokenPrincipal;
 			DgvPilhaPrincipal.Refresh();
 		}
@@ -136,6 +137,10 @@ namespace Compilador.FrontEnd
             if (LocalArquivo == "")
             {
              salvarToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                File.WriteAllText(LocalArquivo,TxtEditorTexto.Text);
             }
 			ClnArquivo clArquivo = new ClnArquivo();
 			List<string> LinhaLidas = clArquivo.LerArquivo(LocalArquivo);

@@ -153,7 +153,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 		
 		public void MontagemPilha(List<string> Linhas)
 		{
-
+            PilhaTokenPrincipal.Clear();
             try
 			{
 				// Recebe as linhas brutas.
@@ -267,15 +267,15 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
 								concatenado = null;
 								break;
-							case ".":
-								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
-								concatenado = null;
-								break;
 							case "..":
 								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
 								concatenado = null;
 								break;
-							case "$":
+                            case ".":
+                                TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+                                concatenado = null;
+                                break;
+                            case "$":
 								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
 								concatenado = null;
 								break;
@@ -301,8 +301,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 									|| Caracteres[j + 1].Equals('<')
 									|| Caracteres[j + 1].ToString().Equals("<=")
 									|| Caracteres[j + 1].ToString().Equals("<>")
-									|| Caracteres[j + 1].Equals('.')
-									|| Caracteres[j + 1].ToString().Equals("..")
+                                    || Caracteres[j + 1].ToString().Equals("..")
+                                    || Caracteres[j + 1].Equals('.')
 									|| Caracteres[j + 1].Equals('$')
 									)
 								{
