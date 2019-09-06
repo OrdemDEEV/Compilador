@@ -108,7 +108,7 @@ namespace Compilador.FrontEnd
 
 				for (int i = 0; i < retorno.Count; i++)
 				{
-					TxtEditorTexto.Text += retorno[i];
+					TxtEditorTexto.Text += retorno[i] + "\n";
 				}
 			}
 			else
@@ -127,5 +127,29 @@ namespace Compilador.FrontEnd
 
 			CarregarGridViewTokensAtivos();
 		}
+
+		private void salvarToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			FolderBrowserDialog teste = new FolderBrowserDialog();
+			teste.ShowDialog();
+			string Caminho = teste.SelectedPath;
+
+			Escrevertexto(TxtEditorTexto.Text, Caminho);
+		}
+
+		public void Escrevertexto(string texto, string caminho)
+		{
+			string[] linhas = { "teste" };
+			linhas[0] = texto;
+
+			using (System.IO.StreamWriter arquivo = new System.IO.StreamWriter(@caminho + "\\Arquivo.txt"))
+			{
+				foreach (string linha in linhas)
+				{
+					arquivo.WriteLine(linha);
+				}
+			}
+		}
+
 	}
 }

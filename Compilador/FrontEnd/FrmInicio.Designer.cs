@@ -47,12 +47,12 @@
 			this.TxtEditorTexto = new System.Windows.Forms.RichTextBox();
 			this.TxtCaminhoArquivo = new System.Windows.Forms.TextBox();
 			this.DgvPilhaPrincipal = new System.Windows.Forms.DataGridView();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.linhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tokenAtivoBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
 			this.tokenAtivoBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tokenAtivoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-			this.linhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.DgvPilhaPrincipal)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).BeginInit();
@@ -95,20 +95,21 @@
 			// BtnAbrir
 			// 
 			this.BtnAbrir.Name = "BtnAbrir";
-			this.BtnAbrir.Size = new System.Drawing.Size(109, 22);
+			this.BtnAbrir.Size = new System.Drawing.Size(180, 22);
 			this.BtnAbrir.Text = "Abrir";
 			this.BtnAbrir.Click += new System.EventHandler(this.BtnAbrir_Click);
 			// 
 			// salvarToolStripMenuItem
 			// 
 			this.salvarToolStripMenuItem.Name = "salvarToolStripMenuItem";
-			this.salvarToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+			this.salvarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.salvarToolStripMenuItem.Text = "Salvar";
+			this.salvarToolStripMenuItem.Click += new System.EventHandler(this.salvarToolStripMenuItem_Click);
 			// 
 			// fecharToolStripMenuItem
 			// 
 			this.fecharToolStripMenuItem.Name = "fecharToolStripMenuItem";
-			this.fecharToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+			this.fecharToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.fecharToolStripMenuItem.Text = "Fechar";
 			// 
 			// ferramentasToolStripMenuItem
@@ -173,7 +174,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.TxtEditorTexto.Location = new System.Drawing.Point(12, 78);
 			this.TxtEditorTexto.Name = "TxtEditorTexto";
-			this.TxtEditorTexto.Size = new System.Drawing.Size(707, 308);
+			this.TxtEditorTexto.Size = new System.Drawing.Size(707, 659);
 			this.TxtEditorTexto.TabIndex = 3;
 			this.TxtEditorTexto.Text = "";
 			// 
@@ -186,7 +187,8 @@
 			// 
 			// DgvPilhaPrincipal
 			// 
-			this.DgvPilhaPrincipal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.DgvPilhaPrincipal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.DgvPilhaPrincipal.AutoGenerateColumns = false;
 			this.DgvPilhaPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.DgvPilhaPrincipal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -196,28 +198,9 @@
 			this.DgvPilhaPrincipal.DataSource = this.tokenAtivoBindingSource2;
 			this.DgvPilhaPrincipal.Location = new System.Drawing.Point(725, 78);
 			this.DgvPilhaPrincipal.Name = "DgvPilhaPrincipal";
-			this.DgvPilhaPrincipal.Size = new System.Drawing.Size(519, 308);
+			this.DgvPilhaPrincipal.Size = new System.Drawing.Size(519, 659);
 			this.DgvPilhaPrincipal.TabIndex = 5;
 			this.DgvPilhaPrincipal.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDados_CellFormatting);
-			// 
-			// tokenAtivoBindingSource2
-			// 
-			this.tokenAtivoBindingSource2.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
-			// 
-			// tokenAtivoBindingSource
-			// 
-			this.tokenAtivoBindingSource.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
-			// 
-			// tokenAtivoBindingSource1
-			// 
-			this.tokenAtivoBindingSource1.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
-			// 
-			// linhaDataGridViewTextBoxColumn
-			// 
-			this.linhaDataGridViewTextBoxColumn.DataPropertyName = "Linha";
-			this.linhaDataGridViewTextBoxColumn.HeaderText = "Linha";
-			this.linhaDataGridViewTextBoxColumn.Name = "linhaDataGridViewTextBoxColumn";
-			this.linhaDataGridViewTextBoxColumn.ReadOnly = true;
 			// 
 			// Column2
 			// 
@@ -231,12 +214,31 @@
 			this.Column1.HeaderText = "Simb";
 			this.Column1.Name = "Column1";
 			// 
+			// linhaDataGridViewTextBoxColumn
+			// 
+			this.linhaDataGridViewTextBoxColumn.DataPropertyName = "Linha";
+			this.linhaDataGridViewTextBoxColumn.HeaderText = "Linha";
+			this.linhaDataGridViewTextBoxColumn.Name = "linhaDataGridViewTextBoxColumn";
+			this.linhaDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// tokenAtivoBindingSource2
+			// 
+			this.tokenAtivoBindingSource2.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
+			// 
+			// tokenAtivoBindingSource
+			// 
+			this.tokenAtivoBindingSource.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
+			// 
+			// tokenAtivoBindingSource1
+			// 
+			this.tokenAtivoBindingSource1.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
+			// 
 			// FrmInicio
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.ClientSize = new System.Drawing.Size(1256, 408);
+			this.ClientSize = new System.Drawing.Size(1256, 749);
 			this.Controls.Add(this.DgvPilhaPrincipal);
 			this.Controls.Add(this.TxtCaminhoArquivo);
 			this.Controls.Add(this.TxtEditorTexto);

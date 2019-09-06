@@ -174,13 +174,148 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 					while (j < Caracteres.Length)
 					{
 						// Concatena
-						concatenado += Caracteres[j]; 
-						// Ultimo caractere da linha
-						if (j.Equals(Caracteres.Length-1) || Caracteres[j+1].ToString().Equals(","))
+						concatenado += Caracteres[j];
+
+						if (concatenado != " ") {
+
+							concatenado = concatenado.Trim();
+
+						// Switch pega os tokens dos caracteres especiais.
+						switch (concatenado)
 						{
-							TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
-							concatenado = null;
+							case ",":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case "+":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case "-":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case "*":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case "/":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case "[":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case "]":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case "(":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case ")":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case ":":
+									//TokenEncontrado = Caracteres[j+1].Equals('=')? BuscarTokenNoDicionario(concatenado.ToUpper() + Caracteres[j+1]) :BuscarTokenNoDicionario(concatenado.ToUpper());
+									if (Caracteres[j + 1].Equals('='))
+									{
+										TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper() + Caracteres[j + 1]);
+										j++;
+									}
+									else
+									{
+										TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+									}
+								concatenado = null;
+								break;
+							case "=":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case ">":
+									//TokenEncontrado = Caracteres[j+1].Equals('=')? BuscarTokenNoDicionario(concatenado.ToUpper() + Caracteres[j+1]) :BuscarTokenNoDicionario(concatenado.ToUpper());
+									if (Caracteres[j + 1].Equals('='))
+									{
+										TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper() + Caracteres[j + 1]);
+										j++;
+									}
+									else
+									{
+										TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+									}
+								concatenado = null;
+								break;
+							case "<":
+									//TokenEncontrado = Caracteres[j+1].Equals('=')? BuscarTokenNoDicionario(concatenado.ToUpper() + Caracteres[j+1]) :BuscarTokenNoDicionario(concatenado.ToUpper());
+									if (Caracteres[j + 1].Equals('='))
+									{
+										TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper() + Caracteres[j + 1]);
+										j++;
+									}
+									else
+									{
+										BuscarTokenNoDicionario(concatenado.ToUpper());
+									}
+								concatenado = null;
+								break;
+							case "<>":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case ";":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case ".":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case "..":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							case "$":
+								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+								concatenado = null;
+								break;
+							default:
+								// Default para concatenacao e manda para busca no dicionario.
+								if (j.Equals(Caracteres.Length - 1)
+									|| Caracteres[j + 1].Equals(',')
+									|| Caracteres[j + 1].Equals(' ')
+									|| Caracteres[j + 1].Equals(';')
+									|| Caracteres[j + 1].Equals('+')
+									|| Caracteres[j + 1].Equals('-')
+									|| Caracteres[j + 1].Equals('*')
+									|| Caracteres[j + 1].Equals('/')
+									|| Caracteres[j + 1].Equals('[')
+									|| Caracteres[j + 1].Equals(']')
+									|| Caracteres[j + 1].Equals('(')
+									|| Caracteres[j + 1].Equals(')')
+									|| Caracteres[j + 1].ToString().Equals(":=")
+									|| Caracteres[j + 1].Equals(':')
+									|| Caracteres[j + 1].Equals('=')
+									|| Caracteres[j + 1].Equals('>')
+									|| Caracteres[j + 1].ToString().Equals(">=")
+									|| Caracteres[j + 1].Equals('<')
+									|| Caracteres[j + 1].ToString().Equals("<=")
+									|| Caracteres[j + 1].ToString().Equals("<>")
+									|| Caracteres[j + 1].Equals('.')
+									|| Caracteres[j + 1].ToString().Equals("..")
+									|| Caracteres[j + 1].Equals('$')
+									)
+								{
+									TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+									concatenado = null;
+								}
+								break;
 						}
+
+					}
 
 						// Adicionar a pilha principal.
 						if (TokenEncontrado != null)
@@ -188,8 +323,13 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 							SalvarPilhaPrincipal(new TokenAtivo(TokenEncontrado, i + 1, "", 0, "", ""));
 						}
 						j++;
+
+						// Limpar Token encontrado.
+						// Para encontrar proximo.
+						TokenEncontrado = null;
 					}
 					j = 0;
+					
 				}
 
 			}
