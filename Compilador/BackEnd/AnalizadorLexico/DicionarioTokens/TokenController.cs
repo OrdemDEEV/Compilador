@@ -177,6 +177,20 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
 							concatenado = concatenado.Trim();
 
+
+							if (Caracteres[j].Equals('(') && Caracteres[j+1].Equals('*'))
+							{
+								concatenado += Caracteres[j + 1];
+								while (!concatenado.Equals("*)"))
+								{
+									j++;
+									concatenado = "";
+									concatenado = Caracteres[j].ToString() + Caracteres[j+1].ToString();
+								}
+								j++;
+							}
+
+
 						// Switch pega os tokens dos caracteres especiais.
 						switch (concatenado)
 						{
