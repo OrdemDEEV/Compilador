@@ -173,21 +173,34 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 						// Concatena
 						concatenado += Caracteres[j];
 
-						if (concatenado != " ") {
+                        if (concatenado == " ")
+                        {
+                            j++;
+                            concatenado = "";
+                            continue;
+                        }
 
-							concatenado = concatenado.Trim();
-
-
-							if (Caracteres[j].Equals('(') && Caracteres[j+1].Equals('*'))
+                        if (Caracteres[j].Equals('(') && Caracteres[j+1].Equals('*'))
 							{
 								concatenado += Caracteres[j + 1];
 								while (!concatenado.Equals("*)"))
 								{
 									j++;
 									concatenado = "";
-									concatenado = Caracteres[j].ToString() + Caracteres[j+1].ToString();
-								}
-								j++;
+                                if (j == Caracteres.Length -1)
+                                {
+                                    i++;
+                                    Caracteres = Linhas[i].ToCharArray();
+                                    j = 0;
+                                }
+                                else
+                                { 
+                                concatenado = Caracteres[j].ToString() + Caracteres[j+1].ToString();
+                                }
+                            }
+                            j=j+2;
+                            concatenado = "";
+                            continue;
 							}
 
 
@@ -326,7 +339,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 								break;
 						}
 
-					}
+					
 
 						// Adicionar a pilha principal.
 						if (TokenEncontrado != null)
