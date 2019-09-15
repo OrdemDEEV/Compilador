@@ -9,10 +9,14 @@ using System.Windows.Forms;
 
 namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 {
+
+
     class TokenController
     {
 
-		public static List<TokenAtivo> PilhaTokenPrincipal = new List<TokenAtivo>();
+       
+
+        public static List<TokenAtivo> PilhaTokenPrincipal = new List<TokenAtivo>();
 		public static List<Token> ListaTokens = new List<Token>();
 
         #region --- Excel ---
@@ -136,20 +140,38 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
             return ListaTokens;
         }
 
-		#endregion
+        
 
-		#region --- METODOS ANALIZADOR LEXICO ---
+        #endregion
 
-		private Token BuscarTokenNoDicionario(string variavel)
+        #region --- METODOS ANALIZADOR LEXICO ---
+
+
+        private Token BuscarTokenNoDicionario(string variavel)
 		{
-			Token token = ListaTokens.Find(c => c.Simbolo.Equals(variavel));
+            int directContractTicketID;
+            if (int.TryParse(variavel, out directContractTicketID))
+            {
+                return new Token(26, "INTEIRO");
+            }
 
-			if (token == null)
+
+            Token token = ListaTokens.Find(c => c.Simbolo.Equals(variavel));
+
+            if (token != null)
 			{
-				return new Token(25, "IDENTIFICADOR");
-			}
-			return token;
-		}
+                return token;
+            }
+
+
+            if (variavel != "")
+            {
+                return new Token(25, "IDENTIFICADOR");
+            }
+
+            return null;
+        }
+
 		
 		public void MontagemPilha(List<string> Linhas)
 		{
@@ -204,8 +226,20 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 							}
 
 
-						// Switch pega os tokens dos caracteres especiais.
-						switch (concatenado)
+                        if (Caracteres[j].Equals('\''))
+                        {
+                            while (!Caracteres[j].Equals('\''))
+                            {
+                                j++;
+                                concatenado += Caracteres[j];
+                            }
+                            TokenEncontrado = BuscarTokenNoDicionario("LITERAL");
+                            concatenado = "";
+                        }
+
+
+                        // Switch pega os tokens dos caracteres especiais.
+                        switch (concatenado)
 						{
 							case ",":
 								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
