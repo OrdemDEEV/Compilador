@@ -252,8 +252,19 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 								concatenado = null;
 								break;
 							case "-":
-								// Verificar aqui se o proximo e numero se for manda buscar la e retorna o inteiro e ignora o sinal.
-								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+                                // Verificar aqui se o proximo e numero se for manda buscar la e retorna o inteiro e ignora o sinal.
+                                Boolean TESTE = char.IsNumber(Caracteres[j + 1]);
+                                Boolean OUTROTESTE = char.IsNumber(Caracteres[j - 1]);
+                                if (Caracteres[j].Equals('-') && char.IsNumber(Caracteres[j+1]) && !char.IsNumber(Caracteres[j-1]))
+                                {
+                                    j++;
+                                    concatenado = Caracteres[j + 1].ToString();
+                                    TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+                                }
+                                else
+                                {
+                                    TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+                                }
 								concatenado = null;
 								break;
 							case "*":

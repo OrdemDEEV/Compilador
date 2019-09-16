@@ -226,3 +226,14 @@ C:\Users\dimit\Documents\Projetos\Compilador\Compilador\obj\Debug\Compilador.csp
 C:\Users\dimit\Documents\Projetos\Compilador\Compilador\obj\Debug\Compilador.csproj.CoreCompileInputs.cache
 C:\Users\dimit\Documents\Projetos\Compilador\Compilador\obj\Debug\Compilador.exe
 C:\Users\dimit\Documents\Projetos\Compilador\Compilador\obj\Debug\Compilador.pdb
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\bin\Debug\Compilador.exe.config
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\bin\Debug\Compilador.exe
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\bin\Debug\Compilador.pdb
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.csprojAssemblyReference.cache
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.FrontEnd.Ferramentas.FrmGerenciadorDicionarioTokens1.resources
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.FrontEnd.FrmInicio.resources
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.Properties.Resources.resources
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.csproj.GenerateResource.cache
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.csproj.CoreCompileInputs.cache
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.exe
+C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.pdb
