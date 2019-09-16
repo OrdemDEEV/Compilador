@@ -252,6 +252,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 								concatenado = null;
 								break;
 							case "-":
+								// Verificar aqui se o proximo e numero se for manda buscar la e retorna o inteiro e ignora o sinal.
 								TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
 								concatenado = null;
 								break;
@@ -380,7 +381,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 						// Adicionar a pilha principal.
 						if (TokenEncontrado != null)
 						{
-							SalvarPilhaPrincipal(new TokenAtivo(TokenEncontrado, i + 1, "", 0, "", ""));
+							SalvarPilhaPrincipal(new TokenAtivo(TokenEncontrado, i + 1, "", 0, "", "")); 
 						}
 						j++;
 
