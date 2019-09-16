@@ -45,19 +45,22 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DgvPilhaPrincipal = new System.Windows.Forms.DataGridView();
-            this.linhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tokenAtivoBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.TxtEditorTexto = new System.Windows.Forms.RichTextBox();
             this.LineNumberTextBox = new System.Windows.Forms.RichTextBox();
+            this.tokenAtivoBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.tokenAtivoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tokenAtivoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.linhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Buffer_ident = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Buffer_literal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPilhaPrincipal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -97,21 +100,21 @@
             // BtnAbrir
             // 
             this.BtnAbrir.Name = "BtnAbrir";
-            this.BtnAbrir.Size = new System.Drawing.Size(180, 22);
+            this.BtnAbrir.Size = new System.Drawing.Size(109, 22);
             this.BtnAbrir.Text = "Abrir";
             this.BtnAbrir.Click += new System.EventHandler(this.BtnAbrir_Click);
             // 
             // salvarToolStripMenuItem
             // 
             this.salvarToolStripMenuItem.Name = "salvarToolStripMenuItem";
-            this.salvarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salvarToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.salvarToolStripMenuItem.Text = "Salvar";
             this.salvarToolStripMenuItem.Click += new System.EventHandler(this.salvarToolStripMenuItem_Click);
             // 
             // fecharToolStripMenuItem
             // 
             this.fecharToolStripMenuItem.Name = "fecharToolStripMenuItem";
-            this.fecharToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fecharToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.fecharToolStripMenuItem.Text = "Fechar";
             // 
             // ferramentasToolStripMenuItem
@@ -179,36 +182,16 @@
             this.DgvPilhaPrincipal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.linhaDataGridViewTextBoxColumn,
             this.Column2,
-            this.Column1});
+            this.Column1,
+            this.Valor,
+            this.Buffer_ident,
+            this.Buffer_literal});
             this.DgvPilhaPrincipal.DataSource = this.tokenAtivoBindingSource2;
             this.DgvPilhaPrincipal.Location = new System.Drawing.Point(725, 31);
             this.DgvPilhaPrincipal.Name = "DgvPilhaPrincipal";
             this.DgvPilhaPrincipal.Size = new System.Drawing.Size(519, 700);
             this.DgvPilhaPrincipal.TabIndex = 5;
             this.DgvPilhaPrincipal.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDados_CellFormatting);
-            // 
-            // linhaDataGridViewTextBoxColumn
-            // 
-            this.linhaDataGridViewTextBoxColumn.DataPropertyName = "Linha";
-            this.linhaDataGridViewTextBoxColumn.HeaderText = "Linha";
-            this.linhaDataGridViewTextBoxColumn.Name = "linhaDataGridViewTextBoxColumn";
-            this.linhaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "token.Codigo";
-            this.Column2.HeaderText = "Cod";
-            this.Column2.Name = "Column2";
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "token.Simbolo";
-            this.Column1.HeaderText = "Simb";
-            this.Column1.Name = "Column1";
-            // 
-            // tokenAtivoBindingSource2
-            // 
-            this.tokenAtivoBindingSource2.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
             // 
             // groupBox1
             // 
@@ -243,14 +226,18 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.LineNumberTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LineNumberTextBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.LineNumberTextBox.Location = new System.Drawing.Point(6, 12);
+            this.LineNumberTextBox.Location = new System.Drawing.Point(6, 10);
             this.LineNumberTextBox.Name = "LineNumberTextBox";
             this.LineNumberTextBox.ReadOnly = true;
             this.LineNumberTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.LineNumberTextBox.Size = new System.Drawing.Size(40, 697);
+            this.LineNumberTextBox.Size = new System.Drawing.Size(40, 700);
             this.LineNumberTextBox.TabIndex = 0;
             this.LineNumberTextBox.Text = "";
             this.LineNumberTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LineNumberTextBox_MouseDown);
+            // 
+            // tokenAtivoBindingSource2
+            // 
+            this.tokenAtivoBindingSource2.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
             // 
             // tokenAtivoBindingSource
             // 
@@ -259,6 +246,51 @@
             // tokenAtivoBindingSource1
             // 
             this.tokenAtivoBindingSource1.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
+            // 
+            // linhaDataGridViewTextBoxColumn
+            // 
+            this.linhaDataGridViewTextBoxColumn.DataPropertyName = "Linha";
+            this.linhaDataGridViewTextBoxColumn.HeaderText = "Linha";
+            this.linhaDataGridViewTextBoxColumn.Name = "linhaDataGridViewTextBoxColumn";
+            this.linhaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.linhaDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "token.Codigo";
+            this.Column2.HeaderText = "Codigo";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 50;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "token.Simbolo";
+            this.Column1.HeaderText = "Simbolo";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 115;
+            // 
+            // Valor
+            // 
+            this.Valor.DataPropertyName = "Valor";
+            this.Valor.HeaderText = "Valor";
+            this.Valor.Name = "Valor";
+            this.Valor.ReadOnly = true;
+            this.Valor.Width = 70;
+            // 
+            // Buffer_ident
+            // 
+            this.Buffer_ident.DataPropertyName = "Buffer_ident";
+            this.Buffer_ident.HeaderText = "Identificador";
+            this.Buffer_ident.Name = "Buffer_ident";
+            this.Buffer_ident.ReadOnly = true;
+            this.Buffer_ident.Width = 70;
+            // 
+            // Buffer_literal
+            // 
+            this.Buffer_literal.DataPropertyName = "Buffer_literal";
+            this.Buffer_literal.HeaderText = "Literal";
+            this.Buffer_literal.Name = "Buffer_literal";
+            this.Buffer_literal.ReadOnly = true;
             // 
             // FrmInicio
             // 
@@ -278,8 +310,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPilhaPrincipal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -308,11 +340,14 @@
 		private System.Windows.Forms.BindingSource tokenAtivoBindingSource1;
 		private System.Windows.Forms.DataGridView DgvPilhaPrincipal;
 		private System.Windows.Forms.BindingSource tokenAtivoBindingSource2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn linhaDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox TxtEditorTexto;
         private System.Windows.Forms.RichTextBox LineNumberTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linhaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Valor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Buffer_ident;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Buffer_literal;
     }
 }

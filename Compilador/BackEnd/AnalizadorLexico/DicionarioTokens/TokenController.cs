@@ -18,6 +18,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
         public static List<TokenAtivo> PilhaTokenPrincipal = new List<TokenAtivo>();
 		public static List<Token> ListaTokens = new List<Token>();
+        public int valor = 0;
+        public string buffer_ident = "";
 
         #region --- Excel ---
 
@@ -149,9 +151,10 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
         private Token BuscarTokenNoDicionario(string variavel)
 		{
-            int directContractTicketID;
-            if (int.TryParse(variavel, out directContractTicketID))
+          
+            if (int.TryParse(variavel, out int verificacao))
             {
+                valor = Convert.ToInt32(variavel);
                 return new Token(26, "INTEIRO");
             }
 
@@ -166,6 +169,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
             if (variavel != "")
             {
+                buffer_ident = variavel;
                 return new Token(25, "IDENTIFICADOR");
             }
 
@@ -183,6 +187,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 				int j = 0;
 				string concatenado = null;
 				Token TokenEncontrado=  null;
+                string buffer_literal = "";
+
 
 				// Percorre as linhas brutas recebidas.
 				for (int i = 0; i < Linhas.Count; i++)
@@ -195,6 +201,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 						// Concatena
 						concatenado += Caracteres[j];
 
+                        #region --- IGNORAR ESPAÇOS ---
                         if (concatenado == " ")
                         {
                             j++;
@@ -202,10 +209,18 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                             continue;
                         }
 
-						// Tratamento de comentarios.
-						#region --- CONROLE COMENTARIOS ---
+                        if (concatenado == "\t")
+                        {
+                            j++;
+                            concatenado = "";
+                            continue;
+                        }
 
-						if (Caracteres[j].Equals('(') && Caracteres[j + 1].Equals('*'))
+                        #endregion
+
+                        #region --- CONROLE COMENTARIOS ---
+                        // Tratamento de comentarios.
+                        if (Caracteres[j].Equals('(') && Caracteres[j + 1].Equals('*'))
 						{
 							while (TratarComentarios(Caracteres[j], Caracteres.Length == 1 ? 'a' : Caracteres[j+1]) != true)
 							{
@@ -226,19 +241,25 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 							j++;
 						}
 
-						#endregion
+                        #endregion
 
-						if (Caracteres[j].Equals('\''))
+                        #region --- LITERAL ---
+
+                        if (Caracteres[j].Equals('\''))
                         {
+                            concatenado = "";
                             while (!Caracteres[j].Equals('\''))
                             {
                                 j++;
                                 concatenado += Caracteres[j];
                             }
+
                             TokenEncontrado = BuscarTokenNoDicionario("LITERAL");
+                            buffer_literal = concatenado;
                             concatenado = "";
                         }
 
+                        #endregion
 
                         // Switch pega os tokens dos caracteres especiais.
                         switch (concatenado)
@@ -255,10 +276,14 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                                 // Verificar aqui se o proximo e numero se for manda buscar la e retorna o inteiro e ignora o sinal.
                                 Boolean TESTE = char.IsNumber(Caracteres[j + 1]);
                                 Boolean OUTROTESTE = char.IsNumber(Caracteres[j - 1]);
-                                if (Caracteres[j].Equals('-') && char.IsNumber(Caracteres[j+1]) && !char.IsNumber(Caracteres[j-1]))
+                                if (Caracteres[j].Equals('-') && char.IsNumber(Caracteres[j+1]))
                                 {
-                                    j++;
-                                    concatenado = Caracteres[j + 1].ToString();
+                                    while (char.IsNumber(Caracteres[j + 1]))
+                                    {
+                                        j++;
+                                        concatenado += Caracteres[j];
+                                    }
+                                    valor = Convert.ToInt32(concatenado);
                                     TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
                                 }
                                 else
@@ -381,7 +406,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 									|| Caracteres[j + 1].Equals('$')
 									)
 								{
-									TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
+                                    TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper());
 									concatenado = null;
 								}
 								break;
@@ -392,15 +417,19 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 						// Adicionar a pilha principal.
 						if (TokenEncontrado != null)
 						{
-							SalvarPilhaPrincipal(new TokenAtivo(TokenEncontrado, i + 1, "", 0, "", "")); 
+							SalvarPilhaPrincipal(new TokenAtivo(TokenEncontrado, i + 1, "", valor, buffer_ident, buffer_literal));
 						}
-						j++;
 
-						// Limpar Token encontrado.
-						// Para encontrar proximo.
-						TokenEncontrado = null;
-					}
-					j = 0;
+                        // Limpar Token encontrado.
+                        // Para encontrar proximo.
+                        valor = 0;
+                        buffer_literal = "";
+                        buffer_ident = "";
+                        TokenEncontrado = null;
+                        j++;
+
+                    }
+                    j = 0;
 					
 				}
 
