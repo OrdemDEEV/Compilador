@@ -202,31 +202,33 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                             continue;
                         }
 
-                        if (Caracteres[j].Equals('(') && Caracteres[j+1].Equals('*'))
+						// Tratamento de comentarios.
+						#region --- CONROLE COMENTARIOS ---
+
+						if (Caracteres[j].Equals('(') && Caracteres[j + 1].Equals('*'))
+						{
+							while (TratarComentarios(Caracteres[j], Caracteres.Length == 1 ? 'a' : Caracteres[j+1]) != true)
 							{
-								concatenado += Caracteres[j + 1];
-								while (!concatenado.Equals("*)"))
+								j++;
+								if (j.Equals(Caracteres.Length) | j.Equals(Caracteres.Length-1))
 								{
-									j++;
-									concatenado = "";
-                                if (j == Caracteres.Length -1)
-                                {
-                                    i++;
-                                    Caracteres = Linhas[i].ToCharArray();
-                                    j = 0;
-                                }
-                                else
-                                { 
-                                concatenado = Caracteres[j].ToString() + Caracteres[j+1].ToString();
-                                }
-                            }
-                            j=j+2;
-                            concatenado = "";
-                            continue;
+									do
+									{
+										i++;
+										Caracteres = Linhas[i].ToCharArray();
+									}
+									while (Caracteres.Length == 0);
+									
+									j = 0;
+								}
 							}
+							concatenado = "";
+							j++;
+						}
 
+						#endregion
 
-                        if (Caracteres[j].Equals('\''))
+						if (Caracteres[j].Equals('\''))
                         {
                             while (!Caracteres[j].Equals('\''))
                             {
@@ -400,6 +402,15 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 		private void SalvarPilhaPrincipal(TokenAtivo tokenAtivo)
 		{
 			PilhaTokenPrincipal.Add(tokenAtivo);
+		}
+
+		private Boolean TratarComentarios(char primeiro, char segundo)
+		{
+			if (primeiro != '*'|| segundo != ')')
+			{
+				return false;
+			}
+			return true;
 		}
 
 		#endregion
