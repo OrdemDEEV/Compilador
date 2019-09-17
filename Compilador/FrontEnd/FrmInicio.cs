@@ -267,6 +267,5 @@ namespace Compilador.FrontEnd
             TxtEditorTexto.Select();
             LineNumberTextBox.DeselectAll();
         }
-
-    }
+	}
 }

@@ -79,6 +79,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx" />
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.Token.datasource" />
@@ -96,6 +97,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\folder-symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fast-forward-button.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
