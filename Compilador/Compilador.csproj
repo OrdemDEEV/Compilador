@@ -106,5 +106,23 @@
   <ItemGroup>
     <None Include="Resources\fast-forward-button.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoadFrom_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Next_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Index_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddItem_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find_16x16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

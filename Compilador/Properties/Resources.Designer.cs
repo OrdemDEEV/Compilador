@@ -63,6 +63,16 @@ namespace Compilador.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddItem_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("AddItem_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fast_forward_button {
             get {
                 object obj = ResourceManager.GetObject("fast-forward-button", resourceCulture);
@@ -73,9 +83,59 @@ namespace Compilador.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Find_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Find_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap folder_symbol {
             get {
                 object obj = ResourceManager.GetObject("folder-symbol", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Index_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Index_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LoadFrom_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("LoadFrom_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Next_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Next_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Save_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Save_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

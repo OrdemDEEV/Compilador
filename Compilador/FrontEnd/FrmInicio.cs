@@ -34,6 +34,8 @@ namespace Compilador.FrontEnd
                 LineNumberTextBox.Font = TxtEditorTexto.Font;
                 TxtEditorTexto.Select();
                 AddLineNumbers();
+
+            TxtSaida.Text = "Saída >>";
         }
 
         private void FrmInicio_Resize(object sender, EventArgs e)
