@@ -93,7 +93,8 @@ namespace Compilador.FrontEnd
 
 		#endregion
 
-		private void gerenciarDicionarioDeDadosToolStripMenuItem_Click(object sender, EventArgs e)
+		private void gerenciarDicionarioDeDadosToolStripMenuItem_Click
+			(object sender, EventArgs e)
         {
             FrmGerenciadorDicionarioTokens1 gerToken = new FrmGerenciadorDicionarioTokens1();
             gerToken.Show();
