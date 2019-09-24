@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Compilador.BackEnd.AnalisadorSintatico.Auxiliar;
 
 namespace Compilador.FrontEnd
 {
@@ -270,5 +271,11 @@ namespace Compilador.FrontEnd
             TxtEditorTexto.Select();
             LineNumberTextBox.DeselectAll();
         }
+
+		private void rodarAnalizarSintáticoToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			NaoTerminais naoTerminais = new NaoTerminais();
+			naoTerminais.MontarTabelaNaoTerminais();
+		}
 	}
 }

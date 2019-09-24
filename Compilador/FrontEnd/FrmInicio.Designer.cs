@@ -180,6 +180,7 @@
 			this.rodarAnalizarSintáticoToolStripMenuItem.Name = "rodarAnalizarSintáticoToolStripMenuItem";
 			this.rodarAnalizarSintáticoToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
 			this.rodarAnalizarSintáticoToolStripMenuItem.Text = "Rodar Analizar Sintático";
+			this.rodarAnalizarSintáticoToolStripMenuItem.Click += new System.EventHandler(this.rodarAnalizarSintáticoToolStripMenuItem_Click);
 			// 
 			// rodarAnalizadorSemanticoToolStripMenuItem
 			// 

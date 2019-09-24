@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackEnd\AnalisadorSintatico\Auxiliar\NaoTerminais.cs" />
+    <Compile Include="BackEnd\AnalisadorSintatico\Codigos\AnalizadorSintatico.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\Auxiliar\ClnArquivo.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\Auxiliar\Leitura.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\Token.cs" />
@@ -124,5 +126,6 @@
   <ItemGroup>
     <None Include="Resources\Find_16x16.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
