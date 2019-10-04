@@ -46,13 +46,11 @@
 			this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.DgvPilhaPrincipal = new System.Windows.Forms.DataGridView();
-			this.linhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Buffer_ident = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Buffer_literal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.tokenAtivoBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.TxtEditorTexto = new System.Windows.Forms.RichTextBox();
 			this.LineNumberTextBox = new System.Windows.Forms.RichTextBox();
@@ -70,11 +68,12 @@
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.TxtSaida = new System.Windows.Forms.RichTextBox();
+			this.linhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.tokenAtivoBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
 			this.tokenAtivoBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tokenAtivoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.DgvPilhaPrincipal)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
@@ -85,6 +84,7 @@
 			this.splitContainer2.Panel1.SuspendLayout();
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource1)).BeginInit();
 			this.SuspendLayout();
@@ -227,14 +227,6 @@
 			this.DgvPilhaPrincipal.TabIndex = 5;
 			this.DgvPilhaPrincipal.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDados_CellFormatting);
 			// 
-			// linhaDataGridViewTextBoxColumn
-			// 
-			this.linhaDataGridViewTextBoxColumn.DataPropertyName = "Linha";
-			this.linhaDataGridViewTextBoxColumn.HeaderText = "Linha";
-			this.linhaDataGridViewTextBoxColumn.Name = "linhaDataGridViewTextBoxColumn";
-			this.linhaDataGridViewTextBoxColumn.ReadOnly = true;
-			this.linhaDataGridViewTextBoxColumn.Width = 50;
-			// 
 			// Column2
 			// 
 			this.Column2.DataPropertyName = "token.Codigo";
@@ -271,10 +263,6 @@
 			this.Buffer_literal.HeaderText = "Literal";
 			this.Buffer_literal.Name = "Buffer_literal";
 			this.Buffer_literal.ReadOnly = true;
-			// 
-			// tokenAtivoBindingSource2
-			// 
-			this.tokenAtivoBindingSource2.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
 			// 
 			// groupBox1
 			// 
@@ -398,7 +386,7 @@
 			this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButton3.Name = "toolStripButton3";
 			this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-			this.toolStripButton3.Text = "toolStripButton3";
+			this.toolStripButton3.Text = "Rodar Analisador Lexico";
 			this.toolStripButton3.Click += new System.EventHandler(this.BtnRodarAnalizadorLexico_Click);
 			// 
 			// toolStripSeparator4
@@ -474,6 +462,18 @@
 			this.TxtSaida.TabIndex = 0;
 			this.TxtSaida.Text = "";
 			// 
+			// linhaDataGridViewTextBoxColumn
+			// 
+			this.linhaDataGridViewTextBoxColumn.DataPropertyName = "Linha";
+			this.linhaDataGridViewTextBoxColumn.HeaderText = "Linha";
+			this.linhaDataGridViewTextBoxColumn.Name = "linhaDataGridViewTextBoxColumn";
+			this.linhaDataGridViewTextBoxColumn.ReadOnly = true;
+			this.linhaDataGridViewTextBoxColumn.Width = 50;
+			// 
+			// tokenAtivoBindingSource2
+			// 
+			this.tokenAtivoBindingSource2.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
+			// 
 			// tokenAtivoBindingSource
 			// 
 			this.tokenAtivoBindingSource.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
@@ -502,7 +502,6 @@
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.DgvPilhaPrincipal)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
@@ -515,6 +514,7 @@
 			this.splitContainer2.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource1)).EndInit();
 			this.ResumeLayout(false);
@@ -566,6 +566,6 @@
         private System.Windows.Forms.ToolStripButton BtnDicionarioTokens;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.RichTextBox TxtSaida;
-    }
+		protected System.Windows.Forms.RichTextBox TxtSaida;
+	}
 }

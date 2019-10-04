@@ -44,9 +44,18 @@ namespace Compilador.FrontEnd
             AddLineNumbers();
         }
 
-        #region --- CONTROLE GRID VIEW TOKENS ---
+		#region ---- CONTROLE SAIDA ---
 
-        private void dgvDados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		public void EscreverSaida(string mensagem)
+		{
+			TxtSaida.Text += "\n"+ DateTime.Now.TimeOfDay + " >>  " + mensagem;
+		}
+
+		#endregion
+
+		#region --- CONTROLE GRID VIEW TOKENS ---
+
+		private void dgvDados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 			if ((DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem != null) && (DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
 			{
@@ -138,6 +147,9 @@ namespace Compilador.FrontEnd
 
 		private void BtnRodarAnalizadorLexico_Click(object sender, EventArgs e)
 		{
+			// Escreve na saida.
+			EscreverSaida("Iniciada Execução do analizador lexico! ");
+
             if (LocalArquivo == "")
             {
              salvarToolStripMenuItem_Click(sender, e);
@@ -149,10 +161,12 @@ namespace Compilador.FrontEnd
 			ClnArquivo clArquivo = new ClnArquivo();
 			List<string> LinhaLidas = clArquivo.LerArquivo(LocalArquivo);
 
-			TokenController tokenController = new TokenController(); 
+			TokenController tokenController = new TokenController(this); 
 			tokenController.MontagemPilha(LinhaLidas);
 
 			CarregarGridViewTokensAtivos();
+
+			EscreverSaida("Finalizada Execução do analizador lexico! ");
 		}
 
 		private void salvarToolStripMenuItem_Click(object sender, EventArgs e)

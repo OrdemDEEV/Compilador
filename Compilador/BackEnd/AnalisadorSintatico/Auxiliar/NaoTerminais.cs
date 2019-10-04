@@ -16,7 +16,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Auxiliar
 
 		public void MontarTabelaNaoTerminais()
 		{
-			XElement xml = XElement.Load("C:\\Users\\Eduardo\\Desktop\\Projetos\\Compilador\\Compilador\\BackEnd\\AnalisadorSintatico\\Auxiliar\\gramatica.xml");
+			XElement xml = XElement.Load("C:\\Users\\User\\Desktop\\Projetos\\Compilador\\gramatica.xml");
 			foreach (XElement x in xml.Elements())
 			{
 				NaoTerminais naoterminal = new NaoTerminais();

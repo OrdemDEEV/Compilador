@@ -1,3 +1,4 @@
+using Compilador.FrontEnd;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,12 +15,22 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
     class TokenController
     {
 
-       
+		FrmInicio _frmInicio;
 
         public static List<TokenAtivo> PilhaTokenPrincipal = new List<TokenAtivo>();
 		public static List<Token> ListaTokens = new List<Token>();
         public int valor = 0;
         public string buffer_ident = "";
+
+		public TokenController()
+		{
+
+		}
+
+		public TokenController(FrmInicio frmInicio)
+		{
+			_frmInicio = frmInicio;
+		}
 
         #region --- Excel ---
 
@@ -155,7 +166,10 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
             if (int.TryParse(variavel, out int verificacao))
             {
                 valor = Convert.ToInt32(variavel);
-				return new Token(26, "INTEIRO");
+
+					return new Token(26, "INTEIRO");
+				
+				
             }
 
 
@@ -258,7 +272,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 								}
 								else
 								{
-									MessageBox.Show("Tamanho inválido de literal na linha: " + Convert.ToInt32(i + 1).ToString(), "Erro de compilação!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+									_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Limite de tamanho de literal exedido  | linha: " + Convert.ToInt32(i+1));
+									break;
 								}
 
 							}
@@ -427,6 +442,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 									)
 								{
                                     TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper(), i);
+									
 									concatenado = null;
 								}
 								break;
@@ -452,6 +468,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                     j = 0;
 					
 				}
+
+				PararLeitura:;
 
 			}
 			catch (Exception ex)
