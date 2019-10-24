@@ -237,3 +237,6 @@ C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.csproj
 C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.csproj.CoreCompileInputs.cache
 C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.exe
 C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.pdb
+C:\Users\User\Desktop\Projetos\Compilador\Compilador\bin\Debug\Microsoft.SyndicationFeed.ReaderWriter.dll
+C:\Users\User\Desktop\Projetos\Compilador\Compilador\bin\Debug\System.Xml.ReaderWriter.dll
+C:\Users\User\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.csproj.CopyComplete

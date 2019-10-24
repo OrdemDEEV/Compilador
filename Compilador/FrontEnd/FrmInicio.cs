@@ -290,6 +290,7 @@ namespace Compilador.FrontEnd
 		{
 			NaoTerminais naoTerminais = new NaoTerminais();
 			naoTerminais.MontarTabelaNaoTerminais();
+			
 		}
 	}
 }
