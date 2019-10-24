@@ -60,6 +60,7 @@
     <Compile Include="BackEnd\AnalisadorSintatico\Codigos\AnalizadorSintatico.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\Auxiliar\ClnArquivo.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\Auxiliar\Leitura.cs" />
+    <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\CatalogoParsing.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\Token.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\TokenAtivo.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\TokenController.cs" />
@@ -95,6 +96,7 @@
     </Compile>
     <None Include="BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.CatalogoParsing.datasource" />
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.Token.datasource" />
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo.datasource" />
     <None Include="Properties\Settings.settings">

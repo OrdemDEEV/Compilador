@@ -30,6 +30,7 @@ namespace Compilador.FrontEnd
             TokenController tokenController = new TokenController();
 			//tokenController.IniciarDicionarioTokens();
 			tokenController.IniciarDicionarioTokens();
+            tokenController.IniciarCatalogoParsing();
 
 
                 LineNumberTextBox.Font = TxtEditorTexto.Font;

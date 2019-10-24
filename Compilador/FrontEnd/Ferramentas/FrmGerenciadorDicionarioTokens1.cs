@@ -23,6 +23,10 @@ namespace Compilador.FrontEnd.Ferramentas
 			DgvTeste.DataSource = TokenController.ListaTokens;
 			DgvTeste.Refresh();
 
+            dgvParsing.DataSource = TokenController.CatalogoParsing;
+            dgvParsing.Refresh();
 		}
-	}
+
+
+    }
 }

@@ -240,3 +240,17 @@ C:\Users\harpa\Desktop\Eduardo\Compilador\Compilador\obj\Debug\Compilador.pdb
 C:\Users\User\Desktop\Projetos\Compilador\Compilador\bin\Debug\Microsoft.SyndicationFeed.ReaderWriter.dll
 C:\Users\User\Desktop\Projetos\Compilador\Compilador\bin\Debug\System.Xml.ReaderWriter.dll
 C:\Users\User\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.csproj.CopyComplete
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\bin\Debug\Compilador.exe.config
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\bin\Debug\Compilador.exe
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\bin\Debug\Compilador.pdb
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\bin\Debug\Microsoft.SyndicationFeed.ReaderWriter.dll
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\bin\Debug\System.Xml.ReaderWriter.dll
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.csprojAssemblyReference.cache
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.FrontEnd.Ferramentas.FrmGerenciadorDicionarioTokens1.resources
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.FrontEnd.FrmInicio.resources
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.Properties.Resources.resources
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.csproj.GenerateResource.cache
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.csproj.CoreCompileInputs.cache
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.csproj.CopyComplete
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.exe
+C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.pdb
