@@ -77,8 +77,5 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Auxiliar
 
 		#endregion
 
-		
-
-
 	}
 }

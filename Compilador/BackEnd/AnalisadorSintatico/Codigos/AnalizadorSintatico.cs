@@ -27,7 +27,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 		public void MontagemTabelaTerminais()
 		{
 			ListTerminais = xmlHelper.RetornaTerminais();
-		}
+		}    
 
 		public void MontagemTabelaParsing()
 		{
@@ -41,7 +41,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
 		public void RodarAnalizadoSintatico()
 		{
-
+			// CRIAR O ANALIZADO LEXICO AQUI SOMENTE NESTA CLASSE POR FAVOR.
 		}
 
 		#endregion

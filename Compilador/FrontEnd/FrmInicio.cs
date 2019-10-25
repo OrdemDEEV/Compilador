@@ -295,6 +295,8 @@ namespace Compilador.FrontEnd
 			analizadorSintatico.MontagemTabelaNaoTerminais();
 			analizadorSintatico.MontagemTabelaTerminais();
 			analizadorSintatico.MontagemTabelaParsing();
+
+			// CHAMAR METODOS DAS CLASSES PARA EXECUCAO.
 		}
 	}
 }
