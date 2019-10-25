@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Compilador.BackEnd.AnalisadorSintatico.Auxiliar;
+using Compilador.BackEnd.AnalisadorSintatico.Codigos;
 
 namespace Compilador.FrontEnd
 {
@@ -289,9 +290,11 @@ namespace Compilador.FrontEnd
 
 		private void rodarAnalizarSintáticoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			NaoTerminais naoTerminais = new NaoTerminais();
-			naoTerminais.MontarTabelaNaoTerminais();
-			
+			// Inicia as listas para execucao do automato.
+			AnalizadorSintatico analizadorSintatico = new AnalizadorSintatico();
+			analizadorSintatico.MontagemTabelaNaoTerminais();
+			analizadorSintatico.MontagemTabelaTerminais();
+			analizadorSintatico.MontagemTabelaParsing();
 		}
 	}
 }

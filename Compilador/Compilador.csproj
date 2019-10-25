@@ -54,9 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackEnd\AnalisadorSintatico\Auxiliar\NaoTerminais.cs" />
-    <Compile Include="BackEnd\AnalisadorSintatico\Auxiliar\Objetos\gramatica.cs" />
-    <Compile Include="BackEnd\AnalisadorSintatico\Auxiliar\Objetos\naoTerminal.cs" />
-    <Compile Include="BackEnd\AnalisadorSintatico\Auxiliar\Objetos\terminal.cs" />
+    <Compile Include="BackEnd\AnalisadorSintatico\Auxiliar\Objetos\Gramatica.cs" />
+    <Compile Include="BackEnd\AnalisadorSintatico\Auxiliar\Objetos\TabelaParsing.cs" />
+    <Compile Include="BackEnd\AnalisadorSintatico\Auxiliar\XmlHelper.cs" />
     <Compile Include="BackEnd\AnalisadorSintatico\Codigos\AnalizadorSintatico.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\Auxiliar\ClnArquivo.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\Auxiliar\Leitura.cs" />
