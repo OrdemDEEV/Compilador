@@ -1,6 +1,7 @@
 ﻿using Compilador.BackEnd.AnalisadorSintatico.Auxiliar;
 using Compilador.BackEnd.AnalisadorSintatico.Auxiliar.Objetos;
 using Compilador.BackEnd.AnalizadorLexico.DicionarioTokens;
+using Compilador.FrontEnd;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 {
 	class AnalizadorSintatico
 	{
+		FrmInicio _frmInicio;
 		XmlHelper xmlHelper = new XmlHelper();
 
 		public static List<NaoTerminal> ListNaoTerminais { get; set; }
@@ -18,7 +20,22 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 		public static List<Item> ListParsing { get; set; }
 
 		// Ir armazenando aqui as derivacoes usadas.
-		public static List<string> ArvoreDerivacao { get; set; }
+		public static List<string> ArvoreDerivacao = new List<string>();
+
+
+		#region --- CONSTRUTORES ---
+
+		public AnalizadorSintatico()
+		{
+
+		}
+
+		public AnalizadorSintatico(FrmInicio _form)
+		{
+			_frmInicio = _form;
+		}
+
+		#endregion
 
 		#region --- MONTAGEM DE TABELAS E LISTAS ---
 
@@ -49,8 +66,8 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 		{
 			int i = 0;
 			// CRIAR O ANALIZADO LEXICO AQUI SOMENTE NESTA CLASSE POR FAVOR.
-			//MontagemTabelaNaoTerminais();
-			//MontagemTabelaTerminais();
+			MontagemTabelaNaoTerminais();
+			MontagemTabelaTerminais();
 			MontagemTabelaParsing();
 
 			// Colocar no Proximo o proximo da pilha.
@@ -84,13 +101,96 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
 				// Algoritimo proprio.
 
-				VerificarPilhaParsing(TokenController.PilhaTokenPrincipal[i].token.Simbolo);
+
+				// ir percorrendo lista, verificando se esta na tabela de parsing.
+				// se estiver mandar pear o retorno e procurar na tabela de nao terminais.
+				// pegar o codigo do nao terminal encontrado e mandar par tabela de parsing.
+				// assim encontramos a proxima linha de derivacao.
+
+				// verificamos se o item esta na tabela de parsing.
+				Item _item = null;
+				if (i.Equals(0))
+				{
+					if (TokenController.PilhaTokenPrincipal[i].token.Simbolo.Equals("PROGRAM"))
+					{
+						_item = VerificarPilhaParsing(TokenController.PilhaTokenPrincipal[i].token.Simbolo);
+						CarregarArvoreDerivacao(_item);
+
+						TokenController.PilhaTokenPrincipal.RemoveAt(i);
+						ArvoreDerivacao.RemoveAt(i);
+					}
+					else
+					{
+						_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incial incorreto  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
+						break;
+					}
+				}
+				else
+				{
+
+
+					// Primeiro precisa ver se eum terminal.
+					if (VerificaTerminal(TokenController.PilhaTokenPrincipal[0].token.Simbolo))
+					{
+						// terminal
+						TokenController.PilhaTokenPrincipal.RemoveAt(0);
+						ArvoreDerivacao.RemoveAt(0);
+					}
+					else
+					{
+						// nao terminal.
+						// pode ser um nao terminal.
+						// Encontrar o nao terminal em questao.
+						NaoTerminal _chaveNaoTerminal = RetornarCodigoNaoTerminal(ArvoreDerivacao[i]);
+
+						if (_chaveNaoTerminal != null)
+						{
+							Item _itemRetornado = VerificarPilhaParsingPorCodigo(_chaveNaoTerminal.Codigo);
+							CarregarArvoreDerivacao(_itemRetornado);
+						}
+						else
+						{
+							_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo invalido conforme gramatica  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
+							break;
+						}
+						
+					}
+
+					
+
+				}
+
+				/*if (!_item.Equals(null))
+				{
+						
+				}*/
 
 				i++;
 			}
 
 			#endregion
 
+		}
+
+		// Carrega Item na arvore de derivacao.
+		private bool CarregarArvoreDerivacao(Item _item)
+		{
+			try
+			{
+				string[] itens = _item.Derivacao.Split('|');
+
+				for (int i=0;i<itens.Length;i++)
+				{
+					ArvoreDerivacao.Add(itens[i]);
+				}
+				return true;
+			}
+			catch (Exception ex)
+			{
+				// caso de algum erro interno, parar a analise.
+				return false;
+			}
+			
 		}
 
 		// Encontra Codigo nao terminal.
@@ -145,11 +245,11 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 			return false;
 		}
 
-		private bool VerificaTerminal(TokenAtivo terminal)
+		private bool VerificaTerminal(string simbolo)
 		{
 			for (int i=0;i< ListTerminais.Count;i++)
 			{
-				if (ListTerminais[i].Simbolo.Equals(terminal.Valor))
+				if (ListTerminais[i].Simbolo.Equals(simbolo))
 				{
 					return true;
 				}

@@ -291,7 +291,7 @@ namespace Compilador.FrontEnd
 		private void rodarAnalizarSintáticoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			// Inicia as listas para execucao do automato.
-			AnalizadorSintatico analizadorSintatico = new AnalizadorSintatico();
+			AnalizadorSintatico analizadorSintatico = new AnalizadorSintatico(this);
 			//analizadorSintatico.MontagemTabelaNaoTerminais();
 			//analizadorSintatico.MontagemTabelaTerminais();
 			//analizadorSintatico.MontagemTabelaParsing();

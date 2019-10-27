@@ -39,6 +39,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Auxiliar
 				FileStream stream = new FileStream(CaminhoXml, FileMode.Open);
 				XmlSerializer deserealizador = new XmlSerializer(typeof(Gramatica));
 				Gramatica gramatica = (Gramatica)deserealizador.Deserialize(stream);
+				stream.Close();
 				return gramatica;
 			}
 			catch (Exception ex)
