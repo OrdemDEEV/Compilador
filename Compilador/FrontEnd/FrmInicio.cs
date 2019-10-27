@@ -294,9 +294,11 @@ namespace Compilador.FrontEnd
 			AnalizadorSintatico analizadorSintatico = new AnalizadorSintatico();
 			//analizadorSintatico.MontagemTabelaNaoTerminais();
 			//analizadorSintatico.MontagemTabelaTerminais();
-			analizadorSintatico.MontagemTabelaParsing();
+			//analizadorSintatico.MontagemTabelaParsing();
 
 			// CHAMAR METODOS DAS CLASSES PARA EXECUCAO.
+			analizadorSintatico.RodarAnalizadoSintatico();
+
 		}
 
 		private void btnGerenciarTabelaParsing_Click(object sender, EventArgs e)
