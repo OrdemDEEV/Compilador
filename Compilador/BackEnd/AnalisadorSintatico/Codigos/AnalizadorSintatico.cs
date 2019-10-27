@@ -17,6 +17,9 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 		public static List<Terminal> ListTerminais { get; set; }
 		public static List<Item> ListParsing { get; set; }
 
+		// Ir armazenando aqui as derivacoes usadas.
+		public static List<string> ArvoreDerivacao { get; set; }
+
 		#region --- MONTAGEM DE TABELAS E LISTAS ---
 
 		public void MontagemTabelaNaoTerminais()
@@ -41,12 +44,12 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 		#region --- EXECUCAO DO AUTOMATO DE ANALISE SINTATICA ---
 
 		public TokenAtivo Proximo { get; set; }
-		public int i { get; set; }
 
 		public void RodarAnalizadoSintatico()
 		{
+			int i = 0;
 			// CRIAR O ANALIZADO LEXICO AQUI SOMENTE NESTA CLASSE POR FAVOR.
-			MontagemTabelaNaoTerminais();
+			//MontagemTabelaNaoTerminais();
 			//MontagemTabelaTerminais();
 			MontagemTabelaParsing();
 
@@ -55,13 +58,13 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 			#region --- EXECUCAO DO AUTOMATO ---
 
 			// Colocar em proximo o simbolo $ e o incial da gramatica PROGRAM
-			while (!TokenController.PilhaTokenPrincipal.Equals("$"))
+			while (TokenController.PilhaTokenPrincipal.Count > 0)
 			{
 				// Encontrar proximo elemento analizado.
-				Proximo = TokenController.PilhaTokenPrincipal[i + 1];
+				//Proximo = TokenController.PilhaTokenPrincipal[i + 1];
 
 				// Verificar se o elemento e um terminal ou o simbolo final.
-				if (VerificaTerminal(TokenController.PilhaTokenPrincipal[i]))
+				/*if (VerificaTerminal(TokenController.PilhaTokenPrincipal[i]))
 				{
 					if (TokenController.PilhaTokenPrincipal[i].Equals(Proximo))
 					{
@@ -77,13 +80,60 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 				else
 				{
 
-				}
+				}*/
+
+				// Algoritimo proprio.
+
+				VerificarPilhaParsing(TokenController.PilhaTokenPrincipal[i].token.Simbolo);
 
 				i++;
 			}
 
 			#endregion
 
+		}
+
+		// Encontra Codigo nao terminal.
+		private NaoTerminal RetornarCodigoNaoTerminal(string simbolo)
+		{
+			for (int i=0;i<ListNaoTerminais.Count;i++)
+			{
+				if (ListNaoTerminais[i].Simbolo.Equals(simbolo))
+				{
+					return ListNaoTerminais[i];
+				}
+			}
+			return null;
+		}
+
+		//ENCONTRA PARSING POR CODIGO.
+		private Item VerificarPilhaParsingPorCodigo(string codigo)
+		{
+			string[] parsing;
+			for (int i = 0; i < ListParsing.Count; i++)
+			{
+				parsing = ListParsing[i].Codigo.Split(',');
+				if (parsing.Contains(codigo))
+				{
+					return ListParsing[i];
+				}
+			}
+			return null;
+		}
+
+		// ENCONTRA PARSING POR DESCRICAO.
+		private Item VerificarPilhaParsing(string derivacao)
+		{
+			string[] parsing;
+			for (int i=0;i<ListParsing.Count;i++)
+			{
+				parsing = ListParsing[i].Derivacao.Split('|');
+				if (parsing.Contains(derivacao)) 
+				{
+					return ListParsing[i];
+				}
+			}
+			return null;
 		}
 
 		private bool VerficaNaoTerminal(NaoTerminal naoTerminal)
@@ -95,11 +145,14 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 			return false;
 		}
 
-		private bool VerificaTerminal(Terminal terminal)
+		private bool VerificaTerminal(TokenAtivo terminal)
 		{
-			if (ListTerminais.Contains(terminal))
+			for (int i=0;i< ListTerminais.Count;i++)
 			{
-				return true;
+				if (ListTerminais[i].Simbolo.Equals(terminal.Valor))
+				{
+					return true;
+				}
 			}
 			return false;
 		}
