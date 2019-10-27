@@ -59,7 +59,6 @@
     <Compile Include="BackEnd\AnalisadorSintatico\Codigos\AnalizadorSintatico.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\Auxiliar\ClnArquivo.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\Auxiliar\Leitura.cs" />
-    <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\CatalogoParsing.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\Token.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\TokenAtivo.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\TokenController.cs" />
@@ -68,6 +67,12 @@
     </Compile>
     <Compile Include="FrontEnd\Ferramentas\FrmGerenciadorDicionarioTokens1.Designer.cs">
       <DependentUpon>FrmGerenciadorDicionarioTokens1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrontEnd\Ferramentas\FrmlGerenciadorTabelaParsing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\Ferramentas\FrmlGerenciadorTabelaParsing.Designer.cs">
+      <DependentUpon>FrmlGerenciadorTabelaParsing.cs</DependentUpon>
     </Compile>
     <Compile Include="FrontEnd\FrmInicio.cs">
       <SubType>Form</SubType>
@@ -79,6 +84,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrontEnd\Ferramentas\FrmGerenciadorDicionarioTokens1.resx">
       <DependentUpon>FrmGerenciadorDicionarioTokens1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\Ferramentas\FrmlGerenciadorTabelaParsing.resx">
+      <DependentUpon>FrmlGerenciadorTabelaParsing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\FrmInicio.resx">
       <DependentUpon>FrmInicio.cs</DependentUpon>
@@ -95,6 +103,7 @@
     </Compile>
     <None Include="BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Compilador.BackEnd.AnalisadorSintatico.Auxiliar.Objetos.Item.datasource" />
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.CatalogoParsing.datasource" />
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.Token.datasource" />
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo.datasource" />

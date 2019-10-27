@@ -31,7 +31,7 @@ namespace Compilador.FrontEnd
             TokenController tokenController = new TokenController();
 			//tokenController.IniciarDicionarioTokens();
 			tokenController.IniciarDicionarioTokens();
-            tokenController.IniciarCatalogoParsing();
+            //tokenController.IniciarCatalogoParsing();
 
 
                 LineNumberTextBox.Font = TxtEditorTexto.Font;
@@ -292,11 +292,17 @@ namespace Compilador.FrontEnd
 		{
 			// Inicia as listas para execucao do automato.
 			AnalizadorSintatico analizadorSintatico = new AnalizadorSintatico();
-			analizadorSintatico.MontagemTabelaNaoTerminais();
-			analizadorSintatico.MontagemTabelaTerminais();
+			//analizadorSintatico.MontagemTabelaNaoTerminais();
+			//analizadorSintatico.MontagemTabelaTerminais();
 			analizadorSintatico.MontagemTabelaParsing();
 
 			// CHAMAR METODOS DAS CLASSES PARA EXECUCAO.
+		}
+
+		private void btnGerenciarTabelaParsing_Click(object sender, EventArgs e)
+		{
+			FrmlGerenciadorTabelaParsing frmTabelaParsing = new FrmlGerenciadorTabelaParsing();
+			frmTabelaParsing.ShowDialog();
 		}
 	}
 }

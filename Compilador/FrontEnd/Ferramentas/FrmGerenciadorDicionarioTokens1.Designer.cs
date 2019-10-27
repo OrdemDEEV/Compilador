@@ -131,7 +131,6 @@
             // 
             // catalogoParsingBindingSource
             // 
-            this.catalogoParsingBindingSource.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.CatalogoParsing);
             // 
             // codigoParsing1DataGridViewTextBoxColumn
             // 

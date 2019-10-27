@@ -42,6 +42,9 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 		public void RodarAnalizadoSintatico()
 		{
 			// CRIAR O ANALIZADO LEXICO AQUI SOMENTE NESTA CLASSE POR FAVOR.
+			MontagemTabelaNaoTerminais();
+			MontagemTabelaTerminais();
+			MontagemTabelaParsing();
 		}
 
 		#endregion

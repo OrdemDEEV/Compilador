@@ -254,3 +254,4 @@ C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.cs
 C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.csproj.CopyComplete
 C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.exe
 C:\Users\dimit\Documents\copilador\Compilador\Compilador\obj\Debug\Compilador.pdb
+C:\Users\User\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.FrontEnd.Ferramentas.FrmlGerenciadorTabelaParsing.resources
