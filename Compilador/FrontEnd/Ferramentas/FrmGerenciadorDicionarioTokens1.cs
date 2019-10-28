@@ -24,6 +24,9 @@ namespace Compilador.FrontEnd.Ferramentas
 			DgvTeste.Refresh();
 		}
 
+        private void DgvTeste_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+        }
     }
 }

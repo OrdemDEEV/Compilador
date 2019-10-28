@@ -53,6 +53,12 @@ namespace Compilador.FrontEnd
 			TxtSaida.Text += "\n"+ DateTime.Now.TimeOfDay + " >>  " + mensagem;
 		}
 
+        public void EscreverGrid(string Item1,string Item2,string Item3)
+        {
+            dgvParsing.Rows.Add(Item1,Item2,Item3);
+            DgvPilhaPrincipal.Refresh();
+        }
+
 		#endregion
 
 		#region --- CONTROLE GRID VIEW TOKENS ---
@@ -290,8 +296,9 @@ namespace Compilador.FrontEnd
 
 		private void rodarAnalizarSintáticoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			// Inicia as listas para execucao do automato.
-			AnalizadorSintatico analizadorSintatico = new AnalizadorSintatico(this);
+            dgvParsing.Rows.Clear();
+            // Inicia as listas para execucao do automato.
+            AnalizadorSintatico analizadorSintatico = new AnalizadorSintatico(this);
 			//analizadorSintatico.MontagemTabelaNaoTerminais();
 			//analizadorSintatico.MontagemTabelaTerminais();
 			//analizadorSintatico.MontagemTabelaParsing();
@@ -306,5 +313,5 @@ namespace Compilador.FrontEnd
 			FrmlGerenciadorTabelaParsing frmTabelaParsing = new FrmlGerenciadorTabelaParsing();
 			frmTabelaParsing.ShowDialog();
 		}
-	}
+    }
 }

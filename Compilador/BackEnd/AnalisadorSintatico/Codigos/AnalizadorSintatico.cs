@@ -118,7 +118,8 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
 						TokenController.PilhaTokenPrincipal.RemoveAt(i);
 						ArvoreDerivacao.RemoveAt(i);
-					}
+                        _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[i].Linha) , Convert.ToString(_item.Codigo) , Convert.ToString(_item.Derivacao));
+                    }
 					else
 					{
 						_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incial incorreto  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
@@ -155,13 +156,16 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 								{
 									ArvoreDerivacao.RemoveAt(0);
 									CarregarArvoreDerivacao(_itemRetornado);
-								}
-								else
+                                    _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[i].Linha), Convert.ToString(_itemRetornado.Codigo), Convert.ToString(_itemRetornado.Derivacao));
+                                }
+                                else
 								{
 									ArvoreDerivacao.RemoveAt(0);
 									ArvoreDerivacao.Insert(0, _recursaoEsquerda);
-								}
-							}
+                                    _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[i].Linha), "0", Convert.ToString(_recursaoEsquerda));
+
+                                }
+                            }
 						}
 						else
 						{

@@ -30,28 +30,28 @@
 		{
             this.components = new System.ComponentModel.Container();
             this.DgvTeste = new System.Windows.Forms.DataGridView();
-            this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simboloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tokenBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvParsing = new System.Windows.Forms.DataGridView();
             this.catalogoParsingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.codigoParsing1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigoParsing2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simboloParsingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tokenBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simboloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DgvTeste)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tokenBindingSource)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParsing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.catalogoParsingBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tokenBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // DgvTeste
             // 
+            this.DgvTeste.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DgvTeste.AutoGenerateColumns = false;
             this.DgvTeste.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DgvTeste.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -63,28 +63,13 @@
             this.DgvTeste.Name = "DgvTeste";
             this.DgvTeste.Size = new System.Drawing.Size(777, 372);
             this.DgvTeste.TabIndex = 0;
-            // 
-            // codigoDataGridViewTextBoxColumn
-            // 
-            this.codigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo";
-            this.codigoDataGridViewTextBoxColumn.HeaderText = "Codigo";
-            this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
-            this.codigoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // simboloDataGridViewTextBoxColumn
-            // 
-            this.simboloDataGridViewTextBoxColumn.DataPropertyName = "Simbolo";
-            this.simboloDataGridViewTextBoxColumn.HeaderText = "Simbolo";
-            this.simboloDataGridViewTextBoxColumn.Name = "simboloDataGridViewTextBoxColumn";
-            this.simboloDataGridViewTextBoxColumn.ReadOnly = true;
-            this.simboloDataGridViewTextBoxColumn.Width = 600;
-            // 
-            // tokenBindingSource
-            // 
-            this.tokenBindingSource.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.Token);
+            this.DgvTeste.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvTeste_CellContentClick);
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(2, 2);
@@ -117,42 +102,35 @@
             // 
             // dgvParsing
             // 
+            this.dgvParsing.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvParsing.AutoGenerateColumns = false;
             this.dgvParsing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvParsing.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codigoParsing1DataGridViewTextBoxColumn,
-            this.codigoParsing2DataGridViewTextBoxColumn,
-            this.simboloParsingDataGridViewTextBoxColumn});
             this.dgvParsing.DataSource = this.catalogoParsingBindingSource;
             this.dgvParsing.Location = new System.Drawing.Point(6, 3);
             this.dgvParsing.Name = "dgvParsing";
             this.dgvParsing.Size = new System.Drawing.Size(776, 369);
             this.dgvParsing.TabIndex = 0;
             // 
-            // catalogoParsingBindingSource
+            // tokenBindingSource
             // 
+            this.tokenBindingSource.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.Token);
             // 
-            // codigoParsing1DataGridViewTextBoxColumn
+            // codigoDataGridViewTextBoxColumn
             // 
-            this.codigoParsing1DataGridViewTextBoxColumn.DataPropertyName = "CodigoParsing1";
-            this.codigoParsing1DataGridViewTextBoxColumn.HeaderText = "Codigo 1";
-            this.codigoParsing1DataGridViewTextBoxColumn.Name = "codigoParsing1DataGridViewTextBoxColumn";
-            this.codigoParsing1DataGridViewTextBoxColumn.ReadOnly = true;
+            this.codigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo";
+            this.codigoDataGridViewTextBoxColumn.HeaderText = "Codigo";
+            this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
+            this.codigoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // codigoParsing2DataGridViewTextBoxColumn
+            // simboloDataGridViewTextBoxColumn
             // 
-            this.codigoParsing2DataGridViewTextBoxColumn.DataPropertyName = "CodigoParsing2";
-            this.codigoParsing2DataGridViewTextBoxColumn.HeaderText = "Codigo 2";
-            this.codigoParsing2DataGridViewTextBoxColumn.Name = "codigoParsing2DataGridViewTextBoxColumn";
-            this.codigoParsing2DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // simboloParsingDataGridViewTextBoxColumn
-            // 
-            this.simboloParsingDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.simboloParsingDataGridViewTextBoxColumn.DataPropertyName = "SimboloParsing";
-            this.simboloParsingDataGridViewTextBoxColumn.HeaderText = "Simbolo Parsing";
-            this.simboloParsingDataGridViewTextBoxColumn.Name = "simboloParsingDataGridViewTextBoxColumn";
-            this.simboloParsingDataGridViewTextBoxColumn.ReadOnly = true;
+            this.simboloDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.simboloDataGridViewTextBoxColumn.DataPropertyName = "Simbolo";
+            this.simboloDataGridViewTextBoxColumn.HeaderText = "Simbolo";
+            this.simboloDataGridViewTextBoxColumn.Name = "simboloDataGridViewTextBoxColumn";
+            this.simboloDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // FrmGerenciadorDicionarioTokens1
             // 
@@ -165,12 +143,12 @@
             this.Text = "Visualização";
             this.Load += new System.EventHandler(this.FrmGerenciadorDicionarioTokens1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvTeste)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tokenBindingSource)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvParsing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.catalogoParsingBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tokenBindingSource)).EndInit();
             this.ResumeLayout(false);
 
 		}
@@ -179,8 +157,6 @@
 
 		private System.Windows.Forms.DataGridView DgvTeste;
 		private System.Windows.Forms.BindingSource tokenBindingSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn codigoDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn simboloDataGridViewTextBoxColumn;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -189,5 +165,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn codigoParsing1DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigoParsing2DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simboloParsingDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simboloDataGridViewTextBoxColumn;
     }
 }
