@@ -132,9 +132,42 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 					// Primeiro precisa ver se eum terminal.
 					if (VerificaTerminal(TokenController.PilhaTokenPrincipal[0].token.Simbolo))
 					{
-						// terminal
-						TokenController.PilhaTokenPrincipal.RemoveAt(0);
-						ArvoreDerivacao.RemoveAt(0);
+						if (TokenController.PilhaTokenPrincipal[0].token.Simbolo.Equals(ArvoreDerivacao[0]))
+						{
+							// terminal
+							TokenController.PilhaTokenPrincipal.RemoveAt(0);
+							ArvoreDerivacao.RemoveAt(0);
+						}
+						else if(RetornarCodigoNaoTerminal(ArvoreDerivacao[0]) != null)
+						{
+							// Proximo da arvore e nao terminal.
+							// Buscar por esse nao terminal, no parsing.
+							// Enquanto o termo mais a esquerda for um nao terminal vai derivando.
+							while (RetornarCodigoNaoTerminal(ArvoreDerivacao[0]) != null)
+							{
+								NaoTerminal _chaveNaoTerminal = RetornarCodigoNaoTerminal(ArvoreDerivacao[0]);
+								Item _itemRetornado = VerificarPilhaParsingPorCodigo(_chaveNaoTerminal.Codigo);
+
+								// pegar recursao mais a esquerda.
+								string _recursaoEsquerda = _itemRetornado.Derivacao.Split('|')[0] ;
+
+								if (TokenController.PilhaTokenPrincipal[0].token.Simbolo.Equals(_recursaoEsquerda))
+								{
+									ArvoreDerivacao.RemoveAt(0);
+									CarregarArvoreDerivacao(_itemRetornado);
+								}
+								else
+								{
+									ArvoreDerivacao.RemoveAt(0);
+									ArvoreDerivacao.Insert(0, _recursaoEsquerda);
+								}
+							}
+						}
+						else
+						{
+							_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo invalido conforme gramatica  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
+							break;
+						}
 					}
 					else
 					{
@@ -155,15 +188,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 						}
 						
 					}
-
-					
-
 				}
-
-				/*if (!_item.Equals(null))
-				{
-						
-				}*/
 
 				i++;
 			}
@@ -181,7 +206,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
 				for (int i=0;i<itens.Length;i++)
 				{
-					ArvoreDerivacao.Add(itens[i]);
+					ArvoreDerivacao.Insert(i,itens[i]);
 				}
 				return true;
 			}
@@ -213,7 +238,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 			for (int i = 0; i < ListParsing.Count; i++)
 			{
 				parsing = ListParsing[i].Codigo.Split(',');
-				if (parsing.Contains(codigo))
+				if (ListParsing[i].Derivacao != "NULL" && parsing.Contains(codigo))
 				{
 					return ListParsing[i];
 				}
