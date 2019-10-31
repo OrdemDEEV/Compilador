@@ -68,7 +68,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
             MontagemTabelaParsing();
 
             NaoTerminal _retorno = RetornarCodigoNaoTerminal("PROGRAMA");
-            Item item = VerificarPilhaParsingPorCodigo(_retorno.Codigo);
+            Item item = VerificarPilhaParsingPorCodigo(_retorno.Codigo + "," + "1");
             CarregarArvoreDerivacao(item);
 
             while (ArvoreDerivacao.Count > 0)
@@ -89,7 +89,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                 else
                 {
                     _retorno = RetornarCodigoNaoTerminal(ArvoreDerivacao[0]);
-                    item = VerificarPilhaParsingPorCodigo(_retorno.Codigo);
+                    item = VerificarPilhaParsingPorCodigo(Convert.ToString(_retorno.Codigo + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo));
 
                     string teste = RetornaTerminal(item.Codigo);
 
@@ -304,8 +304,8 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 			string[] parsing;
 			for (int i = 0; i < ListParsing.Count; i++)
 			{
-				parsing = ListParsing[i].Codigo.Split(',');
-				if (ListParsing[i].Derivacao != "NULL" && parsing.Contains(codigo))
+				//parsing = ListParsing[i].Codigo.Split(',');
+				if (ListParsing[i].Codigo == codigo)
 				{
 					return ListParsing[i];
 				}
