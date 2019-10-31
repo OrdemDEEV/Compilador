@@ -299,13 +299,13 @@ namespace Compilador.FrontEnd
             dgvParsing.Rows.Clear();
             // Inicia as listas para execucao do automato.
             AnalizadorSintatico analizadorSintatico = new AnalizadorSintatico(this);
-			//analizadorSintatico.MontagemTabelaNaoTerminais();
-			//analizadorSintatico.MontagemTabelaTerminais();
-			//analizadorSintatico.MontagemTabelaParsing();
+            //analizadorSintatico.MontagemTabelaNaoTerminais();
+            //analizadorSintatico.MontagemTabelaTerminais();
+            //analizadorSintatico.MontagemTabelaParsing();
 
-			// CHAMAR METODOS DAS CLASSES PARA EXECUCAO.
-			analizadorSintatico.RodarAnalizadoSintatico();
-
+            // CHAMAR METODOS DAS CLASSES PARA EXECUCAO.
+            //analizadorSintatico.RodarAnalizadoSintatico();
+            analizadorSintatico.RunAnalizadorSintatico();
 		}
 
 		private void btnGerenciarTabelaParsing_Click(object sender, EventArgs e)

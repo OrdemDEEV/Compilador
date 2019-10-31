@@ -55,12 +55,60 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 			ListParsing = xmlHelper.RetornarListParsing();
 		}
 
-		#endregion
+        #endregion
 
 
-		#region --- EXECUCAO DO AUTOMATO DE ANALISE SINTATICA ---
+        #region --- EXECUCAO DO AUTOMATO DE ANALISE SINTATICA ---
 
-		public TokenAtivo Proximo { get; set; }
+
+        public void RunAnalizadorSintatico()
+        {
+            MontagemTabelaNaoTerminais();
+            MontagemTabelaTerminais();
+            MontagemTabelaParsing();
+
+            NaoTerminal _retorno = RetornarCodigoNaoTerminal("PROGRAMA");
+            Item item = VerificarPilhaParsingPorCodigo(_retorno.Codigo);
+            CarregarArvoreDerivacao(item);
+
+            while (ArvoreDerivacao.Count > 0)
+            {
+                if (VerificaTerminal(ArvoreDerivacao[0]))
+                {
+                    if (ArvoreDerivacao[0].Equals(TokenController.PilhaTokenPrincipal[0].token.Simbolo))
+                    {
+                        TokenController.PilhaTokenPrincipal.RemoveAt(0);
+                        ArvoreDerivacao.RemoveAt(0);
+                    }
+                    else
+                    {
+                        _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incial incorreto  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+                        break;
+                    }
+                }
+                else
+                {
+                    _retorno = RetornarCodigoNaoTerminal(ArvoreDerivacao[0]);
+                    item = VerificarPilhaParsingPorCodigo(_retorno.Codigo);
+
+                    string teste = RetornaTerminal(item.Codigo);
+
+                    if (teste == ArvoreDerivacao[0])
+                    {
+                        ArvoreDerivacao.RemoveAt(0);
+                        CarregarArvoreDerivacao(item);
+                    }
+                    else
+                    {
+                        _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incial incorreto  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        public TokenAtivo Proximo { get; set; }
 
 		public void RodarAnalizadoSintatico()
 		{
@@ -221,6 +269,21 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 			}
 			
 		}
+
+        // Retorna Descricao do terminal pelo codigo.
+        private string RetornaTerminal(string Codigos)
+        {
+            string CodTerminal = Codigos.Split(',')[1];
+
+            for (int i=0;i<ListTerminais.Count;i++)
+            {
+                if (ListTerminais[i].Codigo == CodTerminal)
+                {
+                    return ListTerminais[i].Simbolo;
+                }
+            }
+            return null;
+        }
 
 		// Encontra Codigo nao terminal.
 		private NaoTerminal RetornarCodigoNaoTerminal(string simbolo)
