@@ -101,7 +101,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="BackEnd\AnalizadorLexico\DicionarioTokens\TabelaTokens.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalisadorSintatico.Auxiliar.Objetos.Item.datasource" />
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.CatalogoParsing.datasource" />
@@ -147,6 +146,13 @@
   <ItemGroup>
     <None Include="Resources\Find_16x16.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="BackEnd\AnalisadorSintatico\Auxiliar\tabelaParsing.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BackEnd\AnalisadorSintatico\Auxiliar\tabelaGramatica.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

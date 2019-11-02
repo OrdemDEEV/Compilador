@@ -77,6 +77,8 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                 {
                     if (ArvoreDerivacao[0].Equals(TokenController.PilhaTokenPrincipal[0].token.Simbolo))
                     {
+                        string arvoreDerivacaoUnida = string.Join("|", ArvoreDerivacao);
+                        _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[0].Linha), ArvoreDerivacao[0], arvoreDerivacaoUnida);
                         TokenController.PilhaTokenPrincipal.RemoveAt(0);
                         ArvoreDerivacao.RemoveAt(0);
                     }
@@ -89,15 +91,17 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                 else
                 {
                     _retorno = RetornarCodigoNaoTerminal(ArvoreDerivacao[0]);
-                    item = VerificarPilhaParsingPorCodigo(Convert.ToString(_retorno.Codigo + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo));
-
+          
                     string teste = RetornaTerminal(item.Codigo);
 
-                    if (teste == ArvoreDerivacao[0])
+                    if (VerificarPilhaParsingPorCodigoBool(Convert.ToString(_retorno.Codigo + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo))
+)
                     {
+                        string arvoreDerivacaoUnida = string.Join("|", ArvoreDerivacao);
+                        _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[0].Linha), ArvoreDerivacao[0], arvoreDerivacaoUnida);
                         ArvoreDerivacao.RemoveAt(0);
-                        CarregarArvoreDerivacao(item);
-                    }
+                        CarregarArvoreDerivacao(VerificarPilhaParsingPorCodigo(Convert.ToString(_retorno.Codigo + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo)));
+                     }
                     else
                     {
                         _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incial incorreto  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
@@ -221,25 +225,6 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 							break;
 						}
 					}
-					else
-					{
-						// nao terminal.
-						// pode ser um nao terminal.
-						// Encontrar o nao terminal em questao.
-						NaoTerminal _chaveNaoTerminal = RetornarCodigoNaoTerminal(ArvoreDerivacao[i]);
-
-						if (_chaveNaoTerminal != null)
-						{
-							Item _itemRetornado = VerificarPilhaParsingPorCodigo(_chaveNaoTerminal.Codigo);
-							CarregarArvoreDerivacao(_itemRetornado);
-						}
-						else
-						{
-							_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo invalido conforme gramatica  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
-							break;
-						}
-						
-					}
 				}
 
 				i++;
@@ -258,8 +243,11 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
 				for (int i=0;i<itens.Length;i++)
 				{
-					ArvoreDerivacao.Insert(i,itens[i]);
-				}
+                    if (itens[i] != "NULL")
+                    {
+                        ArvoreDerivacao.Insert(i,itens[i]);
+                    }
+                }
 				return true;
 			}
 			catch (Exception ex)
@@ -307,14 +295,28 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 				//parsing = ListParsing[i].Codigo.Split(',');
 				if (ListParsing[i].Codigo == codigo)
 				{
-					return ListParsing[i];
+                    return ListParsing[i];
 				}
 			}
 			return null;
 		}
 
-		// ENCONTRA PARSING POR DESCRICAO.
-		private Item VerificarPilhaParsing(string derivacao)
+        private bool VerificarPilhaParsingPorCodigoBool(string codigo)
+        {
+            for (int i = 0; i < ListParsing.Count; i++)
+            {
+                //parsing = ListParsing[i].Codigo.Split(',');
+                if (ListParsing[i].Codigo == codigo)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        // ENCONTRA PARSING POR DESCRICAO.
+        private Item VerificarPilhaParsing(string derivacao)
 		{
 			string[] parsing;
 			for (int i=0;i<ListParsing.Count;i++)

@@ -47,13 +47,11 @@
             this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DgvPilhaPrincipal = new System.Windows.Forms.DataGridView();
-            this.linhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Buffer_ident = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Buffer_literal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tokenAtivoBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.TxtEditorTexto = new System.Windows.Forms.RichTextBox();
             this.LineNumberTextBox = new System.Windows.Forms.RichTextBox();
@@ -70,16 +68,17 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvParsing = new System.Windows.Forms.DataGridView();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.TxtSaida = new System.Windows.Forms.RichTextBox();
+            this.linhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tokenAtivoBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.tokenAtivoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tokenAtivoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.Item1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Item2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Item3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.TxtSaida = new System.Windows.Forms.RichTextBox();
-            this.tokenAtivoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tokenAtivoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPilhaPrincipal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -92,6 +91,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -242,14 +242,6 @@
             this.DgvPilhaPrincipal.TabIndex = 5;
             this.DgvPilhaPrincipal.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDados_CellFormatting);
             // 
-            // linhaDataGridViewTextBoxColumn
-            // 
-            this.linhaDataGridViewTextBoxColumn.DataPropertyName = "Linha";
-            this.linhaDataGridViewTextBoxColumn.HeaderText = "Linha";
-            this.linhaDataGridViewTextBoxColumn.Name = "linhaDataGridViewTextBoxColumn";
-            this.linhaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.linhaDataGridViewTextBoxColumn.Width = 50;
-            // 
             // Column2
             // 
             this.Column2.DataPropertyName = "token.Codigo";
@@ -286,10 +278,6 @@
             this.Buffer_literal.HeaderText = "Literal";
             this.Buffer_literal.Name = "Buffer_literal";
             this.Buffer_literal.ReadOnly = true;
-            // 
-            // tokenAtivoBindingSource2
-            // 
-            this.tokenAtivoBindingSource2.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
             // 
             // groupBox1
             // 
@@ -477,24 +465,6 @@
             this.dgvParsing.Size = new System.Drawing.Size(497, 251);
             this.dgvParsing.TabIndex = 0;
             // 
-            // Item1
-            // 
-            this.Item1.HeaderText = "Linha";
-            this.Item1.Name = "Item1";
-            this.Item1.Width = 50;
-            // 
-            // Item2
-            // 
-            this.Item2.HeaderText = "";
-            this.Item2.Name = "Item2";
-            this.Item2.Width = 50;
-            // 
-            // Item3
-            // 
-            this.Item3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Item3.HeaderText = "Parsing";
-            this.Item3.Name = "Item3";
-            // 
             // splitContainer2
             // 
             this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -527,6 +497,18 @@
             this.TxtSaida.TabIndex = 0;
             this.TxtSaida.Text = "";
             // 
+            // linhaDataGridViewTextBoxColumn
+            // 
+            this.linhaDataGridViewTextBoxColumn.DataPropertyName = "Linha";
+            this.linhaDataGridViewTextBoxColumn.HeaderText = "Linha";
+            this.linhaDataGridViewTextBoxColumn.Name = "linhaDataGridViewTextBoxColumn";
+            this.linhaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.linhaDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // tokenAtivoBindingSource2
+            // 
+            this.tokenAtivoBindingSource2.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
+            // 
             // tokenAtivoBindingSource
             // 
             this.tokenAtivoBindingSource.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
@@ -534,6 +516,27 @@
             // tokenAtivoBindingSource1
             // 
             this.tokenAtivoBindingSource1.DataSource = typeof(Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo);
+            // 
+            // Item1
+            // 
+            this.Item1.HeaderText = "Linha";
+            this.Item1.Name = "Item1";
+            this.Item1.ReadOnly = true;
+            this.Item1.Width = 50;
+            // 
+            // Item2
+            // 
+            this.Item2.HeaderText = "Removido";
+            this.Item2.Name = "Item2";
+            this.Item2.ReadOnly = true;
+            this.Item2.Width = 80;
+            // 
+            // Item3
+            // 
+            this.Item3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Item3.HeaderText = "Parsing";
+            this.Item3.Name = "Item3";
+            this.Item3.ReadOnly = true;
             // 
             // FrmInicio
             // 
@@ -555,7 +558,6 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPilhaPrincipal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -570,6 +572,7 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenAtivoBindingSource1)).EndInit();
             this.ResumeLayout(false);

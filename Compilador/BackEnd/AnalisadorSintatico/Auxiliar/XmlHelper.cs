@@ -9,11 +9,12 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Auxiliar
 {
 	class XmlHelper
 	{
+
 		// Caminho xml gramatica.
-		string CaminhoXml = "C:\\Users\\harpa\\Desktop\\Eduardo\\Compilador\\gramatica.xml";
+		string CaminhoXml = "BackEnd\\AnalisadorSintatico\\Auxiliar\\tabelaGramatica.xml";
 
 		// Caminho xml tabela parsing.
-		string CaminhoXmlParsing = "C:\\Users\\harpa\\Desktop\\Eduardo\\Compilador\\tabelaParsing_sem_acoes_semanticas.xml";
+		string CaminhoXmlParsing = "BackEnd\\AnalisadorSintatico\\Auxiliar\\tabelaParsing.xml";
 
 		#region --- XML GRAMATICA ---
 

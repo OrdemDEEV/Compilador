@@ -56,7 +56,14 @@ namespace Compilador.FrontEnd
         public void EscreverGrid(string Item1,string Item2,string Item3)
         {
             dgvParsing.Rows.Add(Item1,Item2,Item3);
+            dgvParsing.FirstDisplayedScrollingRowIndex = dgvParsing.RowCount - 1;
+            dgvParsing.Refresh();
+
+            DgvPilhaPrincipal.DataSource = null;
+            DgvPilhaPrincipal.DataSource = TokenController.PilhaTokenPrincipal;
+            DgvPilhaPrincipal.Update();
             DgvPilhaPrincipal.Refresh();
+
         }
 
 		#endregion
@@ -65,11 +72,16 @@ namespace Compilador.FrontEnd
 
 		private void dgvDados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-			if ((DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem != null) && (DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
-			{
-				e.Value = BindProperty(DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem, DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName);
-			}
-		}
+            try
+            {
+                if ((DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem != null) && (DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
+                {
+                    e.Value = BindProperty(DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem, DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName);
+                }
+            }
+            catch { }
+
+        }
 
 		private string BindProperty(object property, string propertyName)
 		{
