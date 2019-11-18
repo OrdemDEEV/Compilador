@@ -197,34 +197,40 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
 
             private Token BuscarTokenNoDicionario(string variavel, int linha)
-		{
-          
-            if (int.TryParse(variavel, out int verificacao))
-            {
-                valor = Convert.ToInt32(variavel);
-
-					return new Token(26, "INTEIRO");
-				
-				
-            }
-
-
-            Token token = ListaTokens.Find(c => c.Simbolo.Equals(variavel));
-
-            if (token != null)
 			{
-                return token;
-            }
+          
+				if (int.TryParse(variavel, out int verificacao))
+				{
+					valor = Convert.ToInt32(variavel);
+					if (valor > 32767)
+					{
+						MessageBox.Show("Variavel menor!");
+					}
+					else if (valor < -32767)
+					{
+						MessageBox.Show("Variavel maior!");
+					}
+					else
+					{
+						return new Token(26, "INTEIRO");
+					}
+				}
 
+				Token token = ListaTokens.Find(c => c.Simbolo.Equals(variavel));
 
-            if (variavel != "")
-            {
-                buffer_ident = variavel;
-                return new Token(25, "IDENTIFICADOR");
-            }
+				if (token != null)
+				{
+					return token;
+				}
 
-            return null;
-        }
+				if (variavel != "")
+				{
+					buffer_ident = variavel;
+					return new Token(25, "IDENTIFICADOR");
+				}
+
+				return null;
+			}
 
 		
 		public void MontagemPilha(List<string> Linhas)
@@ -301,6 +307,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 							j++;
                             while (!Caracteres[j].Equals('\''))
                             {
+								
 								if (concatenado.Length < 255)
 								{
 									concatenado += Caracteres[j];
@@ -309,9 +316,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 								else
 								{
 									_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Limite de tamanho de literal exedido  | linha: " + Convert.ToInt32(i+1));
-									break;
+									goto PararLeitura;
 								}
-
 							}
 
                             TokenEncontrado = BuscarTokenNoDicionario("LITERAL", i);
@@ -516,7 +522,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 									)
 								{
                                     TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper(), i);
-									
+
+
 									concatenado = null;
 								}
 								break;

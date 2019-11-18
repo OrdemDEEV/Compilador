@@ -291,3 +291,9 @@ C:\Users\dimit\Documents\copilador01\Compilador\Compilador\obj\Debug\Compilador.
 C:\Users\dimit\Documents\copilador01\Compilador\Compilador\obj\Debug\Compilador.pdb
 C:\Users\dimit\Documents\copilador01\Compilador\Compilador\bin\Debug\BackEnd\AnalisadorSintatico\Auxiliar\tabelaParsing.xml
 C:\Users\dimit\Documents\copilador01\Compilador\Compilador\bin\Debug\BackEnd\AnalisadorSintatico\Auxiliar\tabelaGramatica.xml
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\bin\Debug\BackEnd\AnalisadorSintatico\Auxiliar\tabelaParsing.xml
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\bin\Debug\BackEnd\AnalisadorSintatico\Auxiliar\tabelaGramatica.xml
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\bin\Debug\Microsoft.SyndicationFeed.ReaderWriter.dll
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\bin\Debug\System.Xml.ReaderWriter.dll
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.FrontEnd.Ferramentas.FrmlGerenciadorTabelaParsing.resources
+C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.csproj.CopyComplete
