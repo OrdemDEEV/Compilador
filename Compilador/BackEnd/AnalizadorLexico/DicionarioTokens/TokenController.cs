@@ -198,17 +198,18 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
             private Token BuscarTokenNoDicionario(string variavel, int linha)
 			{
-          
-				if (int.TryParse(variavel, out int verificacao))
+                  
+				if (double.TryParse(variavel, out double verificacao))
 				{
-					valor = Convert.ToInt32(variavel);
-					if (valor > 32767)
+					if (Convert.ToDouble(variavel) > 32767)
 					{
-						MessageBox.Show("Variavel menor!");
+						MessageBox.Show("Inteiro maior que 32767 !");
+						return new Token(-2, "Eror");
 					}
-					else if (valor < -32767)
+					else if (Convert.ToDouble(variavel) < -32767)
 					{
-						MessageBox.Show("Variavel maior!");
+						MessageBox.Show("Inteiro menor que -32767 !");
+						return new Token(-2, "Eror");
 					}
 					else
 					{
@@ -324,6 +325,12 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                             buffer_literal = concatenado;
 
 							concatenado = "";
+
+							if (TokenEncontrado.Codigo.Equals(-2))
+							{
+								//goto PararLeitura;
+								break;
+							}
 
 							goto SalvamentoDireto;
 							

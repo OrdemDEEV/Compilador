@@ -297,3 +297,5 @@ C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\bin\Debug\Microsoft.Synd
 C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\bin\Debug\System.Xml.ReaderWriter.dll
 C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.FrontEnd.Ferramentas.FrmlGerenciadorTabelaParsing.resources
 C:\Users\Eduardo\Desktop\Projetos\Compilador\Compilador\obj\Debug\Compilador.csproj.CopyComplete
+C:\Users\User\Desktop\Projetos\Compilador\Compilador\bin\Debug\BackEnd\AnalisadorSintatico\Auxiliar\tabelaParsing.xml
+C:\Users\User\Desktop\Projetos\Compilador\Compilador\bin\Debug\BackEnd\AnalisadorSintatico\Auxiliar\tabelaGramatica.xml
