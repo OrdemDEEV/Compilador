@@ -203,34 +203,36 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 				{
 					if (Convert.ToDouble(variavel) > 32767)
 					{
-						MessageBox.Show("Inteiro maior que 32767 !");
-						return new Token(-2, "Eror");
+						//MessageBox.Show("Inteiro maior que 32767 !");
+						return new Token(-2, "Erro : Inteiro maior que 32767 não permitido !");
 					}
-					else if (Convert.ToDouble(variavel) < -32767)
+					if (Convert.ToDouble(variavel) < -32767)
 					{
-						MessageBox.Show("Inteiro menor que -32767 !");
-						return new Token(-2, "Eror");
+						//MessageBox.Show("Inteiro menor que -32767 !");
+						 return new Token(-2, "Erro : Inteiro menor que -32767 não permitido !");
+						//return null;
 					}
-					else
-					{
+
 						return new Token(26, "INTEIRO");
+					
+				}
+				else
+				{
+					Token token = ListaTokens.Find(c => c.Simbolo.Equals(variavel));
+
+					if (token != null)
+					{
+						return token;
 					}
+
+					if (variavel != "")
+					{
+						buffer_ident = variavel;
+						return new Token(25, "IDENTIFICADOR");
+					}
+
+					return null;
 				}
-
-				Token token = ListaTokens.Find(c => c.Simbolo.Equals(variavel));
-
-				if (token != null)
-				{
-					return token;
-				}
-
-				if (variavel != "")
-				{
-					buffer_ident = variavel;
-					return new Token(25, "IDENTIFICADOR");
-				}
-
-				return null;
 			}
 
 		
@@ -326,11 +328,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
 							concatenado = "";
 
-							if (TokenEncontrado.Codigo.Equals(-2))
-							{
-								//goto PararLeitura;
-								break;
-							}
+							
 
 							goto SalvamentoDireto;
 							
@@ -367,7 +365,18 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                                             valor = Convert.ToInt32(concatenado);
                                         }
                                         TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper(), i);
-                                    }
+
+										if (TokenEncontrado != null)
+										{
+											if (TokenEncontrado.Codigo.Equals(-2))
+											{
+												_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> " + TokenEncontrado.Simbolo + " | linha: " + Convert.ToInt32(i + 1));
+												goto PararLeitura;
+												//break;
+											}
+										}
+
+									}
                                     else
                                     {
                                         TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper(), i);
@@ -530,6 +539,15 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 								{
                                     TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper(), i);
 
+									if (TokenEncontrado != null)
+									{
+										if (TokenEncontrado.Codigo.Equals(-2))
+										{
+											_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> " + TokenEncontrado.Simbolo + " | linha: " + Convert.ToInt32(i + 1));
+											goto PararLeitura;
+											//break;
+										}
+									}
 
 									concatenado = null;
 								}
@@ -562,7 +580,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				 MessageBox.Show(ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
