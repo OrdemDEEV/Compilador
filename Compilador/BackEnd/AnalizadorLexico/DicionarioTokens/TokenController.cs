@@ -19,7 +19,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 
         public static List<TokenAtivo> PilhaTokenPrincipal = new List<TokenAtivo>();
 		public static List<Token> ListaTokens = new List<Token>();
-        public int valor = 0;
+        public double valor = 0;
         public string buffer_ident = "";
 
 		public TokenController()
@@ -349,10 +349,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 								break;
 							case "-":
                                 // Verificar aqui se o proximo e numero se for manda buscar la e retorna o inteiro e ignora o sinal.
-                                Boolean TESTE = char.IsNumber(Caracteres[j + 1]);
-                                Boolean OUTROTESTE = char.IsNumber(Caracteres[j - 1]);
-                                try
-                                {
+                               
+
                                     if (Caracteres[j].Equals('-') && char.IsNumber(Caracteres[j + 1]) && i == Caracteres.Length ? false : !char.IsNumber(Caracteres[j - 1]))
                                     {
                                         while (char.IsNumber(Caracteres[j + 1]))
@@ -362,7 +360,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                                         }
                                         if (!concatenado.Equals("-"))
                                         {
-                                            valor = Convert.ToInt32(concatenado);
+                                            valor = Convert.ToDouble(concatenado);
                                         }
                                         TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper(), i);
 
@@ -380,12 +378,9 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                                     else
                                     {
                                         TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper(), i);
+
                                     }
-                                }
-                                catch
-                                {
-                                    TokenEncontrado = BuscarTokenNoDicionario(concatenado.ToUpper(), i);
-                                }
+
 
                                 concatenado = null;
 								break;
@@ -559,7 +554,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 						// Adicionar a pilha principal.
 						if (TokenEncontrado != null)
 						{
-							SalvarPilhaPrincipal(new TokenAtivo(TokenEncontrado, i + 1, "", valor, buffer_ident, buffer_literal));
+							SalvarPilhaPrincipal(new TokenAtivo(TokenEncontrado, i + 1, "", Convert.ToInt32(valor), buffer_ident, buffer_literal));
 						}
 
                         // Limpar Token encontrado.
