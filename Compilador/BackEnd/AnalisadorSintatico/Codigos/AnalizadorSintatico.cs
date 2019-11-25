@@ -70,14 +70,16 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
             NaoTerminal _retorno = RetornarCodigoNaoTerminal("PROGRAMA");
             Item item = VerificarPilhaParsingPorCodigo(_retorno.Codigo + "," + "1");
             CarregarArvoreDerivacao(item);
+			string arvoreDerivacaoUnida;
 
-            while (ArvoreDerivacao.Count > 0)
+
+			while (ArvoreDerivacao.Count > 0 && TokenController.PilhaTokenPrincipal.Count > 0)
             {
                 if (VerificaTerminal(ArvoreDerivacao[0]))
                 {
                     if (ArvoreDerivacao[0].Equals(TokenController.PilhaTokenPrincipal[0].token.Simbolo))
                     {
-                        string arvoreDerivacaoUnida = string.Join("|", ArvoreDerivacao);
+                        arvoreDerivacaoUnida = string.Join("|", ArvoreDerivacao);
                         _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[0].Linha), ArvoreDerivacao[0], arvoreDerivacaoUnida);
                         TokenController.PilhaTokenPrincipal.RemoveAt(0);
                         ArvoreDerivacao.RemoveAt(0);
@@ -92,16 +94,15 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                 {
                     _retorno = RetornarCodigoNaoTerminal(ArvoreDerivacao[0]);
           
-                    string teste = RetornaTerminal(item.Codigo);
+                    //string teste = RetornaTerminal(item.Codigo);
 
-                    if (VerificarPilhaParsingPorCodigoBool(Convert.ToString(_retorno.Codigo + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo))
-)
+                    if (VerificarPilhaParsingPorCodigoBool(Convert.ToString(_retorno.Codigo + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo)))
                     {
-                        string arvoreDerivacaoUnida = string.Join("|", ArvoreDerivacao);
+                         arvoreDerivacaoUnida = string.Join("|", ArvoreDerivacao);
                         _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[0].Linha), ArvoreDerivacao[0], arvoreDerivacaoUnida);
                         ArvoreDerivacao.RemoveAt(0);
                         CarregarArvoreDerivacao(VerificarPilhaParsingPorCodigo(Convert.ToString(_retorno.Codigo + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo)));
-                     }
+                    }
                     else
                     {
                         _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incial incorreto  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);

@@ -167,21 +167,31 @@ namespace Compilador.FrontEnd
 
 		private void BtnRodarAnalizadorLexico_Click(object sender, EventArgs e)
 		{
+			// Roda analizador lexico.
+			BtnRodarAnalizadorLexico.PerformClick();
+
+			// Roda Analizador Sintatico.
+			rodarAnalizarSintáticoToolStripMenuItem.PerformClick();
+
+		}
+
+		private void BtnRodarAnalizadorLexico_Click_1(object sender, EventArgs e)
+		{
 			// Escreve na saida.
 			EscreverSaida("Iniciada Execução do analizador lexico! ");
 
-            if (LocalArquivo == "")
-            {
-             salvarToolStripMenuItem_Click(sender, e);
-            }
-            else
-            {
-                File.WriteAllText(LocalArquivo,TxtEditorTexto.Text);
-            }
+			if (LocalArquivo == "")
+			{
+				salvarToolStripMenuItem_Click(sender, e);
+			}
+			else
+			{
+				File.WriteAllText(LocalArquivo, TxtEditorTexto.Text);
+			}
 			ClnArquivo clArquivo = new ClnArquivo();
 			List<string> LinhaLidas = clArquivo.LerArquivo(LocalArquivo);
 
-			TokenController tokenController = new TokenController(this); 
+			TokenController tokenController = new TokenController(this);
 			tokenController.MontagemPilha(LinhaLidas);
 
 			CarregarGridViewTokensAtivos();
@@ -325,5 +335,7 @@ namespace Compilador.FrontEnd
 			FrmlGerenciadorTabelaParsing frmTabelaParsing = new FrmlGerenciadorTabelaParsing();
 			frmTabelaParsing.ShowDialog();
 		}
-    }
+
+		
+	}
 }
