@@ -283,18 +283,28 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 						{
 							while (TratarComentarios(Caracteres[j], Caracteres.Length == 1 ? 'a' : Caracteres[j+1]) != true)
 							{
-								j++;
-								if (j.Equals(Caracteres.Length) | j.Equals(Caracteres.Length-1))
+
+								if ((j + 1).Equals(Caracteres.Length - 1))
 								{
-									do
-									{
-										i++;
-										Caracteres = Linhas[i].ToCharArray();
-									}
-									while (Caracteres.Length == 0);
-									
-									j = 0;
+									_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Comentário sem fechamento!  | linha: " + Convert.ToInt32(i + 1));
+									goto PararLeitura;
 								}
+								else
+								{
+									if (j.Equals(Caracteres.Length) | j.Equals(Caracteres.Length - 1))
+									{
+										do
+										{
+											i++;
+											Caracteres = Linhas[i].ToCharArray();
+										}
+										while (Caracteres.Length == 0);
+
+										j = 0;
+									}
+								}
+								j++;
+								
 							}
 							concatenado = "";
 							j++;
