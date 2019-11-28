@@ -16,6 +16,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
     {
 
 		FrmInicio _frmInicio;
+		AnalizadorSemantico.Codigos.AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico.Codigos.AnalizadorSemantico();
 
         public static List<TokenAtivo> PilhaTokenPrincipal = new List<TokenAtivo>();
 		public static List<Token> ListaTokens = new List<Token>();
@@ -230,6 +231,10 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 						buffer_ident = variavel;
 						return new Token(25, "IDENTIFICADOR");
 					}
+
+				// Salvar na tabela do analizador semantico.
+
+				analizadorSemantico.Inserrir();
 
 					return null;
 				}

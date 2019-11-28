@@ -62,6 +62,8 @@
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\Token.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\TokenAtivo.cs" />
     <Compile Include="BackEnd\AnalizadorLexico\DicionarioTokens\TokenController.cs" />
+    <Compile Include="BackEnd\AnalizadorSemantico\Auxiliar\TabelaSimbolos.cs" />
+    <Compile Include="BackEnd\AnalizadorSemantico\Codigos\AnalizadorSemantico.cs" />
     <Compile Include="FrontEnd\Ferramentas\FrmGerenciadorDicionarioTokens1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,5 +156,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
