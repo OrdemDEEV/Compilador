@@ -14,6 +14,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 	{
 		FrmInicio _frmInicio;
 		XmlHelper xmlHelper = new XmlHelper();
+		AnalizadorSemantico.Codigos.AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico.Codigos.AnalizadorSemantico();
 
 		public static List<NaoTerminal> ListNaoTerminais { get; set; }
 		public static List<Terminal> ListTerminais { get; set; }
@@ -21,6 +22,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
 		// Ir armazenando aqui as derivacoes usadas.
 		public static List<string> ArvoreDerivacao = new List<string>();
+
 
 
 		#region --- CONSTRUTORES ---
@@ -60,6 +62,32 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
         #region --- EXECUCAO DO AUTOMATO DE ANALISE SINTATICA ---
 
+		private void MontarTabelaSimbolos(List<TokenAtivo> TokenControle)
+		{
+			// Para nomes de funcoes.
+			if (TokenControle[1].token.Simbolo.Equals(";"))
+			{
+				// Provavel nome de function, ou rotulo.
+				analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[0].Buffer_ident, "ROTULO", "FUNCTION", 0));
+			}
+
+			// Identifica as declaracoes de variaveis inclusive aninhadas.
+			if (TokenControle[0].token.Simbolo.Equals("VAR"))
+			{
+				int i = 0;
+				while (!TokenControle[i].token.Simbolo.Equals("INTEGER"))
+				{
+					if (TokenControle[i].token.Simbolo.Equals("IDENTIFICADOR"))
+					{
+						analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "VARIAVEL", "INTEIRO", 1));
+					}
+					i++;
+				}
+			}
+
+			// Verificar Atribuicoes de valores as variaveis.
+
+		}
 
         public void RunAnalizadorSintatico()
         {
@@ -81,7 +109,15 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                     {
                         arvoreDerivacaoUnida = string.Join("|", ArvoreDerivacao);
                         _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[0].Linha), ArvoreDerivacao[0], arvoreDerivacaoUnida);
-                        TokenController.PilhaTokenPrincipal.RemoveAt(0);
+
+						// Rodar analizador semantico.
+						// Sempre que for um identificador precisa validar para ver oque salva.
+						if (TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(25) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(4))
+						{
+							MontarTabelaSimbolos(TokenController.PilhaTokenPrincipal);
+						}
+
+						TokenController.PilhaTokenPrincipal.RemoveAt(0);
                         ArvoreDerivacao.RemoveAt(0);
                     }
                     else

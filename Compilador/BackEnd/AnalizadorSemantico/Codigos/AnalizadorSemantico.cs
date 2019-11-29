@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Compilador.BackEnd.AnalizadorSemantico.Codigos
 {
@@ -12,15 +13,30 @@ namespace Compilador.BackEnd.AnalizadorSemantico.Codigos
 
 		public static List<TabelaSimbolos> ListTabekaSimbolos = new List<TabelaSimbolos>();
 
-		public void Busca()
+		public Boolean Busca(TabelaSimbolos tabelaSimb)
 		{
-
+			for (int i=0;i< ListTabekaSimbolos.Count;i++)
+			{
+				if (ListTabekaSimbolos[i].Nome.Equals(tabelaSimb.Nome))
+				{
+					return true;
+				}
+			}
+			return false;
+			//return ListTabekaSimbolos.Contains(tabelaSimb);
 		}
 
 		public void Inserir(TabelaSimbolos tabelaSimb)
 		{
 			// Falta fazer a parte das verificacoes.
-			ListTabekaSimbolos.Add(tabelaSimb);
+			if (Busca(tabelaSimb).Equals(false))
+			{
+				ListTabekaSimbolos.Add(tabelaSimb);
+			}
+			else
+			{
+				MessageBox.Show("Identificador Já declarado.");
+			}
 		}
 
 		public void Deletar()
