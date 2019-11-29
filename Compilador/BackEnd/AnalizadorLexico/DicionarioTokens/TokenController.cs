@@ -226,17 +226,25 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 						return token;
 					}
 
-					if (variavel != "")
-					{
-						buffer_ident = variavel;
-						return new Token(25, "IDENTIFICADOR");
-					}
+				if (variavel != "")
+				{
+                    char[] chars = variavel.ToCharArray();
+                    if (!Char.IsDigit(chars[0]))
+                    {
+                        buffer_ident = variavel;
+                        return new Token(25, "IDENTIFICADOR");
+                    }
+                    else
+                    {
+                        return new Token(-2, "Erro : Identificador não pode começar com numero!");
+                    }
+                }
 
-				// Salvar na tabela do analizador semantico.
+                // Salvar na tabela do analizador semantico.
 
-				analizadorSemantico.Inserrir();
+                //analizadorSemantico.Inserir();
 
-					return null;
+                return null;
 				}
 			}
 
@@ -285,37 +293,40 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                         #region --- CONROLE COMENTARIOS ---
                         // Tratamento de comentarios.
                         if (Caracteres[j].Equals('(') && Caracteres[j + 1].Equals('*'))
-						{
-							while (TratarComentarios(Caracteres[j], Caracteres.Length == 1 ? 'a' : Caracteres[j+1]) != true)
-							{
+                        {
+                            int LinhaQueComecou = i + 1;
+                            try { 
+                            while (TratarComentarios(Caracteres[j], Caracteres.Length == 1 ? 'a' : Caracteres[j + 1]) != true)
+                            {
+                                j++;
+                                if (j.Equals(Caracteres.Length) | j.Equals(Caracteres.Length - 1))
+                                {
+                                    do
+                                    {
+                                        i++;
+                                        Caracteres = Linhas[i].ToCharArray();
+                                    }
+                                    while (Caracteres.Length == 0);
 
-								if ((j + 1).Equals(Caracteres.Length - 1))
-								{
-									_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Comentário sem fechamento!  | linha: " + Convert.ToInt32(i + 1));
-									goto PararLeitura;
-								}
-								else
-								{
-									if (j.Equals(Caracteres.Length) | j.Equals(Caracteres.Length - 1))
-									{
-										do
-										{
-											i++;
-											Caracteres = Linhas[i].ToCharArray();
-										}
-										while (Caracteres.Length == 0);
+                                    j = 0;
+                                }
+                            }
+                            concatenado = "";
+                            j++;
 
-										j = 0;
-									}
-								}
-								j++;
-								
-							}
-							concatenado = "";
-							j++;
-						}
+                            }
+                            catch
+                            {
+                                _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Comentário sem fechamento!  | linha: " + Convert.ToInt32(LinhaQueComecou));
+                                goto PararLeitura;
+                            }
+                        
+
+
+                        }
 
                         #endregion
+
 
                         #region --- LITERAL ---
 

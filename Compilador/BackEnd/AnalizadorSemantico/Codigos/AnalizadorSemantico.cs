@@ -17,7 +17,7 @@ namespace Compilador.BackEnd.AnalizadorSemantico.Codigos
 
 		}
 
-		public void Inserrir(TabelaSimbolos tabelaSimb)
+		public void Inserir(TabelaSimbolos tabelaSimb)
 		{
 			// Falta fazer a parte das verificacoes.
 			ListTabekaSimbolos.Add(tabelaSimb);
