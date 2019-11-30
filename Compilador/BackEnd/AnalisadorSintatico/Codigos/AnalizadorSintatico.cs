@@ -62,7 +62,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
         #region --- EXECUCAO DO AUTOMATO DE ANALISE SINTATICA ---
 
-		private void MontarTabelaSimbolos(List<TokenAtivo> TokenControle)
+		private Boolean MontarTabelaSimbolos(List<TokenAtivo> TokenControle)
 		{
 			// Para nomes de funcoes.
 			if (TokenControle[1].token.Simbolo.Equals(";"))
@@ -79,12 +79,22 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 				{
 					if (TokenControle[i].token.Simbolo.Equals("IDENTIFICADOR"))
 					{
-						analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "VARIAVEL", "INTEIRO", 1));
+						if (!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "VARIAVEL", "INTEIRO", 1)))
+						{
+							_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Variável declarada duplicada  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+							return false;
+						}
 					}
 					i++;
 				}
+
+				
+
 			}
 
+
+			// Sucesso apos todas as leituras.
+			return true;
 			// Verificar Atribuicoes de valores as variaveis.
 
 		}
@@ -114,7 +124,10 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 						// Sempre que for um identificador precisa validar para ver oque salva.
 						if (TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(25) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(4))
 						{
-							MontarTabelaSimbolos(TokenController.PilhaTokenPrincipal);
+							if (!MontarTabelaSimbolos(TokenController.PilhaTokenPrincipal))
+							{
+								break;
+							}
 						}
 
 						TokenController.PilhaTokenPrincipal.RemoveAt(0);

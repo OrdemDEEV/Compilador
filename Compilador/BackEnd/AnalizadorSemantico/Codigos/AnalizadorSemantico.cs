@@ -26,16 +26,18 @@ namespace Compilador.BackEnd.AnalizadorSemantico.Codigos
 			//return ListTabekaSimbolos.Contains(tabelaSimb);
 		}
 
-		public void Inserir(TabelaSimbolos tabelaSimb)
+		public Boolean Inserir(TabelaSimbolos tabelaSimb)
 		{
 			// Falta fazer a parte das verificacoes.
 			if (Busca(tabelaSimb).Equals(false))
 			{
 				ListTabekaSimbolos.Add(tabelaSimb);
+				return true;
 			}
 			else
 			{
-				MessageBox.Show("Identificador Já declarado.");
+				//MessageBox.Show("Identificador Já declarado.");
+				return false;
 			}
 		}
 
