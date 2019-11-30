@@ -71,6 +71,12 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 				analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[0].Buffer_ident, "ROTULO", "FUNCTION", 0));
 			}
 
+			// Tratamento das declaracoes de contantes.
+			if (TokenControle[0].token.Simbolo.Equals("CONST"))
+			{
+				// Parei de implementar aqui.
+			}
+
 			// Identifica as declaracoes de variaveis inclusive aninhadas.
 			if (TokenControle[0].token.Simbolo.Equals("VAR"))
 			{
@@ -81,17 +87,44 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 					{
 						if (!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "VARIAVEL", "INTEIRO", 1)))
 						{
-							_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Variável declarada duplicada  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+							_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Variável declarada duplicada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
 							return false;
 						}
 					}
 					i++;
 				}
-
-				
-
 			}
 
+			// Tratar quando e uma atribuicao.
+			if (TokenControle[1].token.Simbolo.Equals(":="))
+			{
+				// Verificar primeiro se o identificador foi declarado.
+				// Verificar se o tipo de dados que se esta atribuindo e valido com o tipo declarado.
+				if (analizadorSemantico.Busca(TokenControle[0].Buffer_ident))
+				{
+					// Simbolo presente na tabela.
+					// Verificar tipagem.
+					if (double.TryParse(TokenControle[2].Buffer_ident, out double verificacao))
+					{
+						// Inteiro.
+						if(!analizadorSemantico.VerificarTipo(TokenControle[0].Buffer_ident, "INTEIRO"))
+						{
+							_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de valor ilegal para variavel inteira.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+							return false;
+
+						}
+					}
+					else
+					{
+
+					}
+				}
+				else
+				{
+					_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de variavel não declarada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+					return false;
+				}
+			}
 
 			// Sucesso apos todas as leituras.
 			return true;
