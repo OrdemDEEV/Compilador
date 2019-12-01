@@ -108,6 +108,7 @@
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.CatalogoParsing.datasource" />
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.Token.datasource" />
     <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorLexico.DicionarioTokens.TokenAtivo.datasource" />
+    <None Include="Properties\DataSources\Compilador.BackEnd.AnalizadorSemantico.Auxiliar.TabelaSimbolos.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

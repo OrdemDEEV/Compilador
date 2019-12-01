@@ -14,6 +14,8 @@ using System.Windows.Forms;
 using System.IO;
 using Compilador.BackEnd.AnalisadorSintatico.Auxiliar;
 using Compilador.BackEnd.AnalisadorSintatico.Codigos;
+using Compilador.BackEnd.AnalizadorSemantico.Auxiliar;
+using Compilador.BackEnd.AnalizadorSemantico.Codigos;
 
 namespace Compilador.FrontEnd
 {
@@ -28,9 +30,14 @@ namespace Compilador.FrontEnd
 
         private void FrmInicio_Load(object sender, EventArgs e)
         {
+
+
+
             TokenController tokenController = new TokenController();
-			//tokenController.IniciarDicionarioTokens();
-			tokenController.IniciarDicionarioTokens();
+
+
+            //tokenController.IniciarDicionarioTokens();
+            tokenController.IniciarDicionarioTokens();
             //tokenController.IniciarCatalogoParsing();
 
 
@@ -64,6 +71,12 @@ namespace Compilador.FrontEnd
             DgvPilhaPrincipal.Update();
             DgvPilhaPrincipal.Refresh();
 
+
+            dgvSemantico.DataSource = null;
+            dgvSemantico.DataSource = AnalizadorSemantico.ListTabekaSimbolos;
+            dgvSemantico.Update();
+            dgvSemantico.Refresh();
+
         }
 
 		#endregion
@@ -72,15 +85,11 @@ namespace Compilador.FrontEnd
 
 		private void dgvDados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-            try
-            {
+
                 if ((DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem != null) && (DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
                 {
                     e.Value = BindProperty(DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem, DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName);
                 }
-            }
-            catch { }
-
         }
 
 		private string BindProperty(object property, string propertyName)
@@ -336,6 +345,21 @@ namespace Compilador.FrontEnd
 			frmTabelaParsing.ShowDialog();
 		}
 
-		
-	}
+        private void SplitContainer3_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ToolStripButton5_Click(object sender, EventArgs e)
+        {
+            LocalArquivo = "";
+            TxtEditorTexto.Clear();
+            TxtEditorTexto.Focus();
+        }
+
+        private void ArquivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

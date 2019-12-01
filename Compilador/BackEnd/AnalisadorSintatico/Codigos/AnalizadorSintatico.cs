@@ -64,8 +64,15 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
 		private Boolean MontarTabelaSimbolos(List<TokenAtivo> TokenControle)
 		{
-			// Para nomes de funcoes.
-			if (TokenControle[1].token.Simbolo.Equals(";"))
+
+
+            //botar nivel como global
+            int Nivel = 0;
+
+           
+
+            // Para nomes de funcoes.
+            if (TokenControle[1].token.Simbolo.Equals(";"))
 			{
 				// Provavel nome de function, ou rotulo.
 				analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[0].Buffer_ident, "ROTULO", "FUNCTION", 0));
@@ -83,9 +90,22 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 				int i = 0;
 				while (!TokenControle[i].token.Simbolo.Equals("INTEGER"))
 				{
-					if (TokenControle[i].token.Simbolo.Equals("IDENTIFICADOR"))
+
+                    //tava tentando achar algum lugar pra definir o nivel, obviamente não é aqui
+                    if (TokenControle[i].token.Simbolo.Equals("PROCEDURE"))
+                    {
+                        Nivel = 1;
+                    }
+
+
+                    if (TokenControle[i].token.Simbolo.Equals("END") && TokenControle[i+1].token.Simbolo.Equals(";"))
+                    {
+                        Nivel = 0;
+                    }
+
+                    if (TokenControle[i].token.Simbolo.Equals("IDENTIFICADOR"))
 					{
-						if (!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "VARIAVEL", "INTEIRO", 1)))
+						if (!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "VARIAVEL", "INTEIRO", Nivel)))
 						{
 							_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Variável declarada duplicada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
 							return false;
