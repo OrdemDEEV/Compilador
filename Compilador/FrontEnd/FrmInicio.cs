@@ -99,7 +99,7 @@ namespace Compilador.FrontEnd
 			{
 				PropertyInfo[] arrayProperties;
 				string leftPropertyName;
-				leftPropertyName = propertyName.Substring(0, propertyName.IndexOf("."));
+				leftPropertyName = propertyName.Substring(0, propertyName.IndexOf(".")); 
 				arrayProperties = property.GetType().GetProperties();
 				foreach (PropertyInfo propertyInfo in arrayProperties)
 				{
@@ -328,6 +328,8 @@ namespace Compilador.FrontEnd
 		private void rodarAnalizarSintáticoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
             dgvParsing.Rows.Clear();
+			//dgvSemantico.Rows.Clear();
+			AnalizadorSemantico.ListTabekaSimbolos.Clear();
             // Inicia as listas para execucao do automato.
             AnalizadorSintatico analizadorSintatico = new AnalizadorSintatico(this);
             //analizadorSintatico.MontagemTabelaNaoTerminais();

@@ -69,17 +69,65 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
             //botar nivel como global
             int Nivel = 0;
 
-           
+			// PROGRAM.
+			if (TokenControle[0].token.Codigo.Equals(1))
+			{
+				analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[1].Buffer_ident, "ROTULO", "STRING", 0));
+			}
+			//CONSTANTE.
+			else if (TokenControle[0].token.Codigo.Equals(3))
+			{
 
-            // Para nomes de funcoes.
-            if (TokenControle[1].token.Simbolo.Equals(";"))
+			}
+			// VAR.
+			else if (TokenControle[0].token.Codigo.Equals(4))
+			{
+
+			}
+			// PROCEDURE.
+			else if (TokenControle[0].token.Codigo.Equals(5))
+			{
+				// Salvar nome da procedure.
+				analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[1].Buffer_ident, "PROCEDURE", "STRING", 0));
+
+				// Verificar existenica de parametros.
+				int i = 3;
+				List<string> identificadores = new List<string>();
+				while (TokenControle[i].token.Simbolo!=":")
+				{
+					if (TokenControle[i].token.Codigo.Equals(25))
+					{
+						// Salvar o identificador, em uma lista para verificar o tipo posteriormente.
+						identificadores.Add(TokenControle[i].Buffer_ident);
+						//analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "IDENTIFICADOR", "STRING", 1));
+
+					}
+					i++;
+				}
+
+				// proximo do i e o tipo de dados das declaracoes.
+				for (int x=0;x<identificadores.Count;x++)
+				{
+					if(!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(identificadores[x], "PARAMETRO", TokenControle[i+1].token.Simbolo, 1)))
+					{
+						// Sinalizar erro.
+						_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Variável ambigua encontrada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+						return false;
+					}
+				}
+
+			}
+
+			#region --- COMEMNTADO ---
+			// Para nomes de funcoes.
+			/*if (TokenControle[1].token.Simbolo.Equals(";"))
 			{
 				// Provavel nome de function, ou rotulo.
 				analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[0].Buffer_ident, "ROTULO", "FUNCTION", 0));
-			}
+			}*/
 
 			// Tratamento das declaracoes de contantes.
-			if (TokenControle[0].token.Simbolo.Equals("CONST"))
+			/*if (TokenControle[0].token.Simbolo.Equals("CONST"))
 			{
 				// Parei de implementar aqui.
 			}
@@ -144,8 +192,8 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 					_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de variavel não declarada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
 					return false;
 				}
-			}
-
+			}*/
+			#endregion
 			// Sucesso apos todas as leituras.
 			return true;
 			// Verificar Atribuicoes de valores as variaveis.
@@ -154,6 +202,8 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
         public void RunAnalizadorSintatico()
         {
+
+
             MontagemTabelaNaoTerminais();
             MontagemTabelaTerminais();
             MontagemTabelaParsing();
@@ -174,8 +224,8 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                         _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[0].Linha), ArvoreDerivacao[0], arvoreDerivacaoUnida);
 
 						// Rodar analizador semantico.
-						// Sempre que for um identificador precisa validar para ver oque salva.
-						if (TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(25) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(4))
+						// Sempre que for um Identificador, Constante, Procedure
+						if (TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(4) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(5) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(1) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(3))
 						{
 							if (!MontarTabelaSimbolos(TokenController.PilhaTokenPrincipal))
 							{
