@@ -75,7 +75,11 @@ namespace Compilador.FrontEnd
             dgvSemantico.DataSource = null;
             dgvSemantico.DataSource = AnalizadorSemantico.ListTabekaSimbolos;
             dgvSemantico.Update();
+            if (dgvSemantico.RowCount > 1) {
+            dgvSemantico.FirstDisplayedScrollingRowIndex = dgvSemantico.RowCount - 1;
+            }
             dgvSemantico.Refresh();
+       
 
         }
 

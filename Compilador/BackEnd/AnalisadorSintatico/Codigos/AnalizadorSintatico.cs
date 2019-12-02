@@ -88,7 +88,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
             // LABEL
 
-            if (TokenControle[0].token.Codigo.Equals(2))
+            else if (TokenControle[0].token.Codigo.Equals(2))
             {
                 int i = 0;
                 while (TokenControle[i].token.Simbolo != ";")
@@ -105,7 +105,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                     i++;
                 }
             }
-           
+
 
             //CONSTANTE.
             else if (TokenControle[0].token.Codigo.Equals(3))
@@ -130,9 +130,10 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
             // VAR.
             else if (TokenControle[0].token.Codigo.Equals(4))
             {
+
                 int i = 1;
                 List<string> identificadores = new List<string>();
-                while (TokenControle[i].token.Simbolo != ":")
+                while (TokenControle[i].token.Simbolo != "PROCEDURE" && TokenControle[i].token.Simbolo != "BEGIN")
                 {
                     if (TokenControle[i].token.Codigo.Equals(25))
                     {
@@ -197,22 +198,31 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                 Nivel1 = false;
             }
             // Atribuicao de variaveis. -- aqui que verifica o tipo da variavel na atribuição
-            else if (TokenControle[0].token.Codigo.Equals(25) && TokenControle[0].token.Codigo.Equals(38))
+            if (TokenControle[0].token.Codigo.Equals(6))
             {
-                if (analizadorSemantico.Busca(TokenControle[0].Buffer_ident, Nivel))
+                int i = 0;
+                while (!TokenControle[i].token.Codigo.Equals(7))
                 {
-                    // Verificar o tipo doque esta sendo atribuido para verificar legalidade da operacao.
-                    if (analizadorSemantico.VerificarTipo(TokenControle[0].Buffer_ident, TokenControle[0].Buffer_ident))
+                    if (TokenControle[i].token.Codigo.Equals(25))
                     {
-                        _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de tipo incorreta.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
-                        return false;
+                        if (analizadorSemantico.Busca(TokenControle[i].Buffer_ident, Nivel))
+                        {
+                            // Verificar o tipo doque esta sendo atribuido para verificar legalidade da operacao.
+                            if (analizadorSemantico.VerificarTipo(TokenControle[i].Buffer_ident, TokenControle[i].Buffer_ident))
+                            {
+                                _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de tipo incorreta.  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
+                                return false;
+                            }
+                            
+                        }
+                        else
+                        {
+                            // Sinalizar erro.
+                            _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de variável não declarada.  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
+                            return false;
+                        }
                     }
-                }
-                else
-                {
-                    // Sinalizar erro.
-                    _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de variável não declarada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
-                    return false;
+                    i++;
                 }
             }
 
@@ -323,8 +333,8 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                         _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[0].Linha), ArvoreDerivacao[0], arvoreDerivacaoUnida);
 
                         // Rodar analizador semantico.
-                        // Sempre que for um Identificador, Constante, Procedure
-                        if (TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(4) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(2) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(5) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(1) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(3) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(25) && TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(38) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(7))
+                        // Sempre que for um Identificador, Constante, Procedure, Label, VAR
+                        if (TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(4) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(2) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(5) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(1) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(3) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(25) && TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(38) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(7) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(6))
                         {
                             if (!MontarTabelaSimbolos(TokenController.PilhaTokenPrincipal))
                             {
