@@ -57,10 +57,19 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 			ListParsing = xmlHelper.RetornarListParsing();
 		}
 
-        #endregion
+		#endregion
 
 
-        #region --- EXECUCAO DO AUTOMATO DE ANALISE SINTATICA ---
+		#region --- EXECUCAO DO AUTOMATO DE ANALISE SINTATICA ---
+
+		private string TestarTipo(string elemento)
+		{
+			if (double.TryParse(elemento, out double verificacao))
+			{
+				return "INTEGER";
+			}
+			return "STRING";
+		}
 
 		private Boolean MontarTabelaSimbolos(List<TokenAtivo> TokenControle)
 		{
@@ -77,12 +86,51 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 			//CONSTANTE.
 			else if (TokenControle[0].token.Codigo.Equals(3))
 			{
+				// Se for diferente de var. ainda estamos declarando constantes.
+				int i = 0;
+				while (!TokenControle[i].token.Codigo.Equals(4))
+				{
+					if (TokenControle[i].token.Codigo.Equals(25))
+					{
 
+						if (!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "CONSTANTE", TokenControle[i+2].token.Simbolo, 1)))
+						{
+							// Sinalizar erro.
+							_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Variável ambigua encontrada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+							return false;
+						}
+					}
+					i++;
+				}
 			}
 			// VAR.
 			else if (TokenControle[0].token.Codigo.Equals(4))
 			{
+				int i = 1;
+				List<string> identificadores = new List<string>();
+				while (TokenControle[i].token.Simbolo != ":")
+				{
+					if (TokenControle[i].token.Codigo.Equals(25))
+					{
+						// Salvar o identificador, em uma lista para verificar o tipo posteriormente.
+						identificadores.Add(TokenControle[i].Buffer_ident);
+						//analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "IDENTIFICADOR", "STRING", 1));
 
+					}
+					i++;
+				}
+
+				// proximo do i e o tipo de dados das declaracoes.
+				for (int x = 0; x < identificadores.Count; x++)
+				{
+
+					if (!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(identificadores[x], "VARIAVEL", TokenControle[i + 1].token.Simbolo, 1)))
+					{ 
+						// Sinalizar erro.
+						_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Variável ambigua encontrada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+						return false;
+					}
+				}
 			}
 			// PROCEDURE.
 			else if (TokenControle[0].token.Codigo.Equals(5))
