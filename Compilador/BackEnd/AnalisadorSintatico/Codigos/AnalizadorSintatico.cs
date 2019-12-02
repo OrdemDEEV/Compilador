@@ -23,6 +23,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 		// Ir armazenando aqui as derivacoes usadas.
 		public static List<string> ArvoreDerivacao = new List<string>();
 
+		private Boolean Nivel1;
 
 
 		#region --- CONSTRUTORES ---
@@ -73,15 +74,16 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
 		private Boolean MontarTabelaSimbolos(List<TokenAtivo> TokenControle)
 		{
-
-
-            //botar nivel como global
-            int Nivel = 0;
+			int Nivel = 0;
+			if (Nivel1.Equals(true))
+			{
+				Nivel = 1;
+			}
 
 			// PROGRAM.
 			if (TokenControle[0].token.Codigo.Equals(1))
 			{
-				analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[1].Buffer_ident, "ROTULO", "STRING", 0));
+				analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[1].Buffer_ident, "ROTULO", "STRING", Nivel));
 			}
 			//CONSTANTE.
 			else if (TokenControle[0].token.Codigo.Equals(3))
@@ -93,7 +95,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 					if (TokenControle[i].token.Codigo.Equals(25))
 					{
 
-						if (!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "CONSTANTE", TokenControle[i+2].token.Simbolo, 1)))
+						if (!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[i].Buffer_ident, "CONSTANTE", TokenControle[i+2].token.Simbolo, Nivel)))
 						{
 							// Sinalizar erro.
 							_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Variável ambigua encontrada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
@@ -124,7 +126,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 				for (int x = 0; x < identificadores.Count; x++)
 				{
 
-					if (!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(identificadores[x], "VARIAVEL", TokenControle[i + 1].token.Simbolo, 1)))
+					if (!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(identificadores[x], "VARIAVEL", TokenControle[i + 1].token.Simbolo, Nivel)))
 					{ 
 						// Sinalizar erro.
 						_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Variável ambigua encontrada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
@@ -135,6 +137,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 			// PROCEDURE.
 			else if (TokenControle[0].token.Codigo.Equals(5))
 			{
+				Nivel1 = true;
 				// Salvar nome da procedure.
 				analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[1].Buffer_ident, "PROCEDURE", "STRING", 0));
 
@@ -165,10 +168,16 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 				}
 
 			}
+			// Controle limpeza de niveis 1.
+			else if (TokenControle[0].token.Codigo.Equals(7))
+			{
+				analizadorSemantico.Deletar();
+				Nivel1 = false;
+			}
 			// Atribuicao de variaveis.
 			else if (TokenControle[0].token.Codigo.Equals(25) && TokenControle[0].token.Codigo.Equals(38))
 			{
-				if (analizadorSemantico.Busca(TokenControle[0].Buffer_ident))
+				if (analizadorSemantico.Busca(TokenControle[0].Buffer_ident, Nivel))
 				{
 					// Verificar o tipo doque esta sendo atribuido para verificar legalidade da operacao.
 				}
@@ -288,7 +297,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
 						// Rodar analizador semantico.
 						// Sempre que for um Identificador, Constante, Procedure
-						if (TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(4) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(5) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(1) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(3) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(25) && TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(38))
+						if (TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(4) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(5) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(1) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(3) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(25) && TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(38) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(7))
 						{
 							if (!MontarTabelaSimbolos(TokenController.PilhaTokenPrincipal))
 							{

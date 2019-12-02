@@ -13,11 +13,11 @@ namespace Compilador.BackEnd.AnalizadorSemantico.Codigos
 
 		public static List<TabelaSimbolos> ListTabekaSimbolos = new List<TabelaSimbolos>();
 
-		public Boolean Busca(string simbolo)
+		public Boolean Busca(string simbolo, int Nivel)
 		{
 			for (int i=0;i< ListTabekaSimbolos.Count;i++)
 			{
-				if (ListTabekaSimbolos[i].Nome.Equals(simbolo))
+				if (ListTabekaSimbolos[i].Nome.Equals(simbolo) && ListTabekaSimbolos[i].Nivel.Equals(Nivel))
 				{
 					return true;
 				}
@@ -29,7 +29,7 @@ namespace Compilador.BackEnd.AnalizadorSemantico.Codigos
 		public Boolean Inserir(TabelaSimbolos tabelaSimb)
 		{
 			// Falta fazer a parte das verificacoes.
-			if (Busca(tabelaSimb.Nome).Equals(false))
+			if (Busca(tabelaSimb.Nome, tabelaSimb.Nivel).Equals(false))
 			{
 				ListTabekaSimbolos.Add(tabelaSimb);
 				return true;
@@ -43,7 +43,15 @@ namespace Compilador.BackEnd.AnalizadorSemantico.Codigos
 
 		public void Deletar()
 		{
-
+			// Remover todos os elementos de nivel 1.
+			for (int i = 0; i < ListTabekaSimbolos.Count; i++)
+			{
+				if (ListTabekaSimbolos[i].Nivel.Equals(1))
+				{
+					ListTabekaSimbolos.RemoveAt(i);
+					i--;
+				}
+			}
 		}
 
 		public Boolean VerificarTipo(string simbolo, string tipo)
