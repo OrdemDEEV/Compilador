@@ -85,11 +85,14 @@ namespace Compilador.FrontEnd
 
 		private void dgvDados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
+            try { 
 
                 if ((DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem != null) && (DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
                 {
                     e.Value = BindProperty(DgvPilhaPrincipal.Rows[e.RowIndex].DataBoundItem, DgvPilhaPrincipal.Columns[e.ColumnIndex].DataPropertyName);
                 }
+            }
+            catch { }
         }
 
 		private string BindProperty(object property, string propertyName)
@@ -362,6 +365,11 @@ namespace Compilador.FrontEnd
         private void ArquivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void DgvPilhaPrincipal_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }
