@@ -58,16 +58,10 @@ namespace Compilador.BackEnd.AnalizadorSemantico.Codigos
 		{
 			for (int i = 0; i < ListTabekaSimbolos.Count; i++)
 			{
-				if (ListTabekaSimbolos[i].Nome.Equals(simbolo))
+				if (ListTabekaSimbolos[i].Nome.Equals(simbolo) && ListTabekaSimbolos[i].Tipo.Equals(tipo))
 				{
 					// Encontrou elemento.
-					if (ListTabekaSimbolos[i].Tipo.Equals(tipo))
-					{
-						return true;
-					}
-					
-					return false;
-					
+					return true;
 				}
 			}
 			return false;

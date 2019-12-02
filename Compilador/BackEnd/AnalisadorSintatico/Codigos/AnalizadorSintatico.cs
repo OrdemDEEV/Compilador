@@ -174,12 +174,17 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 				analizadorSemantico.Deletar();
 				Nivel1 = false;
 			}
-			// Atribuicao de variaveis.
+			// Atribuicao de variaveis. -- aqui que verifica o tipo da variavel na atribuição
 			else if (TokenControle[0].token.Codigo.Equals(25) && TokenControle[0].token.Codigo.Equals(38))
 			{
 				if (analizadorSemantico.Busca(TokenControle[0].Buffer_ident, Nivel))
 				{
 					// Verificar o tipo doque esta sendo atribuido para verificar legalidade da operacao.
+					if(analizadorSemantico.VerificarTipo(TokenControle[0].Buffer_ident, TokenControle[0].Buffer_ident))
+					{
+						_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de tipo incorreta.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+						return false;
+					}
 				}
 				else
 				{
