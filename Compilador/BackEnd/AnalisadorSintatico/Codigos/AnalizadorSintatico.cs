@@ -165,6 +165,21 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 				}
 
 			}
+			// Atribuicao de variaveis.
+			else if (TokenControle[0].token.Codigo.Equals(25) && TokenControle[0].token.Codigo.Equals(38))
+			{
+				if (analizadorSemantico.Busca(TokenControle[0].Buffer_ident))
+				{
+					// Verificar o tipo doque esta sendo atribuido para verificar legalidade da operacao.
+				}
+				else
+				{
+					// Sinalizar erro.
+					_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de variável não declarada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+					return false;
+				}
+			}
+
 
 			#region --- COMEMNTADO ---
 			// Para nomes de funcoes.
@@ -273,7 +288,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
 						// Rodar analizador semantico.
 						// Sempre que for um Identificador, Constante, Procedure
-						if (TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(4) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(5) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(1) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(3))
+						if (TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(4) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(5) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(1) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(3) || TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(25) && TokenController.PilhaTokenPrincipal[0].token.Codigo.Equals(38))
 						{
 							if (!MontarTabelaSimbolos(TokenController.PilhaTokenPrincipal))
 							{
