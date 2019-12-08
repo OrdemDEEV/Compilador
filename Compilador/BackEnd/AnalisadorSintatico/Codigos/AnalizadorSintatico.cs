@@ -85,9 +85,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
             {
                 analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[1].Buffer_ident, "ROTULO", "STRING", Nivel));
             }
-
             // LABEL
-
             else if (TokenControle[0].token.Codigo.Equals(2))
             {
                 int i = 0;
@@ -105,8 +103,6 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                     i++;
                 }
             }
-
-
             //CONSTANTE.
             else if (TokenControle[0].token.Codigo.Equals(3))
             {
@@ -160,12 +156,20 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
             // PROCEDURE.
             else if (TokenControle[0].token.Codigo.Equals(5))
             {
-                Nivel1 = true;
-                // Salvar nome da procedure.
-                analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[1].Buffer_ident, "PROCEDURE", "STRING", 0));
+				Nivel1 = false;
 
-                // Verificar existenica de parametros.
-                int i = 3;
+				// Salvar nome da procedure.
+				if(!analizadorSemantico.Inserir(new AnalizadorSemantico.Auxiliar.TabelaSimbolos(TokenControle[1].Buffer_ident, "PROCEDURE", "STRING", 0)))
+				{
+					// Sinalizar erro.
+					_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Procedure ambigua encontrada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+					return false;
+				}
+
+				Nivel1 = true;
+				
+				// Verificar existenica de parametros.
+				int i = 3;
                 List<string> identificadores = new List<string>();
                 while (TokenControle[i].token.Simbolo != ":")
                 {
