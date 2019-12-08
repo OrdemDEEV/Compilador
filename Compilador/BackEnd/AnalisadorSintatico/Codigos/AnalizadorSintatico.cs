@@ -334,7 +334,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                     if (ArvoreDerivacao[0].Equals(TokenController.PilhaTokenPrincipal[0].token.Simbolo))
                     {
                         arvoreDerivacaoUnida = string.Join("|", ArvoreDerivacao);
-                        _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[0].Linha), ArvoreDerivacao[0], arvoreDerivacaoUnida);
+                        _frmInicio.EscreverGrid(TokenController.PilhaTokenPrincipal[0].Linha.ToString(), ArvoreDerivacao[0], arvoreDerivacaoUnida);
 
                         // Rodar analizador semantico.
                         // Sempre que for um Identificador, Constante, Procedure, Label, VAR
@@ -359,14 +359,12 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                 {
                     _retorno = RetornarCodigoNaoTerminal(ArvoreDerivacao[0]);
 
-                    //string teste = RetornaTerminal(item.Codigo);
-
-                    if (VerificarPilhaParsingPorCodigoBool(Convert.ToString(_retorno.Codigo + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo)))
+                    if (VerificarPilhaParsingPorCodigoBool(_retorno.Codigo.ToString() + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo.ToString()))
                     {
                         arvoreDerivacaoUnida = string.Join("|", ArvoreDerivacao);
-                        _frmInicio.EscreverGrid(Convert.ToString(TokenController.PilhaTokenPrincipal[0].Linha), ArvoreDerivacao[0], arvoreDerivacaoUnida);
+                        _frmInicio.EscreverGrid(TokenController.PilhaTokenPrincipal[0].Linha.ToString(), ArvoreDerivacao[0], arvoreDerivacaoUnida);
                         ArvoreDerivacao.RemoveAt(0);
-                        CarregarArvoreDerivacao(VerificarPilhaParsingPorCodigo(Convert.ToString(_retorno.Codigo + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo)));
+                        CarregarArvoreDerivacao(VerificarPilhaParsingPorCodigo(_retorno.Codigo.ToString() + "," + TokenController.PilhaTokenPrincipal[0].token.Codigo.ToString()));
                     }
                     else
                     {
@@ -500,12 +498,14 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
         }
 
-        // Carrega Item na arvore de derivacao.
-        private bool CarregarArvoreDerivacao(Item _item)
+		string[] itens = null;
+
+		// Carrega Item na arvore de derivacao.
+		private bool CarregarArvoreDerivacao(Item _item)
         {
             try
             {
-                string[] itens = _item.Derivacao.Split('|');
+                itens = _item.Derivacao.Split('|');
 
                 for (int i = 0; i < itens.Length; i++)
                 {
@@ -516,7 +516,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 // caso de algum erro interno, parar a analise.
                 return false;
@@ -555,7 +555,6 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
         //ENCONTRA PARSING POR CODIGO.
         private Item VerificarPilhaParsingPorCodigo(string codigo)
         {
-            string[] parsing;
             for (int i = 0; i < ListParsing.Count; i++)
             {
                 //parsing = ListParsing[i].Codigo.Split(',');
@@ -607,14 +606,16 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
 
         private bool VerificaTerminal(string simbolo)
         {
-            for (int i = 0; i < ListTerminais.Count; i++)
+			/*for (int i = 0; i < ListTerminais.Count; i++)
             {
                 if (ListTerminais[i].Simbolo.Equals(simbolo))
                 {
                     return true;
                 }
-            }
-            return false;
+            }*/
+			return ListTerminais.Exists(c => c.Simbolo.Equals(simbolo));
+
+			//return false;
         }
 
         #endregion
