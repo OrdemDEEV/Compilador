@@ -222,7 +222,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                         else
                         {
                             // Sinalizar erro.
-                            _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de variável não declarada.  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
+                            _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de variável com erro.  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
                             return false;
                         }
 
@@ -352,7 +352,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                     }
                     else
                     {
-                        _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incial incorreto  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+                        _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incorreto  | Proximo a linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
                         break;
                     }
                 }
@@ -369,7 +369,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                     }
                     else
                     {
-                        _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incial incorreto  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+                        _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incorreto  | Proximo a linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
                         break;
                     }
                 }
@@ -439,7 +439,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                     }
                     else
                     {
-                        _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incial incorreto  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
+                        _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Simbolo incorreto  | Proximo a linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
                         break;
                     }
                 }

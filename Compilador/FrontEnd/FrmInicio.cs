@@ -59,7 +59,9 @@ namespace Compilador.FrontEnd
 		public void EscreverSaida(string mensagem)
 		{
 			TxtSaida.Text += "\n"+ DateTime.Now.TimeOfDay + " >>  " + mensagem;
-		}
+            TxtSaida.Refresh();
+
+        }
 
         public void ErroAoExcutar()
         {
@@ -350,6 +352,7 @@ namespace Compilador.FrontEnd
 
 		private void rodarAnalizarSintáticoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+            EscreverSaida("Iniciada Execução do analizador Sintatico e Semantico! ");
             dgvParsing.Rows.Clear();
 			//dgvSemantico.Rows.Clear();
 			AnalizadorSemantico.ListTabekaSimbolos.Clear();
@@ -362,7 +365,8 @@ namespace Compilador.FrontEnd
             // CHAMAR METODOS DAS CLASSES PARA EXECUCAO.
             //analizadorSintatico.RodarAnalizadoSintatico();
             analizadorSintatico.RunAnalizadorSintatico();
-		}
+            EscreverSaida("Finalizado Execução do analizador Sintatico e Semantico! ");
+        }
 
 		private void btnGerenciarTabelaParsing_Click(object sender, EventArgs e)
 		{
