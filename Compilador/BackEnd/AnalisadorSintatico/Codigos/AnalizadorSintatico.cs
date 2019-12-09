@@ -190,6 +190,7 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                     {
                         // Sinalizar erro.
                         _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Variável ambigua encontrada.  | linha: " + TokenController.PilhaTokenPrincipal[0].Linha);
+                        _frmInicio.ErroAoExcutar();
                         return false;
                     }
                 }
@@ -217,7 +218,6 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                                 _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de tipo incorreta.  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
                                 return false;
                             }
-                            
                         }
                         else
                         {
@@ -225,12 +225,13 @@ namespace Compilador.BackEnd.AnalisadorSintatico.Codigos
                             _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Atribuição de variável não declarada.  | linha: " + TokenController.PilhaTokenPrincipal[i].Linha);
                             return false;
                         }
+
                     }
                     i++;
                 }
             }
 
-
+            _frmInicio.EscreverGridSemantica();
             #region --- COMEMNTADO ---
             // Para nomes de funcoes.
             /*if (TokenControle[1].token.Simbolo.Equals(";"))

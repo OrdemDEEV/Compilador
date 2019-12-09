@@ -22,7 +22,8 @@ namespace Compilador.FrontEnd
 
     public partial class FrmInicio : Form
     {
-        public string LocalArquivo = "";    
+        public string LocalArquivo = "";   
+        public bool ExecutadoComSucesso = true;
         public FrmInicio()
         {
             InitializeComponent();
@@ -60,6 +61,11 @@ namespace Compilador.FrontEnd
 			TxtSaida.Text += "\n"+ DateTime.Now.TimeOfDay + " >>  " + mensagem;
 		}
 
+        public void ErroAoExcutar()
+        {
+            ExecutadoComSucesso = false;
+        }
+
         public void EscreverGrid(string Item1,string Item2,string Item3)
         {
             dgvParsing.Rows.Add(Item1,Item2,Item3);
@@ -72,22 +78,28 @@ namespace Compilador.FrontEnd
             DgvPilhaPrincipal.Refresh();
 
 
-            dgvSemantico.DataSource = null;
-            dgvSemantico.DataSource = AnalizadorSemantico.ListTabekaSimbolos;
-            dgvSemantico.Update();
-            if (dgvSemantico.RowCount > 1) {
-            dgvSemantico.FirstDisplayedScrollingRowIndex = dgvSemantico.RowCount - 1;
-            }
-            dgvSemantico.Refresh();
-       
+
 
         }
 
-		#endregion
+        public void EscreverGridSemantica()
+        {
 
-		#region --- CONTROLE GRID VIEW TOKENS ---
+            dgvSemantico.DataSource = null;
+            dgvSemantico.DataSource = AnalizadorSemantico.ListTabekaSimbolos;
+            dgvSemantico.Update();
+            if (dgvSemantico.RowCount > 1)
+            {
+                dgvSemantico.FirstDisplayedScrollingRowIndex = dgvSemantico.RowCount - 1;
+            }
+            dgvSemantico.Refresh();
+        }
 
-		private void dgvDados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        #endregion
+
+        #region --- CONTROLE GRID VIEW TOKENS ---
+
+        private void dgvDados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
             try { 
 
@@ -181,15 +193,19 @@ namespace Compilador.FrontEnd
 			}
 		}
 
-		private void BtnRodarAnalizadorLexico_Click(object sender, EventArgs e)
+		private async void BtnRodarAnalizadorLexico_Click(object sender, EventArgs e)
 		{
-			// Roda analizador lexico.
-			BtnRodarAnalizadorLexico.PerformClick();
+            // Roda analizador lexico.
+            ExecutadoComSucesso = true;
+            BtnRodarAnalizadorLexico.PerformClick();
+            await Task.Delay(2000);
+            // Roda Analizador Sintatico.
+            if (ExecutadoComSucesso == true)
+            {
+            rodarAnalizarSintáticoToolStripMenuItem.PerformClick();
+            }
 
-			// Roda Analizador Sintatico.
-			rodarAnalizarSintáticoToolStripMenuItem.PerformClick();
-
-		}
+        }
 
 		private void BtnRodarAnalizadorLexico_Click_1(object sender, EventArgs e)
 		{
@@ -374,6 +390,16 @@ namespace Compilador.FrontEnd
         private void DgvPilhaPrincipal_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        private void DgvSemantico_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
+        private void ToolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

@@ -231,8 +231,15 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                     char[] chars = variavel.ToCharArray();
                     if (!Char.IsDigit(chars[0]))
                     {
+                        if (variavel.Length > 30)
+                        {
+                            return new Token(-2, "Erro : Identificador não pode ser maior que 30 Caracteres!");
+                        }
+                        else
+                        { 
                         buffer_ident = variavel;
                         return new Token(25, "IDENTIFICADOR");
+                        }
                     }
                     else
                     {
@@ -317,6 +324,7 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
                             }
                             catch
                             {
+                                _frmInicio.ErroAoExcutar();
                                 _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Comentário sem fechamento!  | linha: " + Convert.ToInt32(LinhaQueComecou));
                                 goto PararLeitura;
                             }
@@ -344,7 +352,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 								}
 								else
 								{
-									_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Limite de tamanho de literal exedido  | linha: " + Convert.ToInt32(i+1));
+                                    _frmInicio.ErroAoExcutar();
+                                    _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> Limite de tamanho de literal exedido  | linha: " + Convert.ToInt32(i+1));
 									goto PararLeitura;
 								}
 							}
@@ -394,7 +403,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 										{
 											if (TokenEncontrado.Codigo.Equals(-2))
 											{
-												_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> " + TokenEncontrado.Simbolo + " | linha: " + Convert.ToInt32(i + 1));
+                                            _frmInicio.ErroAoExcutar();
+                                            _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> " + TokenEncontrado.Simbolo + " | linha: " + Convert.ToInt32(i + 1));
 												goto PararLeitura;
 												//break;
 											}
@@ -564,7 +574,8 @@ namespace Compilador.BackEnd.AnalizadorLexico.DicionarioTokens
 									{
 										if (TokenEncontrado.Codigo.Equals(-2))
 										{
-											_frmInicio.EscreverSaida("ERROS ENCONTRADOS >> " + TokenEncontrado.Simbolo + " | linha: " + Convert.ToInt32(i + 1));
+                                            _frmInicio.ErroAoExcutar();
+                                            _frmInicio.EscreverSaida("ERROS ENCONTRADOS >> " + TokenEncontrado.Simbolo + " | linha: " + Convert.ToInt32(i + 1));
 											goto PararLeitura;
 											//break;
 										}
